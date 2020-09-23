@@ -190,15 +190,110 @@
 <table>
 <thead>
 <tr>
+<th align="center"></th>
 <th align="center">statisches Typsystem</th>
-<th align="center">dynamisches Typsystem</th>
+<th align="center">dynamisches Typsystem <code>Prolog</code></th>
 </tr>
 </thead>
-<tbody></tbody>
-</table><h1 id="todo---continue">TODO - continue</h1>
-<h2 id="funktionale-programmiersprachen">Funktionale Programmiersprachen</h2>
+<tbody>
+<tr>
+<td align="center"><strong>strenges Typsystem</strong></td>
+<td align="center"><strong>implizites Typsystem</strong> <code>Haskell, Standard ML</code></td>
+<td align="center"><strong>implizites Typsystem</strong>  <code>Lisp, Clojure, Smalltalk</code></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center"><strong>explizites Typsystem</strong> <code>Java</code></td>
+<td align="center"><strong>explizites Typsystem</strong></td>
+</tr>
+<tr>
+<td align="center"><strong>schwaches Typsystem</strong></td>
+<td align="center"><strong>implizites Typsystem</strong></td>
+<td align="center"><strong>implizites Typsystem</strong> <code>Javascript</code></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center"><strong>explizites Typsystem</strong> <code>C</code></td>
+<td align="center"><strong>explizites Typsystem</strong></td>
+</tr>
+</tbody>
+</table><h2 id="funktionale-programmiersprachen">Funktionale Programmiersprachen</h2>
 <h3 id="clojure">Clojure</h3>
+<ul>
+<li>Lisp Dialekt</li>
+<li>strenges, dynamisches, implizites Typsystem</li>
+<li>verschiedene Programmierstile (imperativ, funktional, objektorientiert)</li>
+</ul>
+<h4 id="repl-read-eval-print-loop">REPL (Read-Eval-Print-Loop)</h4>
+<ul>
+<li>Liest den Ausdruck</li>
+<li>Wertet ihn aus</li>
+<li>Gibt das Ergebnis zurück</li>
+</ul>
+<h4 id="beispiel-code">Beispiel-Code</h4>
+<pre class=" language-haskell"><code class="prism  language-haskell"><span class="token punctuation">(</span><span class="token hvariable">def</span> <span class="token builtin">filter</span> 
+      <span class="token punctuation">(</span><span class="token hvariable">fn</span> <span class="token punctuation">[</span><span class="token hvariable">praed</span><span class="token operator">?</span> <span class="token hvariable">lst</span><span class="token punctuation">]</span>
+        <span class="token punctuation">(</span><span class="token hvariable">cond</span> 
+          <span class="token punctuation">(</span><span class="token hvariable">empty</span><span class="token operator">?</span> <span class="token hvariable">lst</span><span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> 
+          <span class="token punctuation">(</span><span class="token hvariable">praed</span><span class="token operator">?</span> <span class="token punctuation">(</span><span class="token hvariable">first</span> <span class="token hvariable">lst</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+             <span class="token punctuation">(</span><span class="token hvariable">cons</span> <span class="token punctuation">(</span><span class="token hvariable">first</span> <span class="token hvariable">lst</span><span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token builtin">filter</span> <span class="token hvariable">praed</span><span class="token operator">?</span> <span class="token punctuation">(</span><span class="token hvariable">rest</span> <span class="token hvariable">lst</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+          <span class="token operator">:</span><span class="token keyword">else</span> <span class="token punctuation">(</span><span class="token builtin">filter</span> <span class="token hvariable">praed</span><span class="token operator">?</span> <span class="token punctuation">(</span><span class="token hvariable">rest</span> <span class="token hvariable">lst</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+</code></pre>
 <h3 id="standard-ml">Standard ML</h3>
+<ul>
+<li>funktionale Programmiersprache</li>
+<li>strenges, statisches, implizites Typsystem</li>
+<li>Typinferenz</li>
+<li>ermöglicht Pattern-Matching</li>
+</ul>
+<h4 id="beispiel-code-1">Beispiel-Code:</h4>
+<pre class=" language-ocaml"><code class="prism  language-ocaml"><span class="token comment">(* Filter *)</span>
+<span class="token keyword">fun</span> filter <span class="token punctuation">(</span>praed<span class="token punctuation">,</span> lst<span class="token punctuation">)</span> <span class="token operator">=</span>
+    <span class="token keyword">if</span> null lst
+    <span class="token keyword">then</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+    <span class="token keyword">else</span> <span class="token keyword">if</span> praed <span class="token punctuation">(</span>hd lst<span class="token punctuation">)</span>
+    <span class="token keyword">then</span> 
+        hd lst <span class="token punctuation">:</span><span class="token punctuation">:</span> filter <span class="token punctuation">(</span>praed<span class="token punctuation">,</span> tl lst<span class="token punctuation">)</span>
+    <span class="token keyword">else</span> filter <span class="token punctuation">(</span>praed<span class="token punctuation">,</span> tl lst<span class="token punctuation">)</span>
+<span class="token comment">(* Signatur von filter: fn : ('a -&gt; bool) * 'a list -&gt; 'a list *)</span>
+
+<span class="token comment">(* Lambda Ausdruck *)</span>
+fn x <span class="token operator">=&gt;</span> x<span class="token operator">+</span><span class="token number">1</span>
+
+<span class="token comment">(* Funktion benennen *)</span>
+<span class="token keyword">val</span> twice <span class="token operator">=</span> <span class="token punctuation">(</span>fn x <span class="token operator">=&gt;</span> <span class="token number">2</span><span class="token operator">*</span>x<span class="token punctuation">)</span>
+
+<span class="token comment">(* Funktionen mit Rekursion [fun statt fn] *)</span>
+<span class="token keyword">fun</span> fac n <span class="token operator">=</span> 
+	<span class="token keyword">if</span> <span class="token punctuation">(</span>n<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span> 
+	<span class="token keyword">then</span> <span class="token number">1</span> 
+	<span class="token keyword">else</span> n<span class="token operator">*</span><span class="token punctuation">(</span>fac <span class="token punctuation">(</span>n<span class="token number">-1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token comment">(* Funktion mit getypten Parametern *)</span>
+<span class="token keyword">fun</span> pow <span class="token punctuation">(</span>x<span class="token punctuation">:</span>int<span class="token punctuation">,</span> y<span class="token punctuation">:</span>int<span class="token punctuation">)</span> <span class="token operator">=</span> 
+    <span class="token keyword">if</span> y<span class="token operator">=</span><span class="token number">0</span>
+    <span class="token keyword">then</span> <span class="token number">1</span>
+    <span class="token keyword">else</span> x <span class="token operator">*</span> pow<span class="token punctuation">(</span>x<span class="token punctuation">,</span>y<span class="token number">-1</span><span class="token punctuation">)</span>
+    
+<span class="token comment">(* Tupel *)</span>
+<span class="token keyword">val</span> pair <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token string">"abc"</span><span class="token punctuation">)</span>
+
+<span class="token comment">(* Liste {1} *)</span>
+<span class="token number">1</span><span class="token punctuation">:</span><span class="token punctuation">:</span>nil
+
+<span class="token comment">(* Zugriff auf das erste Listenelement *)</span>
+hd list
+
+<span class="token comment">(* Zugriff auf den Rest der Liste *)</span>
+tl list
+
+<span class="token comment">(* Records [= HashMaps] *)</span>
+<span class="token keyword">val</span> car <span class="token operator">=</span> <span class="token punctuation">{</span>make <span class="token operator">=</span> <span class="token string">"Ford"</span><span class="token punctuation">,</span> built <span class="token operator">=</span> <span class="token number">1904</span><span class="token punctuation">}</span>
+
+<span class="token comment">(* Zugriff auf HashMap-Einträge *)</span>
+<span class="token directive function">#make</span> car
+</code></pre>
+<h1 id="todo---continue">TODO - continue</h1>
 <h1 id="ausdrucksmittel-funktionaler-programmiersprachen">3. Ausdrucksmittel funktionaler Programmiersprachen</h1>
 <h1 id="ausgewählte-kapitel">4. Ausgewählte Kapitel</h1>
 <h1 id="funktionale--vs.-objektorientierte-programmierung">5. Funktionale- vs. Objektorientierte Programmierung</h1>
