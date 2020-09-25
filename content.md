@@ -385,7 +385,67 @@ kalenderdaten<span class="token punctuation">_</span>in<span class="token punctu
 distinct <span class="token punctuation">(</span>kalenderdaten<span class="token punctuation">_</span>in<span class="token punctuation">_</span>monaten<span class="token punctuation">_</span>2 <span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">,</span> <span class="token number">2018</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">,</span> <span class="token number">2017</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">9</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">2018</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">9</span><span class="token punctuation">,</span> <span class="token number">9</span><span class="token punctuation">,</span> <span class="token number">2018</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">7</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
 <h1 id="ausdrucksmittel-funktionaler-programmiersprachen">3. Ausdrucksmittel funktionaler Programmiersprachen</h1>
+<h2 id="datentypen">Datentypen</h2>
+<p>Erstellung neuer Datentypen in SML:</p>
+<pre class=" language-ocaml"><code class="prism  language-ocaml">datatype shape <span class="token operator">=</span>
+         Rectangle <span class="token keyword">of</span> real <span class="token operator">*</span> real
+         <span class="token operator">|</span> Circle <span class="token keyword">of</span> real
+</code></pre>
 <h2 id="pattern-matching">Pattern Matching</h2>
+<ul>
+<li>Unterscheidung von Typen durch <code>muster =&gt; ausdruck</code></li>
+<li>Verschiedene Zweige werden durch <code>|</code> getrennt</li>
+</ul>
+<pre class=" language-ocaml"><code class="prism  language-ocaml"><span class="token keyword">fun</span> shape<span class="token punctuation">_</span>area s <span class="token operator">=</span>
+    case s <span class="token keyword">of</span>
+        Rectangle<span class="token punctuation">(</span>w<span class="token punctuation">,</span> h<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> w <span class="token operator">*</span> h
+      <span class="token operator">|</span> Circle<span class="token punctuation">(</span>r<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token number">3.14159</span> <span class="token operator">*</span> r <span class="token operator">*</span> r
+</code></pre>
+<h3 id="verwendung-von-pattern-matching">Verwendung von Pattern Matching</h3>
+<pre class=" language-ocaml"><code class="prism  language-ocaml"><span class="token keyword">fun</span> sum<span class="token punctuation">_</span>list <span class="token punctuation">(</span>xs <span class="token punctuation">:</span> int list<span class="token punctuation">)</span> <span class="token operator">=</span>
+	<span class="token keyword">if</span> xs <span class="token operator">=</span> nil
+	<span class="token keyword">then</span> <span class="token number">0</span>
+	<span class="token keyword">else</span> hd<span class="token punctuation">(</span>xs<span class="token punctuation">)</span> <span class="token operator">+</span> sum<span class="token punctuation">_</span>list<span class="token punctuation">(</span>tl xs<span class="token punctuation">)</span>
+    
+<span class="token keyword">fun</span> sum<span class="token punctuation">_</span>list xs <span class="token operator">=</span>
+	case xs <span class="token keyword">of</span>
+		<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=&gt;</span> <span class="token number">0</span>
+		<span class="token operator">|</span> x<span class="token punctuation">:</span><span class="token punctuation">:</span>xs’ <span class="token operator">=&gt;</span> x <span class="token operator">+</span> sum<span class="token punctuation">_</span>list xs’
+</code></pre>
+<h2 id="curryfizierung---partielle-anwendung">Curryfizierung - partielle Anwendung</h2>
+<pre class=" language-ocaml"><code class="prism  language-ocaml"><span class="token comment">(* Bisherige Form von mehreren Parametern *)</span>
+<span class="token keyword">fun</span> sorted3<span class="token punctuation">_</span>tupled <span class="token punctuation">(</span>x<span class="token punctuation">,</span>y<span class="token punctuation">,</span>z<span class="token punctuation">)</span> <span class="token operator">=</span> z <span class="token operator">&gt;=</span> y andalso y <span class="token operator">&gt;=</span> x
+
+<span class="token comment">(* Curryfizierte Funktion *)</span>
+<span class="token keyword">fun</span> sorted3 x y z <span class="token operator">=</span> z <span class="token operator">&gt;=</span> y andalso y <span class="token operator">&gt;=</span> x
+</code></pre>
+<h4 id="partielle-anwendung">Partielle Anwendung:</h4>
+<ul>
+<li>Aufruf der Funktion mit weniger Argumenten (hier &lt; 3)</li>
+<li>wird häufig für Funktionen höherer Ordnung verwendet</li>
+</ul>
+<pre class=" language-ocaml"><code class="prism  language-ocaml"><span class="token comment">(* Funktionen höherer Ordnung *)</span>
+<span class="token keyword">val</span> List<span class="token punctuation">.</span>map <span class="token operator">=</span> fn <span class="token punctuation">:</span> <span class="token punctuation">(</span>’a <span class="token operator">-&gt;</span> ’b<span class="token punctuation">)</span> <span class="token operator">-&gt;</span> ’a list <span class="token operator">-&gt;</span> ’b list
+
+<span class="token keyword">val</span> List<span class="token punctuation">.</span>filter <span class="token operator">=</span> fn <span class="token punctuation">:</span> <span class="token punctuation">(</span>’a <span class="token operator">-&gt;</span> bool<span class="token punctuation">)</span> <span class="token operator">-&gt;</span> ’a list <span class="token operator">-&gt;</span> ’a list
+
+<span class="token keyword">val</span> List<span class="token punctuation">.</span>foldl <span class="token operator">=</span> fn <span class="token punctuation">:</span> <span class="token punctuation">(</span>’a <span class="token operator">*</span> ’b <span class="token operator">-&gt;</span> ’b<span class="token punctuation">)</span> <span class="token operator">-&gt;</span> ’b <span class="token operator">-&gt;</span> ’a list <span class="token operator">-&gt;</span> ’b
+</code></pre>
+<h2 id="clojure-1">Clojure</h2>
+<ul>
+<li>Im Gegensatz zu SML: dynamisch getypte Sprache</li>
+</ul>
+<h4 id="beispiel-code-2">Beispiel-Code:</h4>
+<pre class=" language-python"><code class="prism  language-python"><span class="token punctuation">(</span><span class="token keyword">def</span> make<span class="token operator">-</span>add
+	<span class="token punctuation">(</span>fn <span class="token punctuation">[</span>a<span class="token punctuation">]</span>
+		<span class="token punctuation">(</span>fn <span class="token punctuation">[</span>b<span class="token punctuation">]</span>
+			<span class="token punctuation">(</span><span class="token operator">+</span> a b<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token punctuation">(</span><span class="token keyword">def</span> make<span class="token operator">-</span>prepend
+  <span class="token punctuation">(</span>fn <span class="token punctuation">[</span>a<span class="token punctuation">]</span>
+    <span class="token punctuation">(</span>fn <span class="token punctuation">[</span>b<span class="token punctuation">]</span>
+      <span class="token punctuation">(</span>cons a b<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+</code></pre>
 <h1 id="ausgewählte-kapitel">4. Ausgewählte Kapitel</h1>
 <h1 id="funktionale--vs.-objektorientierte-programmierung">5. Funktionale- vs. Objektorientierte Programmierung</h1>
 <h1 id="funktionale-konzepte-in-java">6. Funktionale Konzepte in Java</h1>
