@@ -446,6 +446,55 @@ distinct <span class="token punctuation">(</span>kalenderdaten<span class="token
     <span class="token punctuation">(</span>fn <span class="token punctuation">[</span>b<span class="token punctuation">]</span>
       <span class="token punctuation">(</span>cons a b<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 </code></pre>
+<pre class=" language-ocaml"><code class="prism  language-ocaml">datatype exp <span class="token operator">=</span> Constant <span class="token keyword">of</span> int
+                <span class="token operator">|</span> Negate <span class="token keyword">of</span> exp
+                <span class="token operator">|</span> Add <span class="token keyword">of</span> exp <span class="token operator">*</span> exp
+                <span class="token operator">|</span> Multiply <span class="token keyword">of</span> exp <span class="token operator">*</span> exp<span class="token punctuation">;</span>
+
+<span class="token keyword">fun</span> eval exp <span class="token operator">=</span> 
+  case exp <span class="token keyword">of</span>
+    Constant<span class="token punctuation">(</span>i<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> i
+  <span class="token operator">|</span> Negate<span class="token punctuation">(</span>ex<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token operator">~</span><span class="token punctuation">(</span>eval<span class="token punctuation">(</span>ex<span class="token punctuation">)</span><span class="token punctuation">)</span>
+  <span class="token operator">|</span> Add<span class="token punctuation">(</span>sum1<span class="token punctuation">,</span> sum2<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> eval<span class="token punctuation">(</span>sum1<span class="token punctuation">)</span> <span class="token operator">+</span> eval<span class="token punctuation">(</span>sum2<span class="token punctuation">)</span>
+  <span class="token operator">|</span> Multiply<span class="token punctuation">(</span>fac1<span class="token punctuation">,</span> fac2<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> eval<span class="token punctuation">(</span>fac1<span class="token punctuation">)</span> <span class="token operator">*</span> eval<span class="token punctuation">(</span>fac2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+eval <span class="token punctuation">(</span>Add <span class="token punctuation">(</span>Constant <span class="token number">19</span><span class="token punctuation">,</span> Negate <span class="token punctuation">(</span>Constant <span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">fun</span> list<span class="token punctuation">_</span>of<span class="token punctuation">_</span>constants <span class="token punctuation">(</span>lst<span class="token punctuation">:</span> exp list<span class="token punctuation">)</span> <span class="token operator">=</span>
+  <span class="token keyword">if</span> lst <span class="token operator">=</span> nil
+  <span class="token keyword">then</span> nil
+  <span class="token keyword">else</span>
+    case hd lst <span class="token keyword">of</span>
+      Constant<span class="token punctuation">(</span>i<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> i <span class="token punctuation">:</span><span class="token punctuation">:</span> list<span class="token punctuation">_</span>of<span class="token punctuation">_</span>constants<span class="token punctuation">(</span>tl lst<span class="token punctuation">)</span>
+    <span class="token operator">|</span> <span class="token punctuation">_</span> <span class="token operator">=&gt;</span> list<span class="token punctuation">_</span>of<span class="token punctuation">_</span>constants<span class="token punctuation">(</span>tl lst<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+list<span class="token punctuation">_</span>of<span class="token punctuation">_</span>constants <span class="token punctuation">[</span><span class="token punctuation">(</span>Add <span class="token punctuation">(</span>Constant <span class="token number">19</span><span class="token punctuation">,</span> Negate <span class="token punctuation">(</span>Constant <span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span> Constant <span class="token number">19</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>Constant <span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+<span class="token keyword">fun</span> get<span class="token punctuation">_</span>bigger <span class="token punctuation">(</span>a<span class="token punctuation">:</span>int<span class="token punctuation">,</span> b<span class="token punctuation">:</span>int<span class="token punctuation">)</span> <span class="token operator">=</span>
+  <span class="token keyword">if</span> a <span class="token operator">&gt;</span> b
+  <span class="token keyword">then</span> a
+  <span class="token keyword">else</span> b<span class="token punctuation">;</span>
+
+<span class="token keyword">fun</span> largest<span class="token punctuation">_</span>constant<span class="token punctuation">_</span>helper<span class="token punctuation">(</span>lst<span class="token punctuation">:</span> int list<span class="token punctuation">)</span> <span class="token operator">=</span>
+case lst <span class="token keyword">of</span>
+  <span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=&gt;</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+  <span class="token operator">|</span> c<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=&gt;</span> <span class="token punctuation">[</span>c<span class="token punctuation">]</span>
+  <span class="token operator">|</span> c<span class="token punctuation">:</span><span class="token punctuation">:</span>c2<span class="token punctuation">:</span><span class="token punctuation">:</span>cs' <span class="token operator">=&gt;</span> largest<span class="token punctuation">_</span>constant<span class="token punctuation">_</span>helper <span class="token punctuation">(</span>get<span class="token punctuation">_</span>bigger<span class="token punctuation">(</span>c<span class="token punctuation">,</span> c2<span class="token punctuation">)</span> <span class="token punctuation">:</span><span class="token punctuation">:</span> cs'<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">fun</span> largest<span class="token punctuation">_</span>constant<span class="token punctuation">(</span>lst<span class="token punctuation">:</span> exp list<span class="token punctuation">)</span> <span class="token operator">=</span> largest<span class="token punctuation">_</span>constant<span class="token punctuation">_</span>helper<span class="token punctuation">(</span>list<span class="token punctuation">_</span>of<span class="token punctuation">_</span>constants<span class="token punctuation">(</span>lst<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+largest<span class="token punctuation">_</span>constant <span class="token punctuation">[</span><span class="token punctuation">(</span>Add <span class="token punctuation">(</span>Constant <span class="token number">19</span><span class="token punctuation">,</span> Negate <span class="token punctuation">(</span>Constant <span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span> Constant <span class="token number">19</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>Constant <span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+<span class="token keyword">fun</span> number<span class="token punctuation">_</span>of<span class="token punctuation">_</span>adds <span class="token punctuation">(</span>lst<span class="token punctuation">:</span> exp list<span class="token punctuation">)</span> <span class="token operator">=</span>
+  <span class="token keyword">if</span> lst <span class="token operator">=</span> nil
+  <span class="token keyword">then</span> nil
+  <span class="token keyword">else</span>
+    case hd lst <span class="token keyword">of</span>
+      Add<span class="token punctuation">(</span>a<span class="token punctuation">,</span>b<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token number">1</span> <span class="token operator">+</span> number<span class="token punctuation">_</span>of<span class="token punctuation">_</span>adds<span class="token punctuation">(</span>tl lst<span class="token punctuation">)</span>
+    <span class="token operator">|</span> <span class="token punctuation">_</span> <span class="token operator">=&gt;</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+<span class="token comment">(* contains mistakes *)</span>
+</code></pre>
 <h1 id="ausgewählte-kapitel">4. Ausgewählte Kapitel</h1>
 <h1 id="funktionale--vs.-objektorientierte-programmierung">5. Funktionale- vs. Objektorientierte Programmierung</h1>
 <h1 id="funktionale-konzepte-in-java">6. Funktionale Konzepte in Java</h1>
