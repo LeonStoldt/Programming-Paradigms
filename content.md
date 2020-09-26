@@ -559,5 +559,112 @@ number<span class="token punctuation">_</span>of<span class="token punctuation">
 <h4 id="beispiel">Beispiel</h4>
 <p><a href="https://johbra.github.io/PP2/Vorlesung/Abbildungen/vec2.png"><img src="https://johbra.github.io/PP2/Vorlesung/Abbildungen/vec2.png" alt="Beispiel eines kopierten Pfads"></a></p>
 <h1 id="funktionale--vs.-objektorientierte-programmierung">5. Funktionale- vs. Objektorientierte Programmierung</h1>
+
+<table>
+<thead>
+<tr>
+<th align="center">Funktionale Programmierung</th>
+<th align="center">Objektorientierte Programmierung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">Fehlen von Mutation</td>
+<td align="center">Gebrauch von Mutation</td>
+</tr>
+<tr>
+<td align="center">Fehlen von Zuweisungen</td>
+<td align="center">Gebrauch von Zuweisungen</td>
+</tr>
+<tr>
+<td align="center">Funktionen</td>
+<td align="center">Objekte (Funktionen mit internen Daten)</td>
+</tr>
+<tr>
+<td align="center">Funktionen</td>
+<td align="center">Methoden</td>
+</tr>
+</tbody>
+</table><h3 id="zusammenfassung">Zusammenfassung:</h3>
+<ul>
+<li>Für eine “objektorientierte Programmierung” bedarf es keiner speziellen Programmiersprache</li>
+<li>Objekte sind:
+<ul>
+<li>eine Menge von Key-Value-Abbildungen</li>
+<li>eine Reihe von Funktionen, die Key-Value-Abbildungen akzeptieren</li>
+<li>eine Verteilfunktion zum Aufruf der gewünschten Funktion</li>
+</ul>
+</li>
+<li>Verwendung beider Paradigmen abhängig vom Anwendungskontext und persönlichem Geschmack</li>
+<li>Aufwand der Erweiterbarkeit der Paradigmen sollte ebenfalls in Betracht gezogen werden</li>
+</ul>
+<h2 id="objektorientiert-vs.-prozedural-vs.-funktional">Objektorientiert vs. Prozedural vs. Funktional</h2>
+<h3 id="objektorientiert">Objektorientiert</h3>
+<p><a href="https://johbra.github.io/PP2/Vorlesung/Abbildungen/gops-oop-markiert.png"><img src="https://johbra.github.io/PP2/Vorlesung/Abbildungen/gops-oop-markiert.png" alt=""></a></p>
+<h3 id="prozedural">Prozedural</h3>
+<p><a href="https://johbra.github.io/PP2/Vorlesung/Abbildungen/gops-proz-markiert.png"><img src="https://johbra.github.io/PP2/Vorlesung/Abbildungen/gops-proz-markiert.png" alt=""></a></p>
+<h3 id="funktional">Funktional</h3>
+<p><a href="https://johbra.github.io/PP2/Vorlesung/Abbildungen/gops-schluss.png"><img src="https://johbra.github.io/PP2/Vorlesung/Abbildungen/gops-schluss.png" alt=""></a></p>
+<h2 id="funktionale-entwurfsmuster">Funktionale Entwurfsmuster</h2>
+<ul>
+<li>
+<h3 id="command-pattern">Command-Pattern</h3>
+<ul>
+<li>Modularisierung von Befehlen und Aufrufen</li>
+</ul>
+</li>
+<li>
+<h3 id="strategy-pattern">Strategy-Pattern</h3>
+<ul>
+<li>Flexibler Wechsel von alternativen Verhalten</li>
+</ul>
+</li>
+<li>
+<h3 id="oberserver-pattern">Oberserver-Pattern</h3>
+<ul>
+<li>Benachrichtigung einer oder mehrerer Objekte, wenn sich der Zustand eines bestimmten Objekts ändert</li>
+</ul>
+</li>
+</ul>
 <h1 id="funktionale-konzepte-in-java">6. Funktionale Konzepte in Java</h1>
+<blockquote>
+<p>Gilt nur für Java 8 oder größer!</p>
+</blockquote>
+<ul>
+<li>z.B. <code>map</code>, <code>filter</code> und <code>reduce</code></li>
+<li>Vermeidung expliziter Mutation</li>
+<li>lesbarer Code</li>
+<li>Formulierung <strong>was</strong> (deklerativ) geschehen soll, nicht <strong>wie</strong> (imperativ)</li>
+<li>Objektorientierung steht nicht im Widerspruch zur Funktionalen Programmierung</li>
+</ul>
+<h3 id="funktionale-interfaces-in-java">Funktionale Interfaces in Java</h3>
+<ul>
+<li><code>Consumer&lt;T&gt;</code> - Operation ohne Rückgabe</li>
+<li><code>Supplier&lt;T&gt;</code> - Fabrik, die ein neues oder existierendes Objekt liefert</li>
+<li><code>Predicate&lt;T&gt;</code> - Prüfung einer Bedingung für ein Argument</li>
+<li><code>Function&lt;T&gt;</code> - Operation mit Resultat</li>
+</ul>
+<h2 id="fluent-interfaces">Fluent Interfaces</h2>
+<ul>
+<li>Objektorientierte API unter Verwendung von method chaining</li>
+</ul>
+<h3 id="verwendung-von-fluent-interfaces-am-beispiel">Verwendung von Fluent Interfaces am Beispiel:</h3>
+<pre class=" language-java"><code class="prism  language-java"><span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">final</span> String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	FluentMailer<span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span>mailer <span class="token operator">-</span><span class="token operator">&gt;</span>
+		mailer<span class="token punctuation">.</span><span class="token function">from</span><span class="token punctuation">(</span><span class="token string">"build@agiledeveloper.com"</span><span class="token punctuation">)</span>
+			<span class="token punctuation">.</span><span class="token function">to</span><span class="token punctuation">(</span><span class="token string">"venkats@agiledeveloper.com"</span><span class="token punctuation">)</span>
+			<span class="token punctuation">.</span><span class="token function">subject</span><span class="token punctuation">(</span><span class="token string">"build notification"</span><span class="token punctuation">)</span>
+            <span class="token punctuation">.</span><span class="token function">body</span><span class="token punctuation">(</span><span class="token string">"...much better..."</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+</code></pre>
+<h1 id="relationale-programmierung">7. Relationale Programmierung</h1>
+<h1 id="relational-logische-programmierung">8. Relational-logische Programmierung</h1>
+<h1 id="constraint-programmierung---grundlagen">9. Constraint Programmierung - Grundlagen</h1>
+<h1 id="constraint-solving">10. Constraint-solving</h1>
+<h1 id="constraint-logic-programmierung">10. Constraint-logic Programmierung</h1>
+<h1 id="parallelprogrammierung">11. Parallelprogrammierung</h1>
+<h2 id="einstieg">Einstieg</h2>
+<h2 id="multithreading-in-java">Multithreading (in Java)</h2>
+<h2 id="software-transactional-memory">Software Transactional Memory</h2>
+<h2 id="parallele-algorithmen">Parallele Algorithmen</h2>
 
