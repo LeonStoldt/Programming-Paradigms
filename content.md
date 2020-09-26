@@ -487,13 +487,13 @@ largest<span class="token punctuation">_</span>constant <span class="token punct
 
 <span class="token keyword">fun</span> number<span class="token punctuation">_</span>of<span class="token punctuation">_</span>adds <span class="token punctuation">(</span>lst<span class="token punctuation">:</span> exp list<span class="token punctuation">)</span> <span class="token operator">=</span>
   <span class="token keyword">if</span> lst <span class="token operator">=</span> nil
-  <span class="token keyword">then</span> nil
+  <span class="token keyword">then</span> <span class="token number">0</span>
   <span class="token keyword">else</span>
     case hd lst <span class="token keyword">of</span>
       Add<span class="token punctuation">(</span>a<span class="token punctuation">,</span>b<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token number">1</span> <span class="token operator">+</span> number<span class="token punctuation">_</span>of<span class="token punctuation">_</span>adds<span class="token punctuation">(</span>tl lst<span class="token punctuation">)</span>
-    <span class="token operator">|</span> <span class="token punctuation">_</span> <span class="token operator">=&gt;</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token operator">|</span> <span class="token punctuation">_</span> <span class="token operator">=&gt;</span> <span class="token number">0</span> <span class="token operator">+</span> number<span class="token punctuation">_</span>of<span class="token punctuation">_</span>adds<span class="token punctuation">(</span>tl lst<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-<span class="token comment">(* contains mistakes *)</span>
+number<span class="token punctuation">_</span>of<span class="token punctuation">_</span>adds <span class="token punctuation">[</span><span class="token punctuation">(</span>Add <span class="token punctuation">(</span>Constant <span class="token number">19</span><span class="token punctuation">,</span> Negate <span class="token punctuation">(</span>Constant <span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span> Constant <span class="token number">19</span><span class="token punctuation">,</span> Constant <span class="token number">5</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>Add <span class="token punctuation">(</span>Constant <span class="token number">19</span><span class="token punctuation">,</span> Negate <span class="token punctuation">(</span>Constant <span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
 </code></pre>
 <h1 id="ausgewählte-kapitel">4. Ausgewählte Kapitel</h1>
 <h1 id="funktionale--vs.-objektorientierte-programmierung">5. Funktionale- vs. Objektorientierte Programmierung</h1>
