@@ -540,7 +540,24 @@ number<span class="token punctuation">_</span>of<span class="token punctuation">
 <li><code>apply</code> erwartet eine Funktion und eine Sequenz von Argumenten und wendet die Funktion auf die Elemente der Sequenz an</li>
 <li><strong>Self-evaluation expression:</strong> Ausdruck, der sich selbst wieder als Ergebnis hat</li>
 </ul>
-<h2 id="verzögerte-auswertung">Verzögerte Auswertung</h2>
+<h2 id="lazy-evaluation">Lazy evaluation</h2>
+<ul>
+<li>auch: <em>call by need</em> oder <em>promises</em></li>
+<li>Use-Case: Das Ergebnis einer aufwendigen Berechnung wird als Parameter benötigt (keinmal oder n-mal). Durch Lazy Evaluation wird der Wert nicht n-mal durchgeführt, sondern einmal und dann zwischengespeichert.</li>
+</ul>
+<h2 id="funktionale-datenstrukturen">Funktionale Datenstrukturen</h2>
+<ul>
+<li>Änderungen imperativer Datenstrukturen basieren auf Mutation</li>
+<li>Funktionale Datenstrukturen sind nicht änderbar (immutable)</li>
+<li>Änderungen von Werten erzeugen ein neues Exemplar der Datenstruktur</li>
+<li>Kopien sorgen für eine lange Laufzeit</li>
+<li><strong>Lösung:</strong> Baumstrukturen, zur Vermeidung von Redundanzen</li>
+<li>Bei Änderung eines Werts werden die Knoten des Pfads zum Element kopiert</li>
+<li>Verschiedene Fälle sind <a href="https://hypirion.com/musings/understanding-persistent-vector-pt-1">hier</a> zu finden.</li>
+<li>Zur Beschleunigung der Operationen können Mehrwegbäume anstatt von Binärbäumen eingesetzt werden</li>
+</ul>
+<h4 id="beispiel">Beispiel</h4>
+<p><a href="https://johbra.github.io/PP2/Vorlesung/Abbildungen/vec2.png"><img src="https://johbra.github.io/PP2/Vorlesung/Abbildungen/vec2.png" alt="Beispiel eines kopierten Pfads"></a></p>
 <h1 id="funktionale--vs.-objektorientierte-programmierung">5. Funktionale- vs. Objektorientierte Programmierung</h1>
 <h1 id="funktionale-konzepte-in-java">6. Funktionale Konzepte in Java</h1>
 
