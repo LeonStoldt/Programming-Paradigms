@@ -402,6 +402,7 @@ distinct <span class="token punctuation">(</span>kalenderdaten<span class="token
       <span class="token operator">|</span> Circle<span class="token punctuation">(</span>r<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token number">3.14159</span> <span class="token operator">*</span> r <span class="token operator">*</span> r
 </code></pre>
 <h3 id="verwendung-von-pattern-matching">Verwendung von Pattern Matching</h3>
+<h4 id="beispiel-code-2">Beispiel-Code:</h4>
 <pre class=" language-ocaml"><code class="prism  language-ocaml"><span class="token keyword">fun</span> sum<span class="token punctuation">_</span>list <span class="token punctuation">(</span>xs <span class="token punctuation">:</span> int list<span class="token punctuation">)</span> <span class="token operator">=</span>
 	<span class="token keyword">if</span> xs <span class="token operator">=</span> nil
 	<span class="token keyword">then</span> <span class="token number">0</span>
@@ -411,42 +412,8 @@ distinct <span class="token punctuation">(</span>kalenderdaten<span class="token
 	case xs <span class="token keyword">of</span>
 		<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=&gt;</span> <span class="token number">0</span>
 		<span class="token operator">|</span> x<span class="token punctuation">:</span><span class="token punctuation">:</span>xs’ <span class="token operator">=&gt;</span> x <span class="token operator">+</span> sum<span class="token punctuation">_</span>list xs’
-</code></pre>
-<h2 id="curryfizierung---partielle-anwendung">Curryfizierung - partielle Anwendung</h2>
-<pre class=" language-ocaml"><code class="prism  language-ocaml"><span class="token comment">(* Bisherige Form von mehreren Parametern *)</span>
-<span class="token keyword">fun</span> sorted3<span class="token punctuation">_</span>tupled <span class="token punctuation">(</span>x<span class="token punctuation">,</span>y<span class="token punctuation">,</span>z<span class="token punctuation">)</span> <span class="token operator">=</span> z <span class="token operator">&gt;=</span> y andalso y <span class="token operator">&gt;=</span> x
 
-<span class="token comment">(* Curryfizierte Funktion *)</span>
-<span class="token keyword">fun</span> sorted3 x y z <span class="token operator">=</span> z <span class="token operator">&gt;=</span> y andalso y <span class="token operator">&gt;=</span> x
-</code></pre>
-<h4 id="partielle-anwendung">Partielle Anwendung:</h4>
-<ul>
-<li>Aufruf der Funktion mit weniger Argumenten (hier &lt; 3)</li>
-<li>wird häufig für Funktionen höherer Ordnung verwendet</li>
-</ul>
-<pre class=" language-ocaml"><code class="prism  language-ocaml"><span class="token comment">(* Funktionen höherer Ordnung *)</span>
-<span class="token keyword">val</span> List<span class="token punctuation">.</span>map <span class="token operator">=</span> fn <span class="token punctuation">:</span> <span class="token punctuation">(</span>’a <span class="token operator">-&gt;</span> ’b<span class="token punctuation">)</span> <span class="token operator">-&gt;</span> ’a list <span class="token operator">-&gt;</span> ’b list
-
-<span class="token keyword">val</span> List<span class="token punctuation">.</span>filter <span class="token operator">=</span> fn <span class="token punctuation">:</span> <span class="token punctuation">(</span>’a <span class="token operator">-&gt;</span> bool<span class="token punctuation">)</span> <span class="token operator">-&gt;</span> ’a list <span class="token operator">-&gt;</span> ’a list
-
-<span class="token keyword">val</span> List<span class="token punctuation">.</span>foldl <span class="token operator">=</span> fn <span class="token punctuation">:</span> <span class="token punctuation">(</span>’a <span class="token operator">*</span> ’b <span class="token operator">-&gt;</span> ’b<span class="token punctuation">)</span> <span class="token operator">-&gt;</span> ’b <span class="token operator">-&gt;</span> ’a list <span class="token operator">-&gt;</span> ’b
-</code></pre>
-<h2 id="clojure-1">Clojure</h2>
-<ul>
-<li>Im Gegensatz zu SML: dynamisch getypte Sprache</li>
-</ul>
-<h4 id="beispiel-code-2">Beispiel-Code:</h4>
-<pre class=" language-python"><code class="prism  language-python"><span class="token punctuation">(</span><span class="token keyword">def</span> make<span class="token operator">-</span>add
-	<span class="token punctuation">(</span>fn <span class="token punctuation">[</span>a<span class="token punctuation">]</span>
-		<span class="token punctuation">(</span>fn <span class="token punctuation">[</span>b<span class="token punctuation">]</span>
-			<span class="token punctuation">(</span><span class="token operator">+</span> a b<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-
-<span class="token punctuation">(</span><span class="token keyword">def</span> make<span class="token operator">-</span>prepend
-  <span class="token punctuation">(</span>fn <span class="token punctuation">[</span>a<span class="token punctuation">]</span>
-    <span class="token punctuation">(</span>fn <span class="token punctuation">[</span>b<span class="token punctuation">]</span>
-      <span class="token punctuation">(</span>cons a b<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-</code></pre>
-<pre class=" language-ocaml"><code class="prism  language-ocaml">datatype exp <span class="token operator">=</span> Constant <span class="token keyword">of</span> int
+datatype exp <span class="token operator">=</span> Constant <span class="token keyword">of</span> int
                 <span class="token operator">|</span> Negate <span class="token keyword">of</span> exp
                 <span class="token operator">|</span> Add <span class="token keyword">of</span> exp <span class="token operator">*</span> exp
                 <span class="token operator">|</span> Multiply <span class="token keyword">of</span> exp <span class="token operator">*</span> exp<span class="token punctuation">;</span>
@@ -495,7 +462,85 @@ largest<span class="token punctuation">_</span>constant <span class="token punct
 
 number<span class="token punctuation">_</span>of<span class="token punctuation">_</span>adds <span class="token punctuation">[</span><span class="token punctuation">(</span>Add <span class="token punctuation">(</span>Constant <span class="token number">19</span><span class="token punctuation">,</span> Negate <span class="token punctuation">(</span>Constant <span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span> Constant <span class="token number">19</span><span class="token punctuation">,</span> Constant <span class="token number">5</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>Add <span class="token punctuation">(</span>Constant <span class="token number">19</span><span class="token punctuation">,</span> Negate <span class="token punctuation">(</span>Constant <span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
 </code></pre>
+<h2 id="curryfizierung---partielle-anwendung">Curryfizierung - partielle Anwendung</h2>
+<pre class=" language-ocaml"><code class="prism  language-ocaml"><span class="token comment">(* Bisherige Form von mehreren Parametern *)</span>
+<span class="token keyword">fun</span> sorted3<span class="token punctuation">_</span>tupled <span class="token punctuation">(</span>x<span class="token punctuation">,</span>y<span class="token punctuation">,</span>z<span class="token punctuation">)</span> <span class="token operator">=</span> z <span class="token operator">&gt;=</span> y andalso y <span class="token operator">&gt;=</span> x
+
+<span class="token comment">(* Curryfizierte Funktion *)</span>
+<span class="token keyword">fun</span> sorted3 x y z <span class="token operator">=</span> z <span class="token operator">&gt;=</span> y andalso y <span class="token operator">&gt;=</span> x
+</code></pre>
+<h4 id="partielle-anwendung">Partielle Anwendung:</h4>
+<ul>
+<li>Aufruf der Funktion mit weniger Argumenten (hier &lt; 3)</li>
+<li>wird häufig für Funktionen höherer Ordnung verwendet</li>
+</ul>
+<pre class=" language-ocaml"><code class="prism  language-ocaml"><span class="token comment">(* Funktionen höherer Ordnung *)</span>
+<span class="token keyword">val</span> List<span class="token punctuation">.</span>map <span class="token operator">=</span> fn <span class="token punctuation">:</span> <span class="token punctuation">(</span>’a <span class="token operator">-&gt;</span> ’b<span class="token punctuation">)</span> <span class="token operator">-&gt;</span> ’a list <span class="token operator">-&gt;</span> ’b list
+
+<span class="token keyword">val</span> List<span class="token punctuation">.</span>filter <span class="token operator">=</span> fn <span class="token punctuation">:</span> <span class="token punctuation">(</span>’a <span class="token operator">-&gt;</span> bool<span class="token punctuation">)</span> <span class="token operator">-&gt;</span> ’a list <span class="token operator">-&gt;</span> ’a list
+
+<span class="token keyword">val</span> List<span class="token punctuation">.</span>foldl <span class="token operator">=</span> fn <span class="token punctuation">:</span> <span class="token punctuation">(</span>’a <span class="token operator">*</span> ’b <span class="token operator">-&gt;</span> ’b<span class="token punctuation">)</span> <span class="token operator">-&gt;</span> ’b <span class="token operator">-&gt;</span> ’a list <span class="token operator">-&gt;</span> ’b
+</code></pre>
+<h2 id="clojure-1">Clojure</h2>
+<ul>
+<li>Im Gegensatz zu SML: dynamisch getypte Sprache</li>
+<li>Prefixnotation</li>
+<li>Verwendung der JVM (wird zu bytecode compiliert)</li>
+</ul>
+<h4 id="grundlagen">Grundlagen:</h4>
+<pre class=" language-typescript"><code class="prism  language-typescript"><span class="token comment">// list</span>
+'<span class="token punctuation">(</span><span class="token number">1</span>  <span class="token number">2</span>  <span class="token number">3</span><span class="token punctuation">)</span>
+<span class="token comment">// vector</span>
+<span class="token punctuation">[</span><span class="token number">1</span>  <span class="token number">2</span>  <span class="token number">3</span><span class="token punctuation">]</span>
+<span class="token comment">// set</span>
+#<span class="token punctuation">{</span><span class="token number">1</span>  <span class="token number">2</span>  <span class="token number">3</span><span class="token punctuation">}</span>
+<span class="token comment">// map</span>
+<span class="token punctuation">{</span><span class="token punctuation">:</span>a  <span class="token number">1</span><span class="token punctuation">,</span> <span class="token punctuation">:</span>b  <span class="token number">2</span><span class="token punctuation">}</span>
+
+<span class="token comment">// Function</span>
+<span class="token punctuation">(</span>defn  greet <span class="token punctuation">[</span>name<span class="token punctuation">]</span> <span class="token punctuation">(</span>str  <span class="token string">"Hello, "</span> name<span class="token punctuation">)</span> <span class="token punctuation">)</span>
+
+<span class="token comment">// Bedingungen</span>
+<span class="token punctuation">(</span><span class="token keyword">if</span> <span class="token punctuation">(</span>even<span class="token operator">?</span>  <span class="token number">2</span><span class="token punctuation">)</span>
+	<span class="token string">"even"</span>
+	<span class="token string">"odd"</span><span class="token punctuation">)</span>
+
+
+<span class="token punctuation">(</span><span class="token function">cond</span> 
+	<span class="token punctuation">(</span><span class="token operator">&lt;</span> x <span class="token number">2</span><span class="token punctuation">)</span> <span class="token string">"Case 1"</span>
+	<span class="token punctuation">(</span><span class="token operator">&lt;</span> x <span class="token number">10</span><span class="token punctuation">)</span> <span class="token string">"Case 2"</span>
+	<span class="token punctuation">:</span><span class="token keyword">else</span>  <span class="token string">"Case 3"</span><span class="token punctuation">)</span>
+
+<span class="token comment">// Zugriff auf eine Liste</span>
+<span class="token punctuation">(</span><span class="token function">first</span> <span class="token punctuation">(</span>cons a list<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token function">a</span>
+<span class="token punctuation">(</span><span class="token function">rest</span> <span class="token punctuation">(</span>cons a list<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">=</span> list
+</code></pre>
+<h4 id="beispiel-code-3">Beispiel-Code:</h4>
+<pre class=" language-python"><code class="prism  language-python"><span class="token punctuation">(</span><span class="token keyword">def</span> make<span class="token operator">-</span>add
+	<span class="token punctuation">(</span>fn <span class="token punctuation">[</span>a<span class="token punctuation">]</span>
+		<span class="token punctuation">(</span>fn <span class="token punctuation">[</span>b<span class="token punctuation">]</span>
+			<span class="token punctuation">(</span><span class="token operator">+</span> a b<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token punctuation">(</span><span class="token keyword">def</span> make<span class="token operator">-</span>prepend
+  <span class="token punctuation">(</span>fn <span class="token punctuation">[</span>a<span class="token punctuation">]</span>
+    <span class="token punctuation">(</span>fn <span class="token punctuation">[</span>b<span class="token punctuation">]</span>
+      <span class="token punctuation">(</span>cons a b<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+</code></pre>
 <h1 id="ausgewählte-kapitel">4. Ausgewählte Kapitel</h1>
+<h2 id="datenabstraktion">Datenabstraktion</h2>
+<ul>
+<li><strong>Es gibt keinen Unterschied zwischen Programmen und Daten</strong></li>
+<li>Datentypen kann man bauen und damit unabhängig von festgelegten Repräsentationen rechnen</li>
+</ul>
+<h2 id="metazirkulärer-interpreter">Metazirkulärer Interpreter</h2>
+<ul>
+<li>Interpreter, der in derselben Sprache geschrieben ist, die er interpretiert</li>
+<li>Prozess der Funktionsanwendung durch <code>eval</code> und <code>apply</code></li>
+<li><code>eval</code> wertet den Ausdruck aus und gibt das Ergebnis zurück</li>
+<li><code>apply</code> erwartet eine Funktion und eine Sequenz von Argumenten und wendet die Funktion auf die Elemente der Sequenz an</li>
+<li><strong>Self-evaluation expression:</strong> Ausdruck, der sich selbst wieder als Ergebnis hat</li>
+</ul>
+<h2 id="verzögerte-auswertung">Verzögerte Auswertung</h2>
 <h1 id="funktionale--vs.-objektorientierte-programmierung">5. Funktionale- vs. Objektorientierte Programmierung</h1>
 <h1 id="funktionale-konzepte-in-java">6. Funktionale Konzepte in Java</h1>
 
