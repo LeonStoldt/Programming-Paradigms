@@ -956,7 +956,7 @@ AcmeObject acme <span class="token operator">=</span> <span class="token punctua
 <p><strong>Aufgabentrennung</strong></p>
 <ul>
 <li>Aufgaben trennen zur Betrugsvermeidung</li>
-<li>Bsp: Admin dar nicht gleichzeitig User sein</li>
+<li>Bsp: Admin darf nicht gleichzeitig User sein</li>
 </ul>
 </li>
 <li>
@@ -1046,7 +1046,7 @@ AcmeObject acme <span class="token operator">=</span> <span class="token punctua
 <ul>
 <li>Zusätzliche IT-Infrastruktur</li>
 <li>kann viele False-Positives melden</li>
-<li>Selbstlernmechanismen können schwierigkeiten beinhalten</li>
+<li>Selbstlernmechanismen können Schwierigkeiten beinhalten</li>
 <li>kann Fehler enthalten</li>
 <li>sehr teuer</li>
 </ul>
@@ -1056,7 +1056,7 @@ AcmeObject acme <span class="token operator">=</span> <span class="token punctua
 <p><strong>Blocking Mode</strong>: Normaler Modus, bei dem die WAF erkannten Traffic blockt.</p>
 </li>
 <li>
-<p><strong>Monitoring Mode</strong>: Die WAF alamiert, aber blockt nicht.</p>
+<p><strong>Monitoring Mode</strong>: Die WAF alarmiert, aber blockt nicht.</p>
 </li>
 <li>
 <p><strong>Learning Mode</strong>: Die WAF lernt durch gutartigen Traffic, was normal und valide ist.</p>
