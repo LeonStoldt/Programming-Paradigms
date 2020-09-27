@@ -3,814 +3,1135 @@
 
 ---
 
-<h1 id="programmierparadigmen">1. Programmierparadigmen</h1>
-<h3 id="was-ist-ein-programmierparadigma">Was ist ein Programmierparadigma?</h3>
+<h1 id="it-security-lecture">IT Security Lecture</h1>
+<h3 id="semester-1---informations--und-netzwerksicherheit">Semester 1 - Informations- und Netzwerksicherheit</h3>
+<ol>
+<li><a href="https://github.com/LeonStoldt/it-security-lecture/blob/master/slides/01-01-motivation.md">Motivation</a>  (Vulnerabilities, Exploits, Angreifer)</li>
+<li><a href="https://github.com/LeonStoldt/it-security-lecture/blob/master/slides/01-02-security_goals.md">Sicherheitsziele</a>  (Confidentiality, Integrity, Availability)</li>
+<li><a href="https://github.com/LeonStoldt/it-security-lecture/blob/master/slides/01-03-malware.md">Malware</a>  (Viren, Würmer, Trojaner, Botnets, Ransomware, Cryptojackers)</li>
+<li><a href="https://github.com/LeonStoldt/it-security-lecture/blob/master/slides/01-04-network_security.md">Netzwerksicherheit</a>  (VPN, Wireless Security, Firewalls/IDS/IPS/WAF)</li>
+<li><a href="https://github.com/LeonStoldt/it-security-lecture/blob/master/slides/01-06-security_mgmt_and_org.md">Sicherheitsmanagement und -rorganisation</a></li>
+<li><a href="https://github.com/LeonStoldt/it-security-lecture/blob/master/slides/01-07-threat_modeling.md">Threat Modeling</a></li>
+<li><a href="https://github.com/LeonStoldt/it-security-lecture/blob/master/slides/01-08-penetration_testing.md">Penetration Testing</a></li>
+</ol>
+<h3 id="semester-2---anwendungssicherheit-und-systementwicklungslebenszyklus">Semester 2 - Anwendungssicherheit und Systementwicklungslebenszyklus</h3>
+<ol start="8">
+<li><a href="https://github.com/LeonStoldt/it-security-lecture/blob/master/slides/02-01-owasp.md">Open Web Application Security Project</a>  (OWASP)</li>
+<li><a href="https://github.com/LeonStoldt/it-security-lecture/blob/master/slides/02-02-xss.md">Cross-Site Scripting (XSS)</a></li>
+<li><a href="https://github.com/LeonStoldt/it-security-lecture/blob/master/slides/02-03-injection.md">Injection</a></li>
+<li><a href="https://github.com/LeonStoldt/it-security-lecture/blob/master/slides/02-04-authentication_flaws.md">Authentifizierungsfehler</a></li>
+<li><a href="https://github.com/LeonStoldt/it-security-lecture/blob/master/slides/02-05-authorization_flaws.md">Authorisierungsfehler</a></li>
+<li><a href="https://github.com/LeonStoldt/it-security-lecture/blob/master/slides/02-06-sensitive_data.md">Sensible Daten</a></li>
+<li><a href="https://github.com/LeonStoldt/it-security-lecture/blob/master/slides/02-07-insecure_dependencies_and_configuration.md">Unsichere Abhängigkeiten und Konfigurationen</a></li>
+<li><a href="https://github.com/LeonStoldt/it-security-lecture/blob/master/slides/02-08-xxe_and_deserialization.md">XXE &amp; Deserialisierung</a></li>
+<li><a href="https://github.com/LeonStoldt/it-security-lecture/blob/master/slides/02-09-sdlc.md">Sicherer Entwicklungslebenszyklus</a></li>
+</ol>
+<hr>
+<h1 id="motivation">1. Motivation</h1>
+<p><strong>Security:</strong> Frei von Gefahren und Bedrohungen</p>
+<p><strong>Vulnerability :</strong> Fehler oder Schwäche eines Sicherheitskonzepts, die zu einer Sicherheitslücke oder Ausnutzen des Fehlers führen kann</p>
+<p><strong>Exploit:</strong> Programme oder Daten, die zur Ausnutzung eines Bugs oder einer Schwachstelle von elektronischen Geräten genutzt werden können</p>
+<p><strong>Zero-Day:</strong> Herstellerunbekannte Schwachstelle, die ausgenutzt wird bevor der Hersteller die Schwachstelle kennt. (Auch: Zero-Day Attack)</p>
+<p><strong>ATP (Advanced Persistent Threat):</strong> Unbemerktes Daten abfangen eines Systems über längere Zeit (meist durch Staat)</p>
+<h2 id="angreifertypen">Angreifertypen</h2>
+<p><a href="https://raw.githubusercontent.com/LeonStoldt/IT-Security/master/images/Angreifertypen.png"><img src="https://raw.githubusercontent.com/LeonStoldt/IT-Security/master/images/Angreifertypen.png" alt="Angreifertypen.png"></a></p>
+<h4 id="gefährliche-kombinationen">Gefährliche Kombinationen</h4>
 <ul>
-<li>Paradigma steht für Beispiel oder Vorbild</li>
-<li>Kontext Programmieren: <strong>Programmierstil</strong></li>
-<li>Das Erstellen von Code nach vorgegebenen Regeln</li>
+<li>Angreifer + frustrierte Mitarbeiter</li>
+<li>Staat + frustrierte Mitarbeiter</li>
+<li>Blackhats + Betrüger / Krmininelle</li>
+<li>Blackhats + Skriptkiddis</li>
 </ul>
-<h3 id="programmierstile">Programmierstile:</h3>
-
-<table>
-<thead>
-<tr>
-<th align="center">Imperative Programmierung</th>
-<th align="center">Deklarative Programmierung</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="center"><strong>Wie</strong> ist das Problem zu lösen?</td>
-<td align="center"><strong>Was</strong> ist das zu lösende Problem?</td>
-</tr>
-<tr>
-<td align="center">Variablen und Wertzuweisungen</td>
-<td align="center">Funktionen und formale, mathematische Logik</td>
-</tr>
-<tr>
-<td align="center">Anweisungsfolge</td>
-<td align="center">Audruck, der ein Ergebnis liefert</td>
-</tr>
-</tbody>
-</table><h4 id="zuordnung">Zuordnung:</h4>
-
-<table>
-<thead>
-<tr>
-<th align="center">Imperative Programmierung</th>
-<th align="center">Deklarative Programmierung</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="center">Prozedurale Programmierung</td>
-<td align="center">Funktionale Programmierung</td>
-</tr>
-<tr>
-<td align="center">Objektorientierte Programmierung</td>
-<td align="center">Logische Programmierung</td>
-</tr>
-</tbody>
-</table><h3 id="prozedurale--vs.-objektorientierte-programmierung">Prozedurale- vs. Objektorientierte Programmierung</h3>
-
-<table>
-<thead>
-<tr>
-<th align="center">Prozedurale Programmierung</th>
-<th align="center">Objektorientierte Programmierung</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="center">Denken in Prozeduren</td>
-<td align="center">Daten im Mittelpunkt</td>
-</tr>
-<tr>
-<td align="center">Für jede Unterscheidung existiert eine eigene Methode</td>
-<td align="center">Objekt weiß selber, welche Antwort zu ermitteln ist</td>
-</tr>
-</tbody>
-</table><h1 id="typsysteme">2. Typsysteme</h1>
-<h2 id="datentyp">Datentyp:</h2>
+<hr>
+<h1 id="sicherheitsziele">2. Sicherheitsziele</h1>
 <ul>
-<li>Rechner arbeitet ohne Typen (nur <code>0</code> und <code>1</code>)</li>
-<li>Ein Datentyp wird durch die Typisierung von Daten gebildet</li>
-<li>Datentypen sind softwareseitige Konstrukte</li>
-<li>Ziel: Keine Ausführung falscher Informationen auf eine Bitfolge</li>
-<li>Synonym: <em>Typ</em></li>
+<li><strong>Nichtveränderbarkeit</strong></li>
+<li><strong>Nachvollziehbarkeit</strong></li>
+<li><strong>Authentizität</strong></li>
+<li><strong>Pseudoanonymität</strong></li>
+<li><strong>Verifizierbarkeit</strong></li>
+<li><strong>Integrität (Integrity):</strong> Schutz vor Änderung oder Löschung von Informationen durch Sicherstellung, dass die Daten nicht manipuliert werden können. [Unterstützt durch: Hashing, digitale Signaturen, manipulationssichere Verpackung]
+<ul>
+<li>Beispiel: Netzwerk Traffic mitschneiden, Whistleblower, Social Engineering</li>
 </ul>
-<h3 id="zweck-von-typisierung">Zweck von Typisierung:</h3>
+</li>
+<li><strong>Vertraulichkeit (Confidentiality):</strong> Schutz vor Weitergabe von Informationen an Unbefugte [Unterstützt durch: Authentifizierung, Autorisierung, Verschlüsselung, Anonymität, Geheimhaltung]
 <ul>
-<li>Ordnung</li>
-<li>Anwendung sinnloser Operationen vermeiden</li>
-<li><strong>Typkompatibilität:</strong>
+<li>Beispiel: eigener Wifi AP, Social Engineering</li>
+</ul>
+</li>
+<li><strong>Ausfallsicherheit / Verfügbarkeit (Availability):</strong> Sicherstellung der Verfügbarkeit der Dienste und Sicherstellung des Zugriffs auf Informationen für authorisierte Personen, wenn diese benötigt werden. [Unterstützt durch: Zugänglichkeit, Fehlertoleranz, Redundanz, Sicherung, Testen]
 <ul>
-<li>Anwendung eines Operators nur mit korrektem Typ möglich</li>
-<li>Anwendung einer Funktion nur mit korrekten Typen möglich</li>
+<li>Beispiel: DDoS Attacke, EMP, Social Engineering</li>
 </ul>
 </li>
 </ul>
+<p><strong>Informationssicherheit:</strong> Schutz vor unbedigten Zugriff / Änderung / Störung von Informationen oder Informationssystemen</p>
+<p><strong>Kontrolle:</strong> Schutz vor der Kontrolle von sensiblen Daten durch unauthorisierte Personen. [Unterstützt durch: Verschlüsselung, Authentifizierung]</p>
+<p><strong>Authentizität:</strong> Versicherung, dass eine Nachricht tatsächlich von der angegebenen Quelle stammt. [Unterstützt durch: Identifikation, digitale Zertifikate]</p>
+<p><strong>Verantwortlichkeit:</strong> Nachvollziehbarkeit und Verantwortlichkeiten unter Berücksichtigung der rechtlichen und vertraglichen Pflichten. [Unterstützt durch: Integrität, Authentizität, Design, Politik]</p>
+<p><strong>Versicherung:</strong> Regelmäßige Kontrolle der oben genannten Sicherheitsziele zur Sicherstellung von technischen- und betrieblichen Sicherungsmaßnahmen. [Unterstützt durch: Auditing, Measuring, Monitoring, kontinuierliche Verbesserung]</p>
+<h2 id="das-cia³-modell">Das CIA³-Modell</h2>
+<ul>
+<li><strong>C</strong>onfidentiality</li>
+<li><strong>I</strong>ntegrity</li>
+<li><strong>A</strong>vailability</li>
+<li><strong>A</strong>ccountability</li>
+<li><strong>A</strong>ssurance</li>
+</ul>
+<h2 id="maßnahmen-zur-einhaltung-der-sicherheitsziele">Maßnahmen zur Einhaltung der Sicherheitsziele</h2>
 
 <table>
 <thead>
 <tr>
-<th align="center">syntaktische Typkompatibilität</th>
-<th align="center">semantische Typkompatibilität</th>
+<th align="left">Sicherheitsziel</th>
+<th align="left">Technische Maßnahmen</th>
+<th align="left">Organisatorische Maßnahmen</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td align="center">Welche Typbezeichner und Funktionssignaturen stehen zur Verfügung?</td>
-<td align="center">liefert eine Funktion das erwartete Ergebnis zurück?</td>
+<td align="left">Confidentiality</td>
+<td align="left">Zugangskontrolle, RSA, Diffie-Hellman, PGP, HTTPS</td>
+<td align="left">Berechtigungen, Datensparsamkeit</td>
 </tr>
 <tr>
-<td align="center"><strong>Vorteile:</strong> - Unterstützt modulare Entwicklung</td>
-<td align="center"></td>
+<td align="left">Integrity</td>
+<td align="left">SHA256, PGP</td>
+<td align="left">Versionskontrollprozess</td>
 </tr>
 <tr>
-<td align="center">- Nutzung neuer Datentypen, wie vordefinierte Datentypen</td>
-<td align="center"></td>
+<td align="left">Availability</td>
+<td align="left">Redundanter Server, Firewall, Load Balancer</td>
+<td align="left">24/7 Support, SLAs</td>
 </tr>
 <tr>
-<td align="center"><strong>Nachteil:</strong> Syntaktisch Korrekte Implementierung kann semantisch falsch sein</td>
-<td align="center"></td>
+<td align="left">Accountability</td>
+<td align="left">keine shared Accounts, Logging</td>
+<td align="left">RACI-Matrix</td>
+</tr>
+<tr>
+<td align="left">Assurance</td>
+<td align="left">Alte Accounts deaktivieren, SIEM (Security Incident and Event Monitoring)</td>
+<td align="left">Rechteprüfung, Notfallübung, Sensibilisierungstraining</td>
 </tr>
 </tbody>
-</table><h2 id="typsysteme-1">Typsysteme</h2>
-<p>Es gibt <strong>zwei</strong> unterschiedliche Typsysteme:</p>
+</table><hr>
+<h1 id="malware">3. Malware</h1>
+<h2 id="kategorien">Kategorien</h2>
+<ul>
+<li>
+<p><strong>Virus:</strong> Computerviren verbreiten sich durch infizierte Dateien oder Computersysteme und anschließender Replizierung von sich selbst. Für den Erhalt eines Virus ist eine Benutzerinteraktion erforderlich. Es gibt harmlose und gefährliche Viren.</p>
+</li>
+<li>
+<p><strong>Wurm:</strong> Würmer sind Viren, die keine Benutzerinteraktion erfordern.</p>
+</li>
+<li>
+<p><strong>Trojanisches Pferd:</strong> Trojanische Pferde sind Viren, die in einem (nützlichen) Computerprogramm versteckt sind.</p>
+</li>
+<li>
+<p><strong>Spyware:</strong> Software, die Informationen eines Systems ohne Einwilligung sammelt (Bsp. Tastaturdaten, Screenshots, Email-Adressen). Die gesammelten Daten werden häufig online verkauft und dienen für Spam, Marketingzwecke, Identitätsdiebstahl etc.</p>
+</li>
+<li>
+<p><strong>Rootkit:</strong> Software, die ohne Wissen des Benutzers installiert und ausgeblendet werden kann und Aktionen überwachen, Programme ändern oder andere Funktionen ausführen kann.</p>
+</li>
+<li>
+<p><strong>Ransomware:</strong> Verweigerung des Zugriffs auf ein System, bis ein Lösegeld bezahlt wurde (Bsp. Verschlüsselung von Daten). Verbreitung erfolgt über zugängliche Systeme (Bsp. geteilte Laufwerke)</p>
+</li>
+<li>
+<p><strong>Cryptojacker:</strong> Software, die unbemerkt installiert wird und die Rechenleistung des infizierten Rechners für Cryptomining ausnutzt. Der Angriff bleibt durch eine etwas geringere Auslastung des Systems häufig unbemerkt.</p>
+</li>
+<li>
+<p><strong>Botnet:</strong> Geräte, die durch einen Virus o.ä. infiziert wurden und in der Kontrolle der Angreifer sind, können zu einem Bot-Netzwerk werden und somit verteilte Aktivitäten unbemerkt durchgeführt werden. (Bsp. Verbreitung von Spam und Viren, DoS-Attacken)<br>
+<a href="https://raw.githubusercontent.com/LeonStoldt/it-security-lecture/master/slides/images/01-03-malware/570px-Botnet.svg.png"><img src="https://raw.githubusercontent.com/LeonStoldt/it-security-lecture/master/slides/images/01-03-malware/570px-Botnet.svg.png" alt="Botnet-Veranschaulichung"></a></p>
+</li>
+</ul>
+<h2 id="anti-virus-software-av">Anti-Virus Software (AV)</h2>
+<p>Anti-Virus Software (auch: Anti-Malware Software) ist eine Software zum Verhindern, Erkennen und Entfernen von Malware.</p>
+<p>Die Software verwendet für die <strong>Erkennung von Malware</strong> folgende Identifikationsmethoden:</p>
+<ul>
+<li>Signaturbasierte Erkennung</li>
+<li>Heuristiken</li>
+<li>Rootkit-Erkennung</li>
+<li>Echtzeit-Sicherung</li>
+</ul>
+<p><strong>Nachteile</strong> von Anti-Viren Software:</p>
+<ul>
+<li>(Abo-)Kosten</li>
+<li>geringere Performance</li>
+<li>falsche Warnmeldungen</li>
+<li>kein Schutz gegen neue Viren (Polymorpher Code)</li>
+<li>Beschädigung von Dateien (beim Entfernen von Malware)</li>
+<li>möglicher Angriffsweg (durch den OS-Zugriff)</li>
+</ul>
+<h2 id="top-5-sicherheitsstrategien-von-sicherheitsexperten">Top 5 Sicherheitsstrategien von Sicherheitsexperten</h2>
+<ol>
+<li>Software Updates installieren</li>
+<li>Verwendung einzigartiger Passwörter</li>
+<li>2-Faktor-Authentifizierung verwenden</li>
+<li>Starke Passwörter benutzen</li>
+<li>Passwort Manager verwenden</li>
+</ol>
+<hr>
+<h1 id="netzwerksicherheit">4. Netzwerksicherheit</h1>
+<h2 id="osi-model">OSI-Model</h2>
+<p>Siehe <a href="https://leonstoldt.github.io/technische-Grundlagen-der-Informatik/page">Technische Grundlagen der Informatik</a></p>
+<h2 id="vpn-virtual-private-network">VPN (Virtual Private Network)</h2>
+<ul>
+<li>VPN bietet einen Sicherheitsmechanismus für verschlüsselten und gekapselten Netzwerk Traffic</li>
+<li>VPN dient als “sicherer Tunnel” durch ungesicherte Netzwerke zum Zielsystem</li>
+</ul>
+<h3 id="verwendung-von-vpn">Verwendung von VPN:</h3>
+<ul>
+<li>
+<p><strong>Remote Access VPN:</strong> Verbindung eines Computers mit einem entfernten, privaten Netzwerk (Bsp. Heimnetzwerk)<br>
+<a href="https://raw.githubusercontent.com/LeonStoldt/it-security-lecture/master/slides/images/01-04-network_security/vpn_remote-to-intranet.gif"><img src="https://raw.githubusercontent.com/LeonStoldt/it-security-lecture/master/slides/images/01-04-network_security/vpn_remote-to-intranet.gif" alt="Remote Access VPN"></a></p>
+</li>
+<li>
+<p><strong>Site-to-Site VPN:</strong> Verbindet zwei private Netzwerke oder Teile eines Netzwerks. Hierdurch können Organisationen eine sichere VPN-Verbindung über das Internet zu anderen Organisationen herstellen.<br>
+<a href="https://raw.githubusercontent.com/LeonStoldt/it-security-lecture/master/slides/images/01-04-network_security/vpn_two-sites.gif"><img src="https://raw.githubusercontent.com/LeonStoldt/it-security-lecture/master/slides/images/01-04-network_security/vpn_two-sites.gif" alt=""></a></p>
+</li>
+<li>
+<p><strong>Site-to-Site VPN (Intranet):</strong> Bei besonders sensiblen Daten kann eine VPN Verbindung zweier Abteilungen über das Intranet  geschützt werden. (Bsp. HR-Daten und Finanzabteilung)</p>
+</li>
+</ul>
+<h2 id="wireless-security">Wireless Security</h2>
+<h3 id="beispiele-für-angreifbare-wireless-technologien">Beispiele für angreifbare Wireless Technologien:</h3>
+<ul>
+<li>Wifi</li>
+<li>Bluetooth</li>
+<li>NFC</li>
+<li>etc.</li>
+</ul>
+<h3 id="vorschläge-für-wireless-security">Vorschläge für Wireless Security</h3>
+<blockquote>
+<ol>
+<li>Außer Haus: Wifi ausschalten</li>
+<li>Alte Netzwerke löschen</li>
+<li>Verwenden uninteressanter WiFi SSID-Namen</li>
+<li>“Wired to WiFi broadcasts” abschalten</li>
+<li>Ausschließliche Verwendung von 5GHz</li>
+<li>Verwendung von kabelgebundenen Kameras</li>
+<li>Bluetooth-Geräte zu Hause verbinden</li>
+<li>(NFC)-Karten sicher verstauen</li>
+<li>Arbeits- und Identifikationskarten versteckt halten</li>
+</ol>
+</blockquote>
+<h2 id="datencenter-sicherheit">Datencenter Sicherheit</h2>
+<ul>
+<li>
+<p><strong>Netzwerk Firewall:</strong> Beobachtet und filtert Netzwerk Traffic auf basis benutzerdefinierter Regeln. Soll böswillige Zugriffe auf Server verhindern und nur legitimen Traffic zulassen.</p>
+<ul>
+<li><strong>Stateless Firewall:</strong> Überprüft isoliert einzelne Pakete und lässt diese auf Basis des Headers zu oder nicht.</li>
+<li><strong>Stateful Firewall:</strong> Bestimmen den Verbindungsstatus von Paketen und können verwandte Pakete sammeln. Die Regeln werden auf den Datenverkehr angewendet.</li>
+<li><strong>Anwendungsfirewall (Proxy-Based Firewall):</strong> Analysieren die übertragenen Daten und Regeln können für einzelne Dienste / Anwendungen spezifisch angewendet werden.</li>
+</ul>
+</li>
+<li>
+<p><strong>Firewall Regeln (Beispiel):</strong> <code>FROM</code> <em>source</em> <code>TO</code> <em>destination</em> <code>ALLOW|BLOCK</code> <em>protocol</em> <code>PORT</code>   <em>port(s)</em></p>
+</li>
+<li>
+<p><strong>DMZ (DeMilitarized Zone):</strong> Teilnetz, welches Zugriff auf öffentliche Dienste hat und gleichzeitig interne Netze erreichen kann. Dieser Bereich ist mit einer Firewall durch den Angriff aus dem öffentlichen Netz geschützt und durch eine weitere Firewall vom internen Netz getrennt.</p>
+</li>
+<li>
+<p><strong>IDS (Intrusion Detection System):</strong> <em>[Einbruchserkennungssystem]</em> Überwacht ein Netzwerk oder System auf böswillige Aktivitäten und meldet diese.</p>
+</li>
+<li>
+<p><strong>IPS (Intrusion Prevention System):</strong> <em>[Einbruchsverhinderungssystem]</em> Erweitert das IDS durch die Überwachung von Netzwerk Traffic und Systemaktivitäten und kann den erkannten Einbruch aktiv verhindern bzw. blockieren.</p>
+</li>
+<li>
+<p><strong>Einschränkungen:</strong></p>
+<ul>
+<li>Hohe Anzahl von Fehlalarmen sorgt für das Ignorieren oder Übersehen von realen Angriffen</li>
+<li>Kann keine Netzwerkschwächen kompensieren</li>
+<li>Verschlüsselte Pakete werden nicht durch IDS verarbeitet</li>
+</ul>
+</li>
+<li>
+<p><strong>NIDS (Network IDS):</strong> Anwendung eines IDS im Netzwerk</p>
+</li>
+<li>
+<p><strong>HIDS (Host IDS):</strong> Anwendung und Überwachung auf einem einzelnen Host. Hierbei werden Systemdaten mit vorherigen zuständen beobachtet und Änderungen von kritischen Systemdaten gemeldet.</p>
+</li>
+</ul>
+<hr>
+<h1 id="sicherheitsmanagement-und-organisation">5. Sicherheitsmanagement und Organisation</h1>
+<h2 id="jobtitel-und--beschreibungen">Jobtitel und -beschreibungen</h2>
+<ul>
+<li>
+<p><strong>Security Analyst:</strong> Analyse und Bewertugen von Schwachstellen in der Infrastruktur (Software, Hardware, Netzwerk). Anschließende Empfehlung von Best Pracises und Lösungen.</p>
+</li>
+<li>
+<p><strong>Security Engineer:</strong> Analyse von Daten und Protokollen zur Sicherheitsüberwachung.</p>
+</li>
+<li>
+<p><strong>Security Architect:</strong> Entwirft das Sicherheitssystem</p>
+</li>
+<li>
+<p><strong>Security Administrator:</strong> Installiert und verwaltet Sicherheitssysteme der Organisation</p>
+</li>
+<li>
+<p><strong>Security Software Developer:</strong> Implementiert Sicherheit in Anwendungssoftware und entwickelt Sicherheitssoftware und -tools.</p>
+</li>
+<li>
+<p><strong>Chief Information Security Officer:</strong> Führungsposition mit Verantwortung für die gesamte Abteilung.</p>
+</li>
+<li>
+<p><strong>Penetration Tester:</strong> Sucht nach Schwachstellen, identifiziert sie und nutzt sie aus (als Nachweis).</p>
+</li>
+<li>
+<p><strong>Cyber Incident Response Team (CIRT):</strong> Gruppe, die für die Reaktionen auf Sicherheitsverletzungen, Viren und Sicherheitsvorfälle zuständig ist.</p>
+<ul>
+<li><strong>1. Vorbereitung:</strong> Reaktionsplan / -strategie</li>
+<li><strong>2. Identifizierung:</strong> Schadenserkennung</li>
+<li><strong>3. Eindämmung:</strong> Verhinderung weiterer Schäden</li>
+<li><strong>4. Ausrottung:</strong> Beseitigung der Bedrohung und zurücksetzen der Systeme</li>
+<li><strong>5. Widerherstellung:</strong> Testen, Überwachen,  Validieren und Inbetriebnahme</li>
+<li><strong>6. Lessons Learned:</strong> Aus Angriff lernen und Sicherheitssystem verbessern</li>
+</ul>
+</li>
+</ul>
+<h2 id="security-awareness">Security Awareness</h2>
+<ul>
+<li>Schulungsprogramme für Mitarbeiter</li>
+<li>Individuelle Verantwortung für Sicherheitsrechtlinien des Unternehmens</li>
+<li>Maßnahmen zur Prüfung (Audits)</li>
+</ul>
+<h3 id="schritte-von-security-awareness">Schritte von Security Awareness</h3>
+<ol>
+<li>Aktuellen Zustand ermitteln</li>
+<li>Security Awareness Programm ermitteln</li>
+<li>Bereitstellung des Programms für Mitarbeiter</li>
+<li>Messung der Fortschritte und ggf. Überarbeitung des Programms</li>
+</ol>
+<hr>
+<h1 id="threat-modeling">6. Threat Modeling</h1>
+<ul>
+<li>Identifizierung und Priorisierung potenzieller Bedrohungen und Schwachstellen aus der Sicht eines hypothetischen Angreifers</li>
+<li>Zweck: Systematische Analyse des Profils eines Angreifers und Ermittlung des wahrscheinlichsten Angriffspunkts - zum Nutzen der Verteidiger</li>
+</ul>
+<h3 id="gründe-für-die-bedrohungsmodellierung">Gründe für die Bedrohungsmodellierung</h3>
+<ul>
+<li>Sicherheitslücken frühzeitig finden</li>
+<li>Verstehen der eigenen Sicherheitsanforderungen</li>
+<li>Entwicklung und Lieferung besserer Produkte</li>
+<li>Behebung von Problemen, die nicht durch anderen Technologien behoben werden (können)</li>
+</ul>
+<h2 id="angriffsbäume">Angriffsbäume</h2>
+<ul>
+<li>Darstellung von Angriffen eines Systems durch eine Baumstruktur</li>
+<li>Das Ziel wird als Wurzelknoten dargestellt</li>
+<li>Angriffsmöglichkeiten werden als Blätter dargestellt</li>
+<li>Angriffsmöglichkeiten können durch <code>AND</code> verbunden werden</li>
+<li>Blätter werden durch <code>I (Impossible)</code> oder <code>P (Possible)</code> gekennzeichnet</li>
+<li>Potentielle Angriffswege werden durch gestrichelte Linien dargestellt</li>
+</ul>
+<p><a href="https://github.com/LeonStoldt/it-security-lecture/raw/master/slides/images/01-07-threat_modeling/paper-attacktrees-fig2.gif"><img src="https://github.com/LeonStoldt/it-security-lecture/raw/master/slides/images/01-07-threat_modeling/paper-attacktrees-fig2.gif" alt="Attack Tree"></a></p>
+<h2 id="trust-boundaries-vertrauensgrenzen">Trust Boundaries (Vertrauensgrenzen)</h2>
+<ul>
+<li>Bedrohungen, die Vertrauensgrenzen überschreiten sind relevante Bedrohungen</li>
+</ul>
+<hr>
+<h1 id="penetration-testing">7. Penetration Testing</h1>
+<p>Versuch einer Bewertung der Sicherheit von IT-Infrastruktur durch kontrolliertes Angreifen, Identifizieren und Ausnutzen von Sicherheitslücken</p>
+<h3 id="phasen-von-pen-tests">Phasen von Pen-Tests</h3>
+<p><strong>1. Interaktionen vor dem Pen-Test</strong><br>
+-	Absprache des Umfangs und Vertragsregelungen<br>
+-	Rahmenbedingungen<br>
+-	Notfallkontakt Informationen<br>
+<strong>2. Informationen sammeln</strong><br>
+<strong>3. Threat Modeling</strong><br>
+<strong>4. Schwachstellenanalyse</strong><br>
+-	automatisierte Anwendungsscans<br>
+-	Netzwerkscans<br>
+-	Traffic / Metadaten Analyse<br>
+<strong>5. Exploitation / Ausnutzung</strong><br>
+-	Vermeiden von Gegenmaßnahmen<br>
+-	Unerkannt bleiben<br>
+-	Durchführung angepasster Exploits<br>
+<strong>6. Nachnutzung der Schwachstelle</strong><br>
+-	Infrastruktur-Analyse<br>
+-	Plünderung z.B. von Informationen<br>
+-	Installation einer Backdoor<br>
+-	Aufräumen der Spuren<br>
+<strong>7. Berichterstattung</strong><br>
+-	Zusammenfassung (allgemeiner Bericht)<br>
+-	Technischer Bericht (technische Details, Angriffspfad und Korrekturvorschläge)</p>
+<h2 id="bug-bounty-programme">Bug Bounty Programme</h2>
+<p>Einzelpersonen erhalten für das Melden von Fehlern (Bugs) eine Belohnung.</p>
+<h2 id="web-security-policies-security.txt">Web Security Policies <code>Security.txt</code></h2>
+<p>Ein Dokument, welches den Prozess zum Aufdecken / Melden von Sicherheitslücken beschreibt.</p>
+<h3 id="inhalt">Inhalt:</h3>
+<ul>
+<li><strong>Kontakt</strong>: Adresse, an die der Fehler gemeldet werden soll</li>
+<li><strong>Verschlüsselung</strong>: Verschlüsselungsschlüssel für die Kommunikation</li>
+<li><strong>Danksagung</strong>: Link zur Anerkennungsseite der gemeldeten Fehler<br>
+. <strong>Berechtigung</strong>: Beschreibung der Berechtigungen des Testens auf der Seite</li>
+<li><strong>Richtlinie</strong>: Link zur Sicherheitsrichtlinie</li>
+<li><strong>Signatur</strong>: Link einer externen Signaturdatei zur Authentifizierung der security.txt</li>
+</ul>
+<ul>
+<li><strong>Anstellung</strong>: Verknüpfung zu den sicherheitsrelevanten Stellen des Anbieters</li>
+</ul>
+<hr>
+<h1 id="owasp">8. OWASP</h1>
+<blockquote>
+<h2 id="open-web-application-security-project">Open Web Application Security Project</h2>
+</blockquote>
+<h2 id="grundwerte">Grundwerte</h2>
+<ul>
+<li><strong>OFFEN:</strong> Hohe Transparenz von allem</li>
+<li><strong>INNOVATION:</strong> Unterstützung von Innovation und Experimenten zur Lösung von Sicherheitsherausforderungen</li>
+<li><strong>GLOBAL:</strong> Keine Beschränkung auf Länder / Kontinente</li>
+<li><strong>INTEGRITÄT:</strong> Ehrliche und Herstellerneutrale Gemeinschaft</li>
+</ul>
+<h2 id="owasp-top-10">OWASP Top 10</h2>
+
+<table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="left"></th>
+<th align="left"></th>
+<th align="left"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">1</td>
+<td align="left">Injection</td>
+<td align="left">6</td>
+<td align="left">Security Misconfiguration</td>
+</tr>
+<tr>
+<td align="left">2</td>
+<td align="left">Broken Authentication</td>
+<td align="left">7</td>
+<td align="left">Cross-Site-Scripting (XSS)</td>
+</tr>
+<tr>
+<td align="left">3</td>
+<td align="left">Sensitive Data Exposure</td>
+<td align="left">8</td>
+<td align="left">Insecure Deserialization</td>
+</tr>
+<tr>
+<td align="left">4</td>
+<td align="left">XML External Entities</td>
+<td align="left">9</td>
+<td align="left">Using Components with Known Vulnerabilities</td>
+</tr>
+<tr>
+<td align="left">5</td>
+<td align="left">Broken Access Control</td>
+<td align="left">10</td>
+<td align="left">Insufficient Logging &amp; Monitoring</td>
+</tr>
+</tbody>
+</table><hr>
+<h1 id="cross-site-scripting-xss">9. Cross-Site-Scripting (XSS)</h1>
+<ul>
+<li>XSS sendet ein bösartiges Skript an einen Ahnungslosen Anwender</li>
+<li>Das Skript wird vom Browser nicht erkannt und ausgeführt</li>
+</ul>
+<h3 id="auswirkungen">Auswirkungen</h3>
+<ul>
+<li>Stehlen der Session des Nutzers</li>
+<li>Stehlen von sensiblen Daten</li>
+<li>Neuschreiben der Website</li>
+<li>Weiterleiten der Nutzer auf eine schädliche Website</li>
+</ul>
+<h2 id="risikobewertung">Risikobewertung</h2>
+
+<table>
+<thead>
+<tr>
+<th align="left">Ausnutzbarkeit</th>
+<th align="left">Häufigkeit</th>
+<th align="left">Erkennbarkeit</th>
+<th align="left">Einfluss</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Einfach</td>
+<td align="left">weit verbreitet</td>
+<td align="left">Einfach</td>
+<td align="left">mittelschwer</td>
+</tr>
+</tbody>
+</table><h3 id="formen-von-xss">Formen von XSS</h3>
+<ul>
+<li>
+<p><strong>Reflected XSS:</strong></p>
+<ul>
+<li>Anwendung liefert den erhaltenen HTTP-Request direkt wieder aus</li>
+<li>Auswertung auf dem Server<br>
+<a href="https://raw.githubusercontent.com/LeonStoldt/it-security-lecture/master/slides/images/02-02-xss/reflected-xss.png"><img src="https://raw.githubusercontent.com/LeonStoldt/it-security-lecture/master/slides/images/02-02-xss/reflected-xss.png" alt="Reflected XSS"></a></li>
+</ul>
+</li>
+<li>
+<p><strong>Stored XSS:</strong></p>
+<ul>
+<li>Angreifer führt zuerst einen Request durch und speichert das XSS</li>
+<li>Bsp. Kommentare / Reviews<br>
+<a href="https://github.com/LeonStoldt/it-security-lecture/raw/master/slides/images/02-02-xss/stored-xss.png"><img src="https://github.com/LeonStoldt/it-security-lecture/raw/master/slides/images/02-02-xss/stored-xss.png" alt="Reflected XSS"></a><br>
+viewed at a later time by another user</li>
+</ul>
+</li>
+<li>
+<p><strong>DOM XSS:</strong></p>
+<ul>
+<li>Statisches HTML</li>
+<li>XSS wird nur im DOM ausgewertet, nicht auf dem Server</li>
+<li>findet direkt im Browser statt (es wird nichts zum Server geschickt)<br>
+<a href="https://github.com/LeonStoldt/it-security-lecture/raw/master/slides/images/02-02-xss/dom-xss.png"><img src="https://github.com/LeonStoldt/it-security-lecture/raw/master/slides/images/02-02-xss/dom-xss.png" alt="Reflected XSS"></a></li>
+</ul>
+</li>
+</ul>
+<h3 id="prävention">Prävention</h3>
+<ul>
+<li>keinen Userinput als Ausgabe anzeigen</li>
+<li>Userinput codieren</li>
+<li>Eingabeüberprüfung per Whitelist oder Verwendung eines HTML Sanitizers</li>
+</ul>
+<h3 id="eingabevalidierung">Eingabevalidierung</h3>
+<p><strong>Black List:</strong></p>
+<ul>
+<li>Alles erlauben, was nicht explizit verboten ist</li>
+<li>kann durch maskieren von Zeichen umgangen werden</li>
+<li>muss aktualisiert werden</li>
+</ul>
+<p><strong>White List:</strong></p>
+<ul>
+<li>Alles verbieten, was nicht explizit erlaubt ist</li>
+<li>muss mit der Zeit gewartet werden, um nicht schlechter zu werden</li>
+<li>mühsamer, aber kann sicherer sein</li>
+</ul>
+<h3 id="umgehen-client-seitiger-validierung">Umgehen Client-seitiger Validierung</h3>
+<ul>
+<li>Client Side Validation bietet keine Sicherheit!</li>
+<li>ausgehende HTTP-Anfragen können manipuliert werden</li>
+<li>direkte Interaktion mit dem Backend</li>
+</ul>
+<hr>
+<h1 id="injection">10. Injection</h1>
+<p>Eine Anwendung dazu bringen ungewollte Befehle einzubinden und durch den Interpreter anschließend ausführen zu lassen.</p>
+<h2 id="risikobewertung-1">Risikobewertung</h2>
+
+<table>
+<thead>
+<tr>
+<th align="left">Ausnutzbarkeit</th>
+<th align="left">Häufigkeit</th>
+<th align="left">Erkennbarkeit</th>
+<th align="left">Einfluss</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Einfach</td>
+<td align="left">verbreitet</td>
+<td align="left">Einfach</td>
+<td align="left">Schwer</td>
+</tr>
+</tbody>
+</table><h3 id="typische-auswirkungen">Typische Auswirkungen</h3>
+<ul>
+<li>Umgehung von Authentifizierung</li>
+<li>Daten ausspähen</li>
+<li>Daten manipulieren</li>
+<li>Übernahme des Systems</li>
+</ul>
+<h3 id="beispiele">Beispiele</h3>
+<ul>
+<li><code>admin'--</code></li>
+<li><code>admin'/*</code></li>
+<li><code>' OR 1=1--</code></li>
+<li><code>' OR 1=1/*</code></li>
+<li><code>') OR '1'='1</code></li>
+<li><code>') OR ('1'='1</code></li>
+</ul>
+<h2 id="blind-sql-injection">Blind SQL Injection</h2>
+<p>Ausprobieren, um Schwachstellen durch Reaktionen des Systems zu erkennen</p>
+<h3 id="beispiele-1">Beispiele</h3>
+<ul>
+<li>Boolsche Ausdrücke (z.B. <code>AND 1 = 2</code> or <code>AND 1 = 1</code>)</li>
+<li>Pausen (z.B. <code>WAITFOR DELAY '00:00:10'--</code>)</li>
+</ul>
+<h2 id="prävention-1">Prävention</h2>
+<ul>
+<li>Interpreter vermeiden</li>
+<li>Schnittstelle verwenden, die Variablen unterstützt (Bsp. PreparedStatement, Hibernate etc.)</li>
+<li>Eingabevalidierung per Whitelist</li>
+<li>DB User sollte möchlichst wenig Rechte haben</li>
+</ul>
+<hr>
+<h1 id="authentifizierungsfehler">11. Authentifizierungsfehler</h1>
+<ul>
+<li>Brute-Force oder automatisierte Angriffe</li>
+<li>schwache, bekannte oder übliche Passwörter</li>
+<li>schlechte Prozesse zur Wiederherstellung von Anmeldeinformationen (Bsp. Passwort vergessen)</li>
+<li>schlecht oder gar nicht verschlüsselte Passwörter</li>
+<li>keine MFA</li>
+<li>Session IDs in URL</li>
+<li>schlechtes Session Management</li>
+</ul>
+<h2 id="risikobewertung-2">Risikobewertung</h2>
+
+<table>
+<thead>
+<tr>
+<th align="left">Ausnutzbarkeit</th>
+<th align="left">Häufigkeit</th>
+<th align="left">Erkennbarkeit</th>
+<th align="left">Einfluss</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Einfach</td>
+<td align="left">verbreitet</td>
+<td align="left">Mittelmäßig</td>
+<td align="left">Schwer</td>
+</tr>
+</tbody>
+</table><h2 id="prävention-2">Prävention</h2>
+<ul>
+<li>Verwendung einzigartiger und Case-Insensitiver  User IDs</li>
+<li>Validiere E-Mail Adressen, wenn diese als Nutzername verwendet werden</li>
+<li>Verwendung starker Passwörter (mind. 10 Zeichen)</li>
+<li>keine regelmäßigen Passwortänderungen erzwingen</li>
+<li>Vermeiden von Regeln zur Passworterstellung</li>
+<li>Bekannte oder schlechte Passwörter nicht zulassen</li>
+<li>Passwörter nur über TLS senden</li>
+<li>Brute-Force Attacken verhindern (z.B. durch Wartezeit, maximale Versuche etc.)</li>
+</ul>
+<h4 id="sicherer-passwort-wiederherstellungsprozess">Sicherer Passwort-Wiederherstellungsprozess</h4>
+<ol>
+<li>Sammeln von Identitätsdaten oder Sicherheitsfragen</li>
+<li>Verifizieren der Sicherheitsfragen</li>
+<li>Konto sofort sperren</li>
+<li>Token über einen anderen Kanal senden</li>
+<li>Nutzer das Passwort ändern lassen</li>
+<li>Protokollieren</li>
+</ol>
+<h2 id="zwei-faktor-authentifizierung">Zwei-Faktor-Authentifizierung</h2>
+<ul>
+<li>zusätzlicher Faktor zur Authentifizierung</li>
+<li>Bsp:
+<ul>
+<li>SMS</li>
+<li>Authenticator App</li>
+<li>Hardware Key</li>
+</ul>
+</li>
+</ul>
+<h2 id="passwort-manager">Passwort Manager</h2>
+<p>Passwort Manager verwalten beliebig viele Nutzerdaten und bieten den Zugriff über ein Master-Passwort. Hierdurch können einzigartige und komplexe Passwörter generiert werden.<br>
+Beispiele</p>
+<ul>
+<li><a href="https://keepass.info/">KeePass</a></li>
+<li><a href="https://www.lastpass.com">LastPass</a></li>
+<li><a href="https://1password.com/">1Password</a></li>
+</ul>
+<hr>
+<h1 id="authorisierungsfehler">12. Authorisierungsfehler</h1>
+<ul>
+<li>Zugreifen auf nicht autorisierte Funktionen oder Daten</li>
+<li>Anzeigen vertraulicher Daten</li>
+<li>Änderung von Daten anderer Nutzer</li>
+<li>Änderung von Zugriffsrechten</li>
+</ul>
+<h3 id="übliche-angriffszenarien">Übliche Angriffszenarien</h3>
+<ul>
+<li>Manipulation der URL oder der Seite</li>
+<li>Änderung des Primärschlüssels anderer Nutzereinträge</li>
+<li>Erhöhen der eigenen Rechte</li>
+<li>Als Admin ausgeben</li>
+<li>Verwendung der API ohne Berechtigungen</li>
+</ul>
+<h2 id="risikobewertung-3">Risikobewertung</h2>
+
+<table>
+<thead>
+<tr>
+<th align="left">Ausnutzbarkeit</th>
+<th align="left">Häufigkeit</th>
+<th align="left">Erkennbarkeit</th>
+<th align="left">Einfluss</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Mittelmäßig</td>
+<td align="left">verbreitet</td>
+<td align="left">Mittelmäßig</td>
+<td align="left">Schwer</td>
+</tr>
+</tbody>
+</table><h2 id="prävention-3">Prävention</h2>
+<ul>
+<li>vertrauenswürdige, serverseitige Zugriffskontrolle</li>
+<li>Einmal Zugriffskontrollmechanismen entwickeln und überall verwenden</li>
+<li>Verzeichnisliste des Webservers deaktivieren</li>
+<li>Fehler bei der Zugriffskontrolle protokollieren und ggf. melden</li>
+<li>Zugriffsversuche der API beschränken</li>
+<li>ungültige Zugriffstoken nach Abmeldung</li>
+<li>Zugriffskontrolle durch Unit-, Integrationtest und QA sichern</li>
+</ul>
+<hr>
+<h1 id="sensible-daten">13. Sensible Daten</h1>
+<ul>
+<li>Passwörter</li>
+<li>Kreditkartennummern</li>
+<li>Gesundheitsdaten</li>
+<li>Persönliche Informationen
+<ul>
+<li>Name und Vorname</li>
+<li>Adresse</li>
+<li>Email Adresse</li>
+<li>Personalausweisnummer</li>
+<li>Geodaten</li>
+<li>IP Adresse</li>
+<li>…</li>
+</ul>
+</li>
+<li>Geschäftsgeheimnisse</li>
+</ul>
+<h1 id="preisgabe-sensitiver-daten">Preisgabe sensitiver Daten</h1>
+<ul>
+<li>Fehler beim Ermitteln der Schutzanforderungen</li>
+<li>Übertragung im Klartext (Bsp. HTTP)</li>
+<li>Verwendung schwacher Verschlüsselung</li>
+<li>Keine Verschlüsselung durch den Browser</li>
+<li>Fehlende Zertifikatsprüfung</li>
+</ul>
+<h2 id="risikobewertung-4">Risikobewertung</h2>
+
+<table>
+<thead>
+<tr>
+<th align="left">Ausnutzbarkeit</th>
+<th align="left">Häufigkeit</th>
+<th align="left">Erkennbarkeit</th>
+<th align="left">Einfluss</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Mittelmäßig</td>
+<td align="left">weit verbreitet</td>
+<td align="left">Mittelmäßig</td>
+<td align="left">Schwer</td>
+</tr>
+</tbody>
+</table><h2 id="prävention-4">Prävention</h2>
+<ul>
+<li>Klassifizierung von Daten und deren Wichtigkeit</li>
+<li>sensible Daten nicht ohne wichtigen Grund speichern</li>
+<li>Einsatz aktueller Technologie (Algorithmen, Protokolle, Schlüssel)</li>
+<li>Sicherstellung eines guten Kryptografieschutzes, selbst wenn die Zugriffskontrolle umgangen werden sollte</li>
+</ul>
+<hr>
+<h1 id="unsichere-abhängigkeiten-und-konfigurationen">14. Unsichere Abhängigkeiten und Konfigurationen</h1>
+<h2 id="unsichere-abhängigkeiten">Unsichere Abhängigkeiten</h2>
+<h3 id="häufige-fehler-bei-anhängigkeiten">Häufige Fehler bei Anhängigkeiten</h3>
+<ul>
+<li>Keine Ahnung / Kontrolle der verwendeten Versionen der Abhängigkeiten</li>
+<li>Verwendete Abhängigkeit ist anfällig für Angriffe oder wird nicht mehr unterstützt</li>
+</ul>
+<h2 id="risikobewertung-5">Risikobewertung</h2>
+
+<table>
+<thead>
+<tr>
+<th align="left">Ausnutzbarkeit</th>
+<th align="left">Häufigkeit</th>
+<th align="left">Erkennbarkeit</th>
+<th align="left">Einfluss</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Mittelmäßig</td>
+<td align="left">weit verbreitet</td>
+<td align="left">Mittelmäßig</td>
+<td align="left">mild</td>
+</tr>
+</tbody>
+</table><h2 id="prävention-5">Prävention</h2>
+<ul>
+<li>Nicht verwendete oder unnötige Abhängigkeiten vermeiden und entfernen</li>
+<li>Kontinuierliches Überwachen der Schwachstellen von Abhängigkeiten</li>
+<li>Nur offizielle Abhängigkeiten von sicheren Links einbinden</li>
+<li>Regelmäßiges Aktualisieren der Versionen aller Abhängigkeiten</li>
+</ul>
+<h2 id="unsichere-konfigurationen">Unsichere Konfigurationen</h2>
+<h3 id="häufige-fehler">Häufige Fehler:</h3>
+<ul>
+<li>Falsch konfigurierte Berechtigungen</li>
+<li>Unnötige Funktionen wurden aktiviert / installiert</li>
+<li>Standardkonten oder -credentials sind noch aktiviert</li>
+<li>Preisgabe zu vieler Informationen (Bsp. Stacktrace)</li>
+<li>Deaktivierung von den neuesten Sicherheitsfunktionen</li>
+<li>Veraltete oder Anfällige Software</li>
+</ul>
+<h3 id="potentielle-auswirkungen">Potentielle Auswirkungen</h3>
+<ul>
+<li>unauthorisierter Zugriff auf Systemdaten oder -funktionalitäten</li>
+<li>Systemübernahme durch z.B. Backdoors</li>
+</ul>
+<h2 id="risikobewertung-6">Risikobewertung</h2>
+
+<table>
+<thead>
+<tr>
+<th align="left">Ausnutzbarkeit</th>
+<th align="left">Häufigkeit</th>
+<th align="left">Erkennbarkeit</th>
+<th align="left">Einfluss</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Einfach</td>
+<td align="left">weit verbreitet</td>
+<td align="left">Einfach</td>
+<td align="left">mild</td>
+</tr>
+</tbody>
+</table><h1 id="web-shells">Web Shells</h1>
+<p>Web Shells sind Skripte, die auf einem Webserver hochgeladen werden können und für eine Remotevewaltung zum Server sorgen. Sie können in jeder Sprache geschrieben werden, die der Zielserver unterstützt.</p>
+<h3 id="prävention-6">Prävention</h3>
+<ul>
+<li>Entwicklungs-, Qualitätssicherungs- und Produktionsumgebung identisch konfigurieren</li>
+<li>segmentierte Anwendungsarchitektur</li>
+<li>Regelmäßige Überprüfung der Konfigurationen</li>
+</ul>
+<h1 id="xxe-und-deserialisierung">15. XXE und Deserialisierung</h1>
+<h2 id="xxe---xml-external-entities">XXE - (XML External Entities)</h2>
+<p>XML Entities sind “Variablen” in XML, die später referenziert werden können. Bsp:</p>
+<pre class=" language-xml"><code class="prism  language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>!ENTITY</span> <span class="token attr-name">foo</span> <span class="token attr-name">"FOO"</span><span class="token punctuation">&gt;</span></span>
+<span class="token comment">&lt;!-- Definition einer externen Entity --&gt;</span>
+&lt;!ENTITY foo "https://raw.githubusercontent.com/bkimminich/juice-shop/gh-pages/entities.dtd"&gt;
+<span class="token comment">&lt;!-- Anwenden --&gt;</span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>foobar</span><span class="token punctuation">&gt;</span></span><span class="token entity" title="&amp;foo;">&amp;foo;</span> <span class="token entity" title="&amp;bar;">&amp;bar;</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>foobar</span><span class="token punctuation">&gt;</span></span>
+</code></pre>
+<p>Viele ältere oder schlecht konfigurierte XML-Prozessoren werten (externe) Entities aus und Angreifer können potentiell folgende Angriffe durchführen:</p>
+<ul>
+<li>interne Dateien offenlegen</li>
+<li>internes Port-Scannen</li>
+<li>Remote-Code Execution</li>
+<li>DoS Attacken</li>
+</ul>
+<h2 id="risikobewertung-7">Risikobewertung</h2>
+
+<table>
+<thead>
+<tr>
+<th align="left">Ausnutzbarkeit</th>
+<th align="left">Häufigkeit</th>
+<th align="left">Erkennbarkeit</th>
+<th align="left">Einfluss</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Mittelmäßig</td>
+<td align="left">verbreitet</td>
+<td align="left">Einfach</td>
+<td align="left">Schwerwiegend</td>
+</tr>
+</tbody>
+</table><h2 id="prävention-7">Prävention</h2>
+<ul>
+<li>richtige Konfiguration des XML-Parsers:
+<ul>
+<li>kein parsen <strong>jeglicher</strong> Entities</li>
+<li>kein parsen von <strong>externen Entities</strong></li>
+</ul>
+</li>
+</ul>
+<h2 id="deserialisierung">Deserialisierung</h2>
+<p><strong>Serialisierung</strong> wandelt ein Objekt in einen Bytestream um, welcher ausreichend Informationen zur Herstellung einer Ausgangszustands besitzt.</p>
+<p><strong>Deserialisierung</strong> wandelt einen Bytestream wieder in ein Objekt um. Beispiel in Java:</p>
+<pre class=" language-java"><code class="prism  language-java">InputStream is <span class="token operator">=</span> request<span class="token punctuation">.</span><span class="token function">getInputStream</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+ObjectInputStream ois <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ObjectInputStream</span><span class="token punctuation">(</span>is<span class="token punctuation">)</span><span class="token punctuation">;</span>
+AcmeObject acme <span class="token operator">=</span> <span class="token punctuation">(</span>AcmeObject<span class="token punctuation">)</span>ois<span class="token punctuation">.</span><span class="token function">readObject</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// Das Casten auf AcmeObject geschieht nach dem Deserialisierungsprozess</span>
+</code></pre>
+<p>Unsichere Deserialisierung sorgt häufig für eine Remote-Code Execution und kann folgende Attacken ausführen:</p>
+<ul>
+<li>Injection</li>
+<li>DoS</li>
+</ul>
+<h2 id="risikobewertung-8">Risikobewertung</h2>
+
+<table>
+<thead>
+<tr>
+<th align="left">Ausnutzbarkeit</th>
+<th align="left">Häufigkeit</th>
+<th align="left">Erkennbarkeit</th>
+<th align="left">Einfluss</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Schwierig</td>
+<td align="left">verbreitet</td>
+<td align="left">Mittelmäßig</td>
+<td align="left">Schwerwiegend</td>
+</tr>
+</tbody>
+</table><h2 id="prävention-8">Prävention</h2>
+<ul>
+<li>Vermeiden von nativen Deserialisierungsformaten</li>
+<li>Verwendung von JSON / XML</li>
+<li>Verwendung von DTOs (Data Transfer Objects)</li>
+<li>Signierung der serialisierten Objekte und Prüfung bei Deserialisierung</li>
+<li>isolierte Deserialisierung mit geringen Berechtigungen</li>
+</ul>
+<h1 id="sicherer-entwicklungslebenszyklus">16. Sicherer Entwicklungslebenszyklus</h1>
+<ul>
+<li>Späte Erkennung von Fehlern ist immer teurer als frühe Erkennung</li>
+<li>Security muss in alle Phasen des Entwicklungsprozesses eingebunden sein</li>
+<li>Sicherheitsexperten und Management-Unterstützung sind notwendig</li>
+</ul>
+<h2 id="sicherheitsanforderungen">Sicherheitsanforderungen</h2>
+<h3 id="ableiten-von-sicherheitsanforderungen">Ableiten von Sicherheitsanforderungen</h3>
+<ul>
+<li>Sicherheitsanforderungen mit fachlichem Stakeholder ableiten (beim Anforderungsmanagement)</li>
+<li>Bsp.
+<ul>
+<li>Datensicherheit</li>
+<li>Zugriffskontrolle</li>
+<li>Wie kritisch sind die Daten?</li>
+<li>Verfügbarkeit</li>
+<li>Vorgaben durch Industriestandards</li>
+</ul>
+</li>
+</ul>
+<h1 id="sicherheits-designprinzipien">Sicherheits-Designprinzipien</h1>
 <ol>
 <li>
-<p>Typangabe ist bei der Dekleration erforderlich:</p>
-<pre class=" language-java"><code class="prism  language-java"><span class="token comment">//Beispiel in Java</span>
-<span class="token keyword">int</span> i<span class="token punctuation">;</span> <span class="token comment">// Java</span>
-</code></pre>
-<pre class=" language-pascal"><code class="prism  language-pascal"><span class="token comment">//Beispiel in Pascal</span>
-<span class="token keyword">var</span> i<span class="token punctuation">:</span> integer<span class="token punctuation">;</span>
-</code></pre>
+<p><strong>Angriffsflächen minimieren</strong></p>
+<ul>
+<li>Unnötige Features vermeiden</li>
+</ul>
 </li>
 <li>
-<p>Typangabe kann aus der Verwendung abgeleitet werden (<strong>Typinferenz</strong>)</p>
-<pre class=" language-javascript"><code class="prism  language-javascript"><span class="token comment">//Beispiel in Clojure</span>
-<span class="token punctuation">(</span>def pi <span class="token number">3.14159</span><span class="token punctuation">)</span>
-</code></pre>
+<p><strong>sichere Standardeinstellungen</strong></p>
+<ul>
+<li>Sicherheit als Standard - Benutzer entscheiden Reduzierung ihrer Sicherheit</li>
+</ul>
+</li>
+<li>
+<p><strong>Prinzip des geringsten Privelegs</strong></p>
+<ul>
+<li>Keine “root”-User verwenden</li>
+<li>möglichst minimale Rechte für den User</li>
+</ul>
+</li>
+<li>
+<p><strong>Prinzip der Tiefenverteidigung</strong></p>
+<ul>
+<li>Mehrere Sicherheitsschichten bieten</li>
+</ul>
+</li>
+<li>
+<p><strong>Fail securely</strong></p>
+<ul>
+<li>Wenn etwas schief geht, dann sollte “die Tür zugemacht werden”</li>
+</ul>
+</li>
+<li>
+<p><strong>Keinen Diensten vertrauen</strong></p>
+<ul>
+<li>Nicht blind (externen) Systemen, mit denen man interagiert vertrauen</li>
+</ul>
+</li>
+<li>
+<p><strong>Aufgabentrennung</strong></p>
+<ul>
+<li>Aufgaben trennen zur Betrugsvermeidung</li>
+<li>Bsp: Admin dar nicht gleichzeitig User sein</li>
+</ul>
+</li>
+<li>
+<p><strong>"Security by Obscurity" vermeiden</strong></p>
+<ul>
+<li>Verstecken von Funktionen bietet keinen Schutz gegen Angreifer</li>
+</ul>
+</li>
+<li>
+<p><strong>Sicherheit einfach halten</strong></p>
+<ul>
+<li>Einfaches Security Design</li>
+</ul>
+</li>
+<li>
+<p><strong>Korrekte Behebung von Sicherheitsproblemen</strong></p>
+<ul>
+<li>Keine Symptome, sondern Ursachen beheben</li>
+</ul>
 </li>
 </ol>
-<h3 id="statische-vs-dynamische-typisierung">Statische vs dynamische Typisierung</h3>
+<h2 id="sichere-entwicklungsrichtlinien">Sichere Entwicklungsrichtlinien</h2>
+<ul>
+<li>Secure Coding Guidelines werden häufig von Entwicklern übersehen</li>
+<li>Checklisten (kurz gehaltene Dokumente) funktionieren besser</li>
+</ul>
+<h2 id="security-testing">Security Testing</h2>
+<p>Bsp. SonarQube, SpotBugs (früher FindBugs)</p>
+<h3 id="statische-code-analyse">Statische Code-Analyse</h3>
+<p><strong>Stärken:</strong></p>
+<ul>
+<li>skaliert gut</li>
+<li>automatisierte Tests, ohne dass die Anwendung läuft</li>
+<li>generierter Output kann gut von Entwicklern für Verbesserungen verwendet werden</li>
+</ul>
+<p><strong>Schwächen:</strong></p>
+<ul>
+<li>False-Positives (Falsche Fehlermeldungen)</li>
+<li>Viele Sicherheitslücken sind schwierig zu finden</li>
+<li>Nur ein kleiner Teil kann abgedeckt werden</li>
+<li>Schwierig eine Schwachstelle tatsächlich nachzuweisen</li>
+</ul>
+<h3 id="dynamische-sicherheitstesting-tools">Dynamische Sicherheitstesting Tools</h3>
+<p>Bsp: ZAP (Zed Attack Proxy)</p>
+<p>Dynamisches Testing auf Sicherheit wird bei laufenden Anwendungen durchgeführt und können automatisiert oder teilweise manuell Tests durchführen.</p>
+<h2 id="logging-und-monitoring">Logging und Monitoring</h2>
+<p>Angreifer können unentdeckt agieren, wenn sinnlos oder gar nicht geloggt wird oder nicht auf die Logs geschaut wird.</p>
+<p>Wichtige Aspekte sind:</p>
+<ul>
+<li>Login</li>
+<li>Berechtigungswechsel</li>
+<li>Warnungen und Errormeldungen</li>
+<li>Suspekte Aktivitäten</li>
+</ul>
+<h2 id="risikobewertung-9">Risikobewertung</h2>
 
 <table>
 <thead>
 <tr>
-<th align="center">statische Typisierung</th>
-<th align="center">dynamische Typisierung</th>
+<th align="left">Ausnutzbarkeit</th>
+<th align="left">Häufigkeit</th>
+<th align="left">Erkennbarkeit</th>
+<th align="left">Einfluss</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td align="center">Typprüfung erfolgt zur Übersetzungszeit</td>
-<td align="center">Typprüfung folgt während der Ausführung des Programms</td>
-</tr>
-<tr>
-<td align="center">Bsp: <code>Java, C++, C#</code></td>
-<td align="center">Bsp: <code>Python, Perl, Php, Smalltalk</code></td>
+<td align="left">Mittelmäßig</td>
+<td align="left">weit verbreitet</td>
+<td align="left">Schwierig</td>
+<td align="left">Mittelmäßig</td>
 </tr>
 </tbody>
-</table><h3 id="strenges-vs-schwaches-typsystem">Strenges vs schwaches Typsystem</h3>
-
-<table>
-<thead>
-<tr>
-<th align="center">strenge Typsysteme</th>
-<th align="center">schwache Typsysteme</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="center">stellt Typensicherheit jederzeit sicher</td>
-<td align="center">lässt gelegentlich auch typfremde Operationen zu</td>
-</tr>
-</tbody>
-</table><h3 id="explizites-vs-implizites-typsystem">Explizites vs implizites Typsystem</h3>
-
-<table>
-<thead>
-<tr>
-<th align="center">explizite Typsysteme</th>
-<th align="center">implizite Typsysteme</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="center">verlangt für <strong>jede</strong> Variable die Angabe eines Typs</td>
-<td align="center">verlangt die Dekleration einer Variable und leitet den Typ der anderen aus der Verwendung ab</td>
-</tr>
-</tbody>
-</table><h2 id="übersicht-typsysteme">Übersicht Typsysteme</h2>
-
-<table>
-<thead>
-<tr>
-<th align="center"></th>
-<th align="center">statisches Typsystem</th>
-<th align="center">dynamisches Typsystem <code>Prolog</code></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="center"><strong>strenges Typsystem</strong></td>
-<td align="center"><strong>implizites Typsystem</strong> <code>Haskell, Standard ML</code></td>
-<td align="center"><strong>implizites Typsystem</strong>  <code>Lisp, Clojure, Smalltalk</code></td>
-</tr>
-<tr>
-<td align="center"></td>
-<td align="center"><strong>explizites Typsystem</strong> <code>Java</code></td>
-<td align="center"><strong>explizites Typsystem</strong></td>
-</tr>
-<tr>
-<td align="center"><strong>schwaches Typsystem</strong></td>
-<td align="center"><strong>implizites Typsystem</strong></td>
-<td align="center"><strong>implizites Typsystem</strong> <code>Javascript</code></td>
-</tr>
-<tr>
-<td align="center"></td>
-<td align="center"><strong>explizites Typsystem</strong> <code>C</code></td>
-<td align="center"><strong>explizites Typsystem</strong></td>
-</tr>
-</tbody>
-</table><h2 id="funktionale-programmiersprachen">Funktionale Programmiersprachen</h2>
-<h3 id="clojure">Clojure</h3>
+</table><h2 id="prävention-9">Prävention</h2>
 <ul>
-<li>Lisp Dialekt</li>
-<li>strenges, dynamisches, implizites Typsystem</li>
-<li>verschiedene Programmierstile (imperativ, funktional, objektorientiert)</li>
+<li>ausreichendes und sinnvolles Logging von Login, Zugangskontrollen (-fehlern) und Server-Side Input</li>
+<li>Übersichtliche Logs in einem gesammelten System (Splunk, ELK-Stack)</li>
+<li>Erstellung eines Recovery-Plans</li>
 </ul>
-<h4 id="repl-read-eval-print-loop">REPL (Read-Eval-Print-Loop)</h4>
+<h2 id="web-application-firewall-waf">Web Application Firewall (WAF)</h2>
 <ul>
-<li>Liest den Ausdruck</li>
-<li>Wertet ihn aus</li>
-<li>Gibt das Ergebnis zurück</li>
+<li>Zusätzliche Firewall zur Kontrolle des Traffics</li>
+<li>Verhindert bösartige Requests</li>
 </ul>
-<h4 id="beispiel-code">Beispiel-Code</h4>
-<pre class=" language-haskell"><code class="prism  language-haskell"><span class="token punctuation">(</span><span class="token hvariable">def</span> <span class="token builtin">filter</span> 
-      <span class="token punctuation">(</span><span class="token hvariable">fn</span> <span class="token punctuation">[</span><span class="token hvariable">praed</span><span class="token operator">?</span> <span class="token hvariable">lst</span><span class="token punctuation">]</span>
-        <span class="token punctuation">(</span><span class="token hvariable">cond</span> 
-          <span class="token punctuation">(</span><span class="token hvariable">empty</span><span class="token operator">?</span> <span class="token hvariable">lst</span><span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> 
-          <span class="token punctuation">(</span><span class="token hvariable">praed</span><span class="token operator">?</span> <span class="token punctuation">(</span><span class="token hvariable">first</span> <span class="token hvariable">lst</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-             <span class="token punctuation">(</span><span class="token hvariable">cons</span> <span class="token punctuation">(</span><span class="token hvariable">first</span> <span class="token hvariable">lst</span><span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token builtin">filter</span> <span class="token hvariable">praed</span><span class="token operator">?</span> <span class="token punctuation">(</span><span class="token hvariable">rest</span> <span class="token hvariable">lst</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-          <span class="token operator">:</span><span class="token keyword">else</span> <span class="token punctuation">(</span><span class="token builtin">filter</span> <span class="token hvariable">praed</span><span class="token operator">?</span> <span class="token punctuation">(</span><span class="token hvariable">rest</span> <span class="token hvariable">lst</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-</code></pre>
-<h3 id="standard-ml">Standard ML</h3>
+<p><a href="https://github.com/bkimminich/it-security-lecture/raw/master/slides/images/02-09-sdlc/WAF_Archi.png"><img src="https://github.com/bkimminich/it-security-lecture/raw/master/slides/images/02-09-sdlc/WAF_Archi.png" alt=""></a></p>
+<h3 id="risiken">Risiken</h3>
 <ul>
-<li>funktionale Programmiersprache</li>
-<li>strenges, statisches, implizites Typsystem</li>
-<li>Typinferenz</li>
-<li>ermöglicht Pattern-Matching</li>
+<li>Zusätzliche IT-Infrastruktur</li>
+<li>kann viele False-Positives melden</li>
+<li>Selbstlernmechanismen können schwierigkeiten beinhalten</li>
+<li>kann Fehler enthalten</li>
+<li>sehr teuer</li>
 </ul>
-<h4 id="beispiel-code-1">Beispiel-Code:</h4>
-<pre class=" language-ocaml"><code class="prism  language-ocaml"><span class="token comment">(* Filter *)</span>
-<span class="token keyword">fun</span> filter <span class="token punctuation">(</span>praed<span class="token punctuation">,</span> lst<span class="token punctuation">)</span> <span class="token operator">=</span>
-    <span class="token keyword">if</span> null lst
-    <span class="token keyword">then</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
-    <span class="token keyword">else</span> <span class="token keyword">if</span> praed <span class="token punctuation">(</span>hd lst<span class="token punctuation">)</span>
-    <span class="token keyword">then</span> 
-        hd lst <span class="token punctuation">:</span><span class="token punctuation">:</span> filter <span class="token punctuation">(</span>praed<span class="token punctuation">,</span> tl lst<span class="token punctuation">)</span>
-    <span class="token keyword">else</span> filter <span class="token punctuation">(</span>praed<span class="token punctuation">,</span> tl lst<span class="token punctuation">)</span>
-<span class="token comment">(* Signatur von filter: fn : ('a -&gt; bool) * 'a list -&gt; 'a list *)</span>
-
-<span class="token comment">(* Lambda Ausdruck *)</span>
-fn x <span class="token operator">=&gt;</span> x<span class="token operator">+</span><span class="token number">1</span>
-
-<span class="token comment">(* Funktion benennen *)</span>
-<span class="token keyword">val</span> twice <span class="token operator">=</span> <span class="token punctuation">(</span>fn x <span class="token operator">=&gt;</span> <span class="token number">2</span><span class="token operator">*</span>x<span class="token punctuation">)</span>
-
-<span class="token comment">(* Funktionen mit Rekursion [fun statt fn] *)</span>
-<span class="token keyword">fun</span> fac n <span class="token operator">=</span> 
-	<span class="token keyword">if</span> <span class="token punctuation">(</span>n<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span> 
-	<span class="token keyword">then</span> <span class="token number">1</span> 
-	<span class="token keyword">else</span> n<span class="token operator">*</span><span class="token punctuation">(</span>fac <span class="token punctuation">(</span>n<span class="token number">-1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-
-<span class="token comment">(* Funktion mit getypten Parametern *)</span>
-<span class="token keyword">fun</span> pow <span class="token punctuation">(</span>x<span class="token punctuation">:</span>int<span class="token punctuation">,</span> y<span class="token punctuation">:</span>int<span class="token punctuation">)</span> <span class="token operator">=</span> 
-    <span class="token keyword">if</span> y<span class="token operator">=</span><span class="token number">0</span>
-    <span class="token keyword">then</span> <span class="token number">1</span>
-    <span class="token keyword">else</span> x <span class="token operator">*</span> pow<span class="token punctuation">(</span>x<span class="token punctuation">,</span>y<span class="token number">-1</span><span class="token punctuation">)</span>
-    
-<span class="token comment">(* Tupel *)</span>
-<span class="token keyword">val</span> pair <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token string">"abc"</span><span class="token punctuation">)</span>
-
-<span class="token comment">(* Liste {1} *)</span>
-<span class="token number">1</span><span class="token punctuation">:</span><span class="token punctuation">:</span>nil
-
-<span class="token comment">(* Zugriff auf das erste Listenelement *)</span>
-hd list
-
-<span class="token comment">(* Zugriff auf den Rest der Liste *)</span>
-tl list
-
-<span class="token comment">(* Records [= HashMaps] *)</span>
-<span class="token keyword">val</span> car <span class="token operator">=</span> <span class="token punctuation">{</span>make <span class="token operator">=</span> <span class="token string">"Ford"</span><span class="token punctuation">,</span> built <span class="token operator">=</span> <span class="token number">1904</span><span class="token punctuation">}</span>
-
-<span class="token comment">(* Zugriff auf HashMap-Einträge *)</span>
-<span class="token directive function">#make</span> car
-
-<span class="token comment">(* Summieren von Listpaaren *)</span>
-<span class="token keyword">fun</span> sum<span class="token punctuation">_</span>pair <span class="token punctuation">(</span>a<span class="token punctuation">,</span>b<span class="token punctuation">)</span> <span class="token operator">=</span> a <span class="token operator">+</span> b<span class="token punctuation">;</span>
-
-<span class="token keyword">fun</span> sum<span class="token punctuation">_</span>pair<span class="token punctuation">_</span>list <span class="token punctuation">(</span>lst<span class="token punctuation">)</span> <span class="token operator">=</span> 
-  <span class="token keyword">if</span> <span class="token punctuation">(</span>lst <span class="token operator">=</span> nil<span class="token punctuation">)</span> 
-  <span class="token keyword">then</span> <span class="token number">0</span> 
-  <span class="token keyword">else</span> sum<span class="token punctuation">_</span>pair <span class="token punctuation">(</span>hd lst<span class="token punctuation">)</span> <span class="token operator">+</span> sum<span class="token punctuation">_</span>pair<span class="token punctuation">_</span>list <span class="token punctuation">(</span>tl lst<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-sum<span class="token punctuation">_</span>pair<span class="token punctuation">_</span>list <span class="token punctuation">[</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token comment">(* =14 *)</span>
-
-<span class="token comment">(* Extrahieren des ersten Elements von Listpaaren *)</span>
-<span class="token keyword">fun</span> get<span class="token punctuation">_</span>first <span class="token punctuation">(</span>a<span class="token punctuation">,</span>b<span class="token punctuation">)</span> <span class="token operator">=</span> a<span class="token punctuation">;</span>
-
-<span class="token keyword">fun</span> firsts <span class="token punctuation">(</span>lst<span class="token punctuation">)</span> <span class="token operator">=</span> 
-  <span class="token keyword">if</span> lst <span class="token operator">=</span> nil
-  <span class="token keyword">then</span> nil
-  <span class="token keyword">else</span> get<span class="token punctuation">_</span>first <span class="token punctuation">(</span>hd lst<span class="token punctuation">)</span> <span class="token punctuation">:</span><span class="token punctuation">:</span> <span class="token punctuation">(</span>firsts <span class="token punctuation">(</span>tl lst<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-firsts <span class="token punctuation">[</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-
-<span class="token comment">(* Datumsfunktionen (DD MM YYY) *)</span>
-<span class="token keyword">fun</span> ist<span class="token punctuation">_</span>frueher <span class="token punctuation">(</span>day1 <span class="token punctuation">:</span> int<span class="token operator">*</span>int<span class="token operator">*</span>int<span class="token punctuation">,</span> day2 <span class="token punctuation">:</span> int<span class="token operator">*</span>int<span class="token operator">*</span>int<span class="token punctuation">)</span> <span class="token operator">=</span>
-    <span class="token punctuation">(</span>#<span class="token number">1</span> day1<span class="token punctuation">)</span> <span class="token operator">&lt;</span> <span class="token punctuation">(</span>#<span class="token number">1</span> day2<span class="token punctuation">)</span>
-    orelse <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">(</span>#<span class="token number">2</span> day1<span class="token punctuation">)</span> <span class="token operator">&lt;</span> <span class="token punctuation">(</span>#<span class="token number">2</span> day2<span class="token punctuation">)</span><span class="token punctuation">)</span>
-            andalso <span class="token punctuation">(</span><span class="token punctuation">(</span>#<span class="token number">1</span> day1<span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token punctuation">(</span>#<span class="token number">1</span> day2<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-    orelse <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">(</span>#<span class="token number">3</span> day1<span class="token punctuation">)</span> <span class="token operator">&lt;</span> <span class="token punctuation">(</span>#<span class="token number">3</span> day2<span class="token punctuation">)</span><span class="token punctuation">)</span>
-            andalso <span class="token punctuation">(</span><span class="token punctuation">(</span>#<span class="token number">2</span> day1<span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token punctuation">(</span>#<span class="token number">2</span> day2<span class="token punctuation">)</span><span class="token punctuation">)</span>
-            andalso <span class="token punctuation">(</span><span class="token punctuation">(</span>#<span class="token number">1</span> day1<span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token punctuation">(</span>#<span class="token number">1</span> day2<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-ist<span class="token punctuation">_</span>frueher <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">2017</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">7</span><span class="token punctuation">,</span><span class="token number">6</span><span class="token punctuation">,</span><span class="token number">2017</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-<span class="token keyword">fun</span> in<span class="token punctuation">_</span>monat <span class="token punctuation">(</span>datum<span class="token punctuation">:</span>int<span class="token operator">*</span>int<span class="token operator">*</span>int<span class="token punctuation">,</span> monat<span class="token punctuation">)</span> <span class="token operator">=</span> #<span class="token number">2</span> datum <span class="token operator">=</span> monat<span class="token punctuation">;</span>
-
-in<span class="token punctuation">_</span>monat <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">,</span> <span class="token number">2017</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-<span class="token keyword">fun</span> kalenderdaten<span class="token punctuation">_</span>in<span class="token punctuation">_</span>monat <span class="token punctuation">(</span>daten<span class="token punctuation">:</span> <span class="token punctuation">(</span>int<span class="token operator">*</span>int<span class="token operator">*</span>int<span class="token punctuation">)</span> list<span class="token punctuation">,</span> monat <span class="token punctuation">:</span> int<span class="token punctuation">)</span> <span class="token operator">=</span> 
-  <span class="token keyword">if</span> daten <span class="token operator">=</span> nil
-  <span class="token keyword">then</span> nil
-  <span class="token keyword">else</span> in<span class="token punctuation">_</span>monat<span class="token punctuation">(</span>hd daten<span class="token punctuation">,</span> monat<span class="token punctuation">)</span> <span class="token punctuation">:</span><span class="token punctuation">:</span> kalenderdaten<span class="token punctuation">_</span>in<span class="token punctuation">_</span>monat <span class="token punctuation">(</span>tl daten<span class="token punctuation">,</span> monat<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-kalenderdaten<span class="token punctuation">_</span>in<span class="token punctuation">_</span>monat <span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">,</span> <span class="token number">2018</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">,</span> <span class="token number">2017</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-<span class="token keyword">fun</span> contains <span class="token punctuation">(</span><span class="token keyword">value</span><span class="token punctuation">:</span> bool<span class="token punctuation">,</span> lst<span class="token punctuation">:</span> <span class="token punctuation">(</span>bool<span class="token punctuation">)</span> list<span class="token punctuation">)</span> <span class="token operator">=</span>
-    <span class="token keyword">if</span> lst <span class="token operator">=</span> nil
-    <span class="token keyword">then</span> <span class="token boolean">false</span>
-    <span class="token keyword">else</span> 
-      <span class="token keyword">if</span> <span class="token punctuation">(</span>hd lst<span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token keyword">value</span>
-      <span class="token keyword">then</span> <span class="token boolean">true</span>
-      <span class="token keyword">else</span> contains <span class="token punctuation">(</span><span class="token keyword">value</span><span class="token punctuation">,</span> tl lst<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-<span class="token keyword">fun</span> daten<span class="token punctuation">_</span>in<span class="token punctuation">_</span>monat <span class="token punctuation">(</span>daten<span class="token punctuation">:</span> <span class="token punctuation">(</span>int<span class="token operator">*</span>int<span class="token operator">*</span>int<span class="token punctuation">)</span> list<span class="token punctuation">,</span> monat<span class="token punctuation">:</span> int<span class="token punctuation">)</span> <span class="token operator">=</span> 
-  <span class="token keyword">if</span> daten <span class="token operator">=</span> nil
-  <span class="token keyword">then</span> nil
-  <span class="token keyword">else</span> 
-      <span class="token keyword">if</span> in<span class="token punctuation">_</span>monat <span class="token punctuation">(</span>hd daten<span class="token punctuation">,</span> monat<span class="token punctuation">)</span>
-      <span class="token keyword">then</span> <span class="token punctuation">(</span>hd daten<span class="token punctuation">)</span> <span class="token punctuation">:</span><span class="token punctuation">:</span> daten<span class="token punctuation">_</span>in<span class="token punctuation">_</span>monat <span class="token punctuation">(</span>tl daten<span class="token punctuation">,</span> monat<span class="token punctuation">)</span>
-      <span class="token keyword">else</span> daten<span class="token punctuation">_</span>in<span class="token punctuation">_</span>monat <span class="token punctuation">(</span>tl daten<span class="token punctuation">,</span> monat<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-daten<span class="token punctuation">_</span>in<span class="token punctuation">_</span>monat <span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">,</span> <span class="token number">2018</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">9</span><span class="token punctuation">,</span> <span class="token number">2017</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-<span class="token keyword">fun</span> kalenderdaten<span class="token punctuation">_</span>in<span class="token punctuation">_</span>monaten <span class="token punctuation">(</span>daten<span class="token punctuation">:</span> <span class="token punctuation">(</span>int<span class="token operator">*</span>int<span class="token operator">*</span>int<span class="token punctuation">)</span> list<span class="token punctuation">,</span> monate<span class="token punctuation">:</span> <span class="token punctuation">(</span>int<span class="token punctuation">)</span> list<span class="token punctuation">)</span> <span class="token operator">=</span> 
-  <span class="token keyword">if</span> monate <span class="token operator">=</span> nil
-  <span class="token keyword">then</span> nil
-  <span class="token keyword">else</span> daten<span class="token punctuation">_</span>in<span class="token punctuation">_</span>monat<span class="token punctuation">(</span>daten<span class="token punctuation">,</span> hd monate<span class="token punctuation">)</span> <span class="token operator">@</span> kalenderdaten<span class="token punctuation">_</span>in<span class="token punctuation">_</span>monaten<span class="token punctuation">(</span>daten<span class="token punctuation">,</span> tl monate<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-kalenderdaten<span class="token punctuation">_</span>in<span class="token punctuation">_</span>monaten <span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">,</span> <span class="token number">2018</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">,</span> <span class="token number">2017</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">9</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">2018</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">9</span><span class="token punctuation">,</span> <span class="token number">9</span><span class="token punctuation">,</span> <span class="token number">2018</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">,</span> <span class="token number">7</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-<span class="token keyword">fun</span> contains<span class="token punctuation">_</span>date <span class="token punctuation">(</span>date<span class="token punctuation">:</span> int<span class="token operator">*</span>int<span class="token operator">*</span>int<span class="token punctuation">,</span> lst<span class="token punctuation">:</span> <span class="token punctuation">(</span>int<span class="token operator">*</span>int<span class="token operator">*</span>int<span class="token punctuation">)</span> list<span class="token punctuation">)</span> <span class="token operator">=</span>
-    <span class="token keyword">if</span> lst <span class="token operator">=</span> nil
-    <span class="token keyword">then</span> <span class="token boolean">false</span>
-    <span class="token keyword">else</span> 
-      <span class="token keyword">if</span> <span class="token punctuation">(</span>hd lst<span class="token punctuation">)</span> <span class="token operator">=</span> date
-      <span class="token keyword">then</span> <span class="token boolean">true</span>
-      <span class="token keyword">else</span> contains<span class="token punctuation">_</span>date <span class="token punctuation">(</span>date<span class="token punctuation">,</span> tl lst<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-<span class="token keyword">fun</span> distinct <span class="token punctuation">(</span>daten<span class="token punctuation">:</span> <span class="token punctuation">(</span>int<span class="token operator">*</span>int<span class="token operator">*</span>int<span class="token punctuation">)</span> list<span class="token punctuation">)</span> <span class="token operator">=</span>
-  <span class="token keyword">if</span> daten <span class="token operator">=</span> nil
-  <span class="token keyword">then</span> nil
-  <span class="token keyword">else</span> 
-      <span class="token keyword">if</span> tl daten <span class="token operator">=</span> nil
-      <span class="token keyword">then</span> <span class="token punctuation">(</span>hd daten<span class="token punctuation">)</span> <span class="token punctuation">:</span><span class="token punctuation">:</span> nil
-      <span class="token keyword">else</span> 
-        <span class="token keyword">if</span> contains<span class="token punctuation">_</span>date <span class="token punctuation">(</span>hd daten<span class="token punctuation">,</span> tl daten<span class="token punctuation">)</span>
-        <span class="token keyword">then</span> distinct <span class="token punctuation">(</span>tl daten<span class="token punctuation">)</span>
-        <span class="token keyword">else</span> <span class="token punctuation">(</span>hd daten<span class="token punctuation">)</span> <span class="token punctuation">:</span><span class="token punctuation">:</span> distinct <span class="token punctuation">(</span>tl daten<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-<span class="token keyword">fun</span> kalenderdaten<span class="token punctuation">_</span>in<span class="token punctuation">_</span>monaten<span class="token punctuation">_</span>2 <span class="token punctuation">(</span>daten<span class="token punctuation">:</span> <span class="token punctuation">(</span>int<span class="token operator">*</span>int<span class="token operator">*</span>int<span class="token punctuation">)</span> list<span class="token punctuation">,</span> monate<span class="token punctuation">:</span> <span class="token punctuation">(</span>int<span class="token punctuation">)</span> list<span class="token punctuation">)</span> <span class="token operator">=</span>
-  distinct <span class="token punctuation">(</span>kalenderdaten<span class="token punctuation">_</span>in<span class="token punctuation">_</span>monaten <span class="token punctuation">(</span>daten<span class="token punctuation">,</span> monate<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-distinct <span class="token punctuation">(</span>kalenderdaten<span class="token punctuation">_</span>in<span class="token punctuation">_</span>monaten<span class="token punctuation">_</span>2 <span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">,</span> <span class="token number">2018</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">,</span> <span class="token number">2017</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">9</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">2018</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">9</span><span class="token punctuation">,</span> <span class="token number">9</span><span class="token punctuation">,</span> <span class="token number">2018</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">7</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre>
-<h1 id="ausdrucksmittel-funktionaler-programmiersprachen">3. Ausdrucksmittel funktionaler Programmiersprachen</h1>
-<h2 id="datentypen">Datentypen</h2>
-<p>Erstellung neuer Datentypen in SML:</p>
-<pre class=" language-ocaml"><code class="prism  language-ocaml">datatype shape <span class="token operator">=</span>
-         Rectangle <span class="token keyword">of</span> real <span class="token operator">*</span> real
-         <span class="token operator">|</span> Circle <span class="token keyword">of</span> real
-</code></pre>
-<h2 id="pattern-matching">Pattern Matching</h2>
-<ul>
-<li>Unterscheidung von Typen durch <code>muster =&gt; ausdruck</code></li>
-<li>Verschiedene Zweige werden durch <code>|</code> getrennt</li>
-</ul>
-<pre class=" language-ocaml"><code class="prism  language-ocaml"><span class="token keyword">fun</span> shape<span class="token punctuation">_</span>area s <span class="token operator">=</span>
-    case s <span class="token keyword">of</span>
-        Rectangle<span class="token punctuation">(</span>w<span class="token punctuation">,</span> h<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> w <span class="token operator">*</span> h
-      <span class="token operator">|</span> Circle<span class="token punctuation">(</span>r<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token number">3.14159</span> <span class="token operator">*</span> r <span class="token operator">*</span> r
-</code></pre>
-<h3 id="verwendung-von-pattern-matching">Verwendung von Pattern Matching</h3>
-<h4 id="beispiel-code-2">Beispiel-Code:</h4>
-<pre class=" language-ocaml"><code class="prism  language-ocaml"><span class="token keyword">fun</span> sum<span class="token punctuation">_</span>list <span class="token punctuation">(</span>xs <span class="token punctuation">:</span> int list<span class="token punctuation">)</span> <span class="token operator">=</span>
-	<span class="token keyword">if</span> xs <span class="token operator">=</span> nil
-	<span class="token keyword">then</span> <span class="token number">0</span>
-	<span class="token keyword">else</span> hd<span class="token punctuation">(</span>xs<span class="token punctuation">)</span> <span class="token operator">+</span> sum<span class="token punctuation">_</span>list<span class="token punctuation">(</span>tl xs<span class="token punctuation">)</span>
-    
-<span class="token keyword">fun</span> sum<span class="token punctuation">_</span>list xs <span class="token operator">=</span>
-	case xs <span class="token keyword">of</span>
-		<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=&gt;</span> <span class="token number">0</span>
-		<span class="token operator">|</span> x<span class="token punctuation">:</span><span class="token punctuation">:</span>xs’ <span class="token operator">=&gt;</span> x <span class="token operator">+</span> sum<span class="token punctuation">_</span>list xs’
-
-datatype exp <span class="token operator">=</span> Constant <span class="token keyword">of</span> int
-                <span class="token operator">|</span> Negate <span class="token keyword">of</span> exp
-                <span class="token operator">|</span> Add <span class="token keyword">of</span> exp <span class="token operator">*</span> exp
-                <span class="token operator">|</span> Multiply <span class="token keyword">of</span> exp <span class="token operator">*</span> exp<span class="token punctuation">;</span>
-
-<span class="token keyword">fun</span> eval exp <span class="token operator">=</span> 
-  case exp <span class="token keyword">of</span>
-    Constant<span class="token punctuation">(</span>i<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> i
-  <span class="token operator">|</span> Negate<span class="token punctuation">(</span>ex<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token operator">~</span><span class="token punctuation">(</span>eval<span class="token punctuation">(</span>ex<span class="token punctuation">)</span><span class="token punctuation">)</span>
-  <span class="token operator">|</span> Add<span class="token punctuation">(</span>sum1<span class="token punctuation">,</span> sum2<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> eval<span class="token punctuation">(</span>sum1<span class="token punctuation">)</span> <span class="token operator">+</span> eval<span class="token punctuation">(</span>sum2<span class="token punctuation">)</span>
-  <span class="token operator">|</span> Multiply<span class="token punctuation">(</span>fac1<span class="token punctuation">,</span> fac2<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> eval<span class="token punctuation">(</span>fac1<span class="token punctuation">)</span> <span class="token operator">*</span> eval<span class="token punctuation">(</span>fac2<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-eval <span class="token punctuation">(</span>Add <span class="token punctuation">(</span>Constant <span class="token number">19</span><span class="token punctuation">,</span> Negate <span class="token punctuation">(</span>Constant <span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-<span class="token keyword">fun</span> list<span class="token punctuation">_</span>of<span class="token punctuation">_</span>constants <span class="token punctuation">(</span>lst<span class="token punctuation">:</span> exp list<span class="token punctuation">)</span> <span class="token operator">=</span>
-  <span class="token keyword">if</span> lst <span class="token operator">=</span> nil
-  <span class="token keyword">then</span> nil
-  <span class="token keyword">else</span>
-    case hd lst <span class="token keyword">of</span>
-      Constant<span class="token punctuation">(</span>i<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> i <span class="token punctuation">:</span><span class="token punctuation">:</span> list<span class="token punctuation">_</span>of<span class="token punctuation">_</span>constants<span class="token punctuation">(</span>tl lst<span class="token punctuation">)</span>
-    <span class="token operator">|</span> <span class="token punctuation">_</span> <span class="token operator">=&gt;</span> list<span class="token punctuation">_</span>of<span class="token punctuation">_</span>constants<span class="token punctuation">(</span>tl lst<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-list<span class="token punctuation">_</span>of<span class="token punctuation">_</span>constants <span class="token punctuation">[</span><span class="token punctuation">(</span>Add <span class="token punctuation">(</span>Constant <span class="token number">19</span><span class="token punctuation">,</span> Negate <span class="token punctuation">(</span>Constant <span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span> Constant <span class="token number">19</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>Constant <span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-
-<span class="token keyword">fun</span> get<span class="token punctuation">_</span>bigger <span class="token punctuation">(</span>a<span class="token punctuation">:</span>int<span class="token punctuation">,</span> b<span class="token punctuation">:</span>int<span class="token punctuation">)</span> <span class="token operator">=</span>
-  <span class="token keyword">if</span> a <span class="token operator">&gt;</span> b
-  <span class="token keyword">then</span> a
-  <span class="token keyword">else</span> b<span class="token punctuation">;</span>
-
-<span class="token keyword">fun</span> largest<span class="token punctuation">_</span>constant<span class="token punctuation">_</span>helper<span class="token punctuation">(</span>lst<span class="token punctuation">:</span> int list<span class="token punctuation">)</span> <span class="token operator">=</span>
-case lst <span class="token keyword">of</span>
-  <span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=&gt;</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
-  <span class="token operator">|</span> c<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=&gt;</span> <span class="token punctuation">[</span>c<span class="token punctuation">]</span>
-  <span class="token operator">|</span> c<span class="token punctuation">:</span><span class="token punctuation">:</span>c2<span class="token punctuation">:</span><span class="token punctuation">:</span>cs' <span class="token operator">=&gt;</span> largest<span class="token punctuation">_</span>constant<span class="token punctuation">_</span>helper <span class="token punctuation">(</span>get<span class="token punctuation">_</span>bigger<span class="token punctuation">(</span>c<span class="token punctuation">,</span> c2<span class="token punctuation">)</span> <span class="token punctuation">:</span><span class="token punctuation">:</span> cs'<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-<span class="token keyword">fun</span> largest<span class="token punctuation">_</span>constant<span class="token punctuation">(</span>lst<span class="token punctuation">:</span> exp list<span class="token punctuation">)</span> <span class="token operator">=</span> largest<span class="token punctuation">_</span>constant<span class="token punctuation">_</span>helper<span class="token punctuation">(</span>list<span class="token punctuation">_</span>of<span class="token punctuation">_</span>constants<span class="token punctuation">(</span>lst<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-largest<span class="token punctuation">_</span>constant <span class="token punctuation">[</span><span class="token punctuation">(</span>Add <span class="token punctuation">(</span>Constant <span class="token number">19</span><span class="token punctuation">,</span> Negate <span class="token punctuation">(</span>Constant <span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span> Constant <span class="token number">19</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>Constant <span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-
-<span class="token keyword">fun</span> number<span class="token punctuation">_</span>of<span class="token punctuation">_</span>adds <span class="token punctuation">(</span>lst<span class="token punctuation">:</span> exp list<span class="token punctuation">)</span> <span class="token operator">=</span>
-  <span class="token keyword">if</span> lst <span class="token operator">=</span> nil
-  <span class="token keyword">then</span> <span class="token number">0</span>
-  <span class="token keyword">else</span>
-    case hd lst <span class="token keyword">of</span>
-      Add<span class="token punctuation">(</span>a<span class="token punctuation">,</span>b<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token number">1</span> <span class="token operator">+</span> number<span class="token punctuation">_</span>of<span class="token punctuation">_</span>adds<span class="token punctuation">(</span>tl lst<span class="token punctuation">)</span>
-    <span class="token operator">|</span> <span class="token punctuation">_</span> <span class="token operator">=&gt;</span> <span class="token number">0</span> <span class="token operator">+</span> number<span class="token punctuation">_</span>of<span class="token punctuation">_</span>adds<span class="token punctuation">(</span>tl lst<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-number<span class="token punctuation">_</span>of<span class="token punctuation">_</span>adds <span class="token punctuation">[</span><span class="token punctuation">(</span>Add <span class="token punctuation">(</span>Constant <span class="token number">19</span><span class="token punctuation">,</span> Negate <span class="token punctuation">(</span>Constant <span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span> Constant <span class="token number">19</span><span class="token punctuation">,</span> Constant <span class="token number">5</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>Add <span class="token punctuation">(</span>Constant <span class="token number">19</span><span class="token punctuation">,</span> Negate <span class="token punctuation">(</span>Constant <span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-</code></pre>
-<h2 id="curryfizierung---partielle-anwendung">Curryfizierung - partielle Anwendung</h2>
-<pre class=" language-ocaml"><code class="prism  language-ocaml"><span class="token comment">(* Bisherige Form von mehreren Parametern *)</span>
-<span class="token keyword">fun</span> sorted3<span class="token punctuation">_</span>tupled <span class="token punctuation">(</span>x<span class="token punctuation">,</span>y<span class="token punctuation">,</span>z<span class="token punctuation">)</span> <span class="token operator">=</span> z <span class="token operator">&gt;=</span> y andalso y <span class="token operator">&gt;=</span> x
-
-<span class="token comment">(* Curryfizierte Funktion *)</span>
-<span class="token keyword">fun</span> sorted3 x y z <span class="token operator">=</span> z <span class="token operator">&gt;=</span> y andalso y <span class="token operator">&gt;=</span> x
-</code></pre>
-<h4 id="partielle-anwendung">Partielle Anwendung:</h4>
-<ul>
-<li>Aufruf der Funktion mit weniger Argumenten (hier &lt; 3)</li>
-<li>wird häufig für Funktionen höherer Ordnung verwendet</li>
-</ul>
-<pre class=" language-ocaml"><code class="prism  language-ocaml"><span class="token comment">(* Funktionen höherer Ordnung *)</span>
-<span class="token keyword">val</span> List<span class="token punctuation">.</span>map <span class="token operator">=</span> fn <span class="token punctuation">:</span> <span class="token punctuation">(</span>’a <span class="token operator">-&gt;</span> ’b<span class="token punctuation">)</span> <span class="token operator">-&gt;</span> ’a list <span class="token operator">-&gt;</span> ’b list
-
-<span class="token keyword">val</span> List<span class="token punctuation">.</span>filter <span class="token operator">=</span> fn <span class="token punctuation">:</span> <span class="token punctuation">(</span>’a <span class="token operator">-&gt;</span> bool<span class="token punctuation">)</span> <span class="token operator">-&gt;</span> ’a list <span class="token operator">-&gt;</span> ’a list
-
-<span class="token keyword">val</span> List<span class="token punctuation">.</span>foldl <span class="token operator">=</span> fn <span class="token punctuation">:</span> <span class="token punctuation">(</span>’a <span class="token operator">*</span> ’b <span class="token operator">-&gt;</span> ’b<span class="token punctuation">)</span> <span class="token operator">-&gt;</span> ’b <span class="token operator">-&gt;</span> ’a list <span class="token operator">-&gt;</span> ’b
-</code></pre>
-<h2 id="clojure-1">Clojure</h2>
-<ul>
-<li>Im Gegensatz zu SML: dynamisch getypte Sprache</li>
-<li>Prefixnotation</li>
-<li>Verwendung der JVM (wird zu bytecode compiliert)</li>
-</ul>
-<h4 id="grundlagen">Grundlagen:</h4>
-<pre class=" language-typescript"><code class="prism  language-typescript"><span class="token comment">// list</span>
-'<span class="token punctuation">(</span><span class="token number">1</span>  <span class="token number">2</span>  <span class="token number">3</span><span class="token punctuation">)</span>
-<span class="token comment">// vector</span>
-<span class="token punctuation">[</span><span class="token number">1</span>  <span class="token number">2</span>  <span class="token number">3</span><span class="token punctuation">]</span>
-<span class="token comment">// set</span>
-#<span class="token punctuation">{</span><span class="token number">1</span>  <span class="token number">2</span>  <span class="token number">3</span><span class="token punctuation">}</span>
-<span class="token comment">// map</span>
-<span class="token punctuation">{</span><span class="token punctuation">:</span>a  <span class="token number">1</span><span class="token punctuation">,</span> <span class="token punctuation">:</span>b  <span class="token number">2</span><span class="token punctuation">}</span>
-
-<span class="token comment">// Function</span>
-<span class="token punctuation">(</span>defn  greet <span class="token punctuation">[</span>name<span class="token punctuation">]</span> <span class="token punctuation">(</span>str  <span class="token string">"Hello, "</span> name<span class="token punctuation">)</span> <span class="token punctuation">)</span>
-
-<span class="token comment">// Bedingungen</span>
-<span class="token punctuation">(</span><span class="token keyword">if</span> <span class="token punctuation">(</span>even<span class="token operator">?</span>  <span class="token number">2</span><span class="token punctuation">)</span>
-	<span class="token string">"even"</span>
-	<span class="token string">"odd"</span><span class="token punctuation">)</span>
-
-
-<span class="token punctuation">(</span><span class="token function">cond</span> 
-	<span class="token punctuation">(</span><span class="token operator">&lt;</span> x <span class="token number">2</span><span class="token punctuation">)</span> <span class="token string">"Case 1"</span>
-	<span class="token punctuation">(</span><span class="token operator">&lt;</span> x <span class="token number">10</span><span class="token punctuation">)</span> <span class="token string">"Case 2"</span>
-	<span class="token punctuation">:</span><span class="token keyword">else</span>  <span class="token string">"Case 3"</span><span class="token punctuation">)</span>
-
-<span class="token comment">// Zugriff auf eine Liste</span>
-<span class="token punctuation">(</span><span class="token function">first</span> <span class="token punctuation">(</span>cons a list<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token function">a</span>
-<span class="token punctuation">(</span><span class="token function">rest</span> <span class="token punctuation">(</span>cons a list<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">=</span> list
-</code></pre>
-<h4 id="beispiel-code-3">Beispiel-Code:</h4>
-<pre class=" language-python"><code class="prism  language-python"><span class="token punctuation">(</span><span class="token keyword">def</span> make<span class="token operator">-</span>add
-	<span class="token punctuation">(</span>fn <span class="token punctuation">[</span>a<span class="token punctuation">]</span>
-		<span class="token punctuation">(</span>fn <span class="token punctuation">[</span>b<span class="token punctuation">]</span>
-			<span class="token punctuation">(</span><span class="token operator">+</span> a b<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-
-<span class="token punctuation">(</span><span class="token keyword">def</span> make<span class="token operator">-</span>prepend
-  <span class="token punctuation">(</span>fn <span class="token punctuation">[</span>a<span class="token punctuation">]</span>
-    <span class="token punctuation">(</span>fn <span class="token punctuation">[</span>b<span class="token punctuation">]</span>
-      <span class="token punctuation">(</span>cons a b<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-</code></pre>
-<h1 id="ausgewählte-kapitel">4. Ausgewählte Kapitel</h1>
-<h2 id="datenabstraktion">Datenabstraktion</h2>
-<ul>
-<li><strong>Es gibt keinen Unterschied zwischen Programmen und Daten</strong></li>
-<li>Datentypen kann man bauen und damit unabhängig von festgelegten Repräsentationen rechnen</li>
-</ul>
-<h2 id="metazirkulärer-interpreter">Metazirkulärer Interpreter</h2>
-<ul>
-<li>Interpreter, der in derselben Sprache geschrieben ist, die er interpretiert</li>
-<li>Prozess der Funktionsanwendung durch <code>eval</code> und <code>apply</code></li>
-<li><code>eval</code> wertet den Ausdruck aus und gibt das Ergebnis zurück</li>
-<li><code>apply</code> erwartet eine Funktion und eine Sequenz von Argumenten und wendet die Funktion auf die Elemente der Sequenz an</li>
-<li><strong>Self-evaluation expression:</strong> Ausdruck, der sich selbst wieder als Ergebnis hat</li>
-</ul>
-<h2 id="lazy-evaluation">Lazy evaluation</h2>
-<ul>
-<li>auch: <em>call by need</em> oder <em>promises</em></li>
-<li>Use-Case: Das Ergebnis einer aufwendigen Berechnung wird als Parameter benötigt (keinmal oder n-mal). Durch Lazy Evaluation wird der Wert nicht n-mal durchgeführt, sondern einmal und dann zwischengespeichert.</li>
-</ul>
-<h2 id="funktionale-datenstrukturen">Funktionale Datenstrukturen</h2>
-<ul>
-<li>Änderungen imperativer Datenstrukturen basieren auf Mutation</li>
-<li>Funktionale Datenstrukturen sind nicht änderbar (immutable)</li>
-<li>Änderungen von Werten erzeugen ein neues Exemplar der Datenstruktur</li>
-<li>Kopien sorgen für eine lange Laufzeit</li>
-<li><strong>Lösung:</strong> Baumstrukturen, zur Vermeidung von Redundanzen</li>
-<li>Bei Änderung eines Werts werden die Knoten des Pfads zum Element kopiert</li>
-<li>Verschiedene Fälle sind <a href="https://hypirion.com/musings/understanding-persistent-vector-pt-1">hier</a> zu finden.</li>
-<li>Zur Beschleunigung der Operationen können Mehrwegbäume anstatt von Binärbäumen eingesetzt werden</li>
-</ul>
-<h4 id="beispiel">Beispiel</h4>
-<p><a href="https://johbra.github.io/PP2/Vorlesung/Abbildungen/vec2.png"><img src="https://johbra.github.io/PP2/Vorlesung/Abbildungen/vec2.png" alt="Beispiel eines kopierten Pfads"></a></p>
-<h1 id="funktionale--vs.-objektorientierte-programmierung">5. Funktionale- vs. Objektorientierte Programmierung</h1>
-
-<table>
-<thead>
-<tr>
-<th align="center">Funktionale Programmierung</th>
-<th align="center">Objektorientierte Programmierung</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="center">Fehlen von Mutation</td>
-<td align="center">Gebrauch von Mutation</td>
-</tr>
-<tr>
-<td align="center">Fehlen von Zuweisungen</td>
-<td align="center">Gebrauch von Zuweisungen</td>
-</tr>
-<tr>
-<td align="center">Funktionen</td>
-<td align="center">Objekte (Funktionen mit internen Daten)</td>
-</tr>
-<tr>
-<td align="center">Funktionen</td>
-<td align="center">Methoden</td>
-</tr>
-</tbody>
-</table><h3 id="zusammenfassung">Zusammenfassung:</h3>
-<ul>
-<li>Für eine “objektorientierte Programmierung” bedarf es keiner speziellen Programmiersprache</li>
-<li>Objekte sind:
-<ul>
-<li>eine Menge von Key-Value-Abbildungen</li>
-<li>eine Reihe von Funktionen, die Key-Value-Abbildungen akzeptieren</li>
-<li>eine Verteilfunktion zum Aufruf der gewünschten Funktion</li>
-</ul>
-</li>
-<li>Verwendung beider Paradigmen abhängig vom Anwendungskontext und persönlichem Geschmack</li>
-<li>Aufwand der Erweiterbarkeit der Paradigmen sollte ebenfalls in Betracht gezogen werden</li>
-</ul>
-<h2 id="objektorientiert-vs.-prozedural-vs.-funktional">Objektorientiert vs. Prozedural vs. Funktional</h2>
-<h3 id="objektorientiert">Objektorientiert</h3>
-<p><a href="https://johbra.github.io/PP2/Vorlesung/Abbildungen/gops-oop-markiert.png"><img src="https://johbra.github.io/PP2/Vorlesung/Abbildungen/gops-oop-markiert.png" alt=""></a></p>
-<h3 id="prozedural">Prozedural</h3>
-<p><a href="https://johbra.github.io/PP2/Vorlesung/Abbildungen/gops-proz-markiert.png"><img src="https://johbra.github.io/PP2/Vorlesung/Abbildungen/gops-proz-markiert.png" alt=""></a></p>
-<h3 id="funktional">Funktional</h3>
-<p><a href="https://johbra.github.io/PP2/Vorlesung/Abbildungen/gops-schluss.png"><img src="https://johbra.github.io/PP2/Vorlesung/Abbildungen/gops-schluss.png" alt=""></a></p>
-<h2 id="funktionale-entwurfsmuster">Funktionale Entwurfsmuster</h2>
+<h1 id="waf-modes">WAF Modes</h1>
 <ul>
 <li>
-<h3 id="command-pattern">Command-Pattern</h3>
-<ul>
-<li>Modularisierung von Befehlen und Aufrufen</li>
-</ul>
+<p><strong>Blocking Mode</strong>: Normaler Modus, bei dem die WAF erkannten Traffic blockt.</p>
 </li>
 <li>
-<h3 id="strategy-pattern">Strategy-Pattern</h3>
-<ul>
-<li>Flexibler Wechsel von alternativen Verhalten</li>
-</ul>
+<p><strong>Monitoring Mode</strong>: Die WAF alamiert, aber blockt nicht.</p>
 </li>
 <li>
-<h3 id="oberserver-pattern">Oberserver-Pattern</h3>
-<ul>
-<li>Benachrichtigung einer oder mehrerer Objekte, wenn sich der Zustand eines bestimmten Objekts ändert</li>
-</ul>
+<p><strong>Learning Mode</strong>: Die WAF lernt durch gutartigen Traffic, was normal und valide ist.</p>
 </li>
 </ul>
-<h1 id="funktionale-konzepte-in-java">6. Funktionale Konzepte in Java</h1>
-<blockquote>
-<p>Gilt nur für Java 8 oder größer!</p>
-</blockquote>
+<hr>
+<h1 id="sammlung-nützlicher-links">Sammlung nützlicher Links</h1>
 <ul>
-<li>z.B. <code>map</code>, <code>filter</code> und <code>reduce</code></li>
-<li>Vermeidung expliziter Mutation</li>
-<li>lesbarer Code</li>
-<li>Formulierung <strong>was</strong> (deklerativ) geschehen soll, nicht <strong>wie</strong> (imperativ)</li>
-<li>Objektorientierung steht nicht im Widerspruch zur Funktionalen Programmierung</li>
-</ul>
-<h3 id="funktionale-interfaces-in-java">Funktionale Interfaces in Java</h3>
-<ul>
-<li><code>Consumer&lt;T&gt;</code> - Operation ohne Rückgabe</li>
-<li><code>Supplier&lt;T&gt;</code> - Fabrik, die ein neues oder existierendes Objekt liefert</li>
-<li><code>Predicate&lt;T&gt;</code> - Prüfung einer Bedingung für ein Argument</li>
-<li><code>Function&lt;T&gt;</code> - Operation mit Resultat</li>
-</ul>
-<h2 id="fluent-interfaces">Fluent Interfaces</h2>
-<ul>
-<li>Objektorientierte API unter Verwendung von method chaining</li>
-</ul>
-<h3 id="verwendung-von-fluent-interfaces-am-beispiel">Verwendung von Fluent Interfaces am Beispiel:</h3>
-<pre class=" language-java"><code class="prism  language-java"><span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">final</span> String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-	FluentMailer<span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span>mailer <span class="token operator">-</span><span class="token operator">&gt;</span>
-		mailer<span class="token punctuation">.</span><span class="token function">from</span><span class="token punctuation">(</span><span class="token string">"build@agiledeveloper.com"</span><span class="token punctuation">)</span>
-			<span class="token punctuation">.</span><span class="token function">to</span><span class="token punctuation">(</span><span class="token string">"venkats@agiledeveloper.com"</span><span class="token punctuation">)</span>
-			<span class="token punctuation">.</span><span class="token function">subject</span><span class="token punctuation">(</span><span class="token string">"build notification"</span><span class="token punctuation">)</span>
-            <span class="token punctuation">.</span><span class="token function">body</span><span class="token punctuation">(</span><span class="token string">"...much better..."</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token punctuation">}</span>
-</code></pre>
-<h1 id="relationale-programmierung">7. Relationale Programmierung</h1>
-<p><a href="https://johbra.github.io/PP2/Vorlesung/Abbildungen/FunktionenRelationenConstraint8.png"><img src="https://johbra.github.io/PP2/Vorlesung/Abbildungen/FunktionenRelationenConstraint8.png" alt="Abgrenzung der Paradigmen"></a></p>
-<h3 id="logische-programmierung">Logische Programmierung</h3>
-<blockquote>
-<p>Häufig als “Erweiterung” der relationalen Programmierung betrachtet</p>
-</blockquote>
-<ul>
-<li>Definition von <strong>Prädikaten</strong></li>
-<li>kürzer als Funktionale Programmierung</li>
-<li>vielseitiger verwendbarer als Funktionen</li>
-</ul>
-<h4 id="code-beispiel-prolog">Code-Beispiel: (<em>Prolog</em>)</h4>
-<pre class=" language-prolog"><code class="prism  language-prolog"><span class="token function">natural</span><span class="token punctuation">(</span>z<span class="token punctuation">)</span><span class="token operator">.</span>
-<span class="token function">natural</span><span class="token punctuation">(</span><span class="token function">s</span><span class="token punctuation">(</span><span class="token variable">N</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">:-</span> <span class="token function">natural</span><span class="token punctuation">(</span><span class="token variable">N</span><span class="token punctuation">)</span><span class="token operator">.</span>
-
-<span class="token comment">% Beispiel "plus"</span>
-<span class="token function">plus</span><span class="token punctuation">(</span>z<span class="token punctuation">,</span> <span class="token variable">N</span><span class="token punctuation">,</span> <span class="token variable">N</span><span class="token punctuation">)</span><span class="token operator">:-</span> <span class="token function">natural</span><span class="token punctuation">(</span><span class="token variable">N</span><span class="token punctuation">)</span><span class="token operator">.</span>
-<span class="token comment">% Definition von Variablen durch Großbuchstaben</span>
-<span class="token function">plus</span><span class="token punctuation">(</span><span class="token function">s</span><span class="token punctuation">(</span><span class="token variable">N</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token variable">M</span><span class="token punctuation">,</span> <span class="token function">s</span><span class="token punctuation">(</span><span class="token variable">X</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">:-</span> <span class="token function">plus</span><span class="token punctuation">(</span><span class="token variable">N</span><span class="token punctuation">,</span> <span class="token variable">M</span><span class="token punctuation">,</span> <span class="token variable">X</span><span class="token punctuation">)</span><span class="token operator">.</span>
-
-<span class="token comment">% Definition von beliebigen Variablen durch "_"</span>
-<span class="token function">print</span><span class="token punctuation">(</span><span class="token variable">_</span><span class="token punctuation">)</span><span class="token operator">.</span>
-</code></pre>
-<h1 id="relational-logische-programmierung">8. Relational-logische Programmierung</h1>
-<ul>
-<li><strong>Relational-logische Programmierung:</strong> Programme spezifizieren Relationen und Größen</li>
-<li><strong>Logische Programmierung:</strong> Programm mit Datenstrukturen (<em>Listen, Bäumen etc.</em>)</li>
-<li>Verwendung von Prädikaten</li>
-<li>Ziel ist die Beantwortung der Variablenbelegung durch
-<ul>
-<li><strong>Unifikation</strong>: Belegung der Variablen zweier Terme, so dass sie gleich sind</li>
-<li><strong>Backtracking</strong>: Suchstrategie zur Beweisfindung</li>
-</ul>
+<li>
+<h3 id="virustotal"><a href="https://www.virustotal.com/">Virustotal</a></h3>
 </li>
-<li>Es gibt keine Typen</li>
-</ul>
-<h2 id="prolog">Prolog</h2>
-<ul>
-<li>Alle Daten werden durch Terme repräsentiert</li>
-<li>Term:
-<ul>
-<li>Atom (<em>Bsp: hans</em>)</li>
-<li>Variable (<em>Bsp: X</em>)</li>
-<li>Ganzzahl oder Gleitkommazahl</li>
-<li>zusammengesetzter Term (<em>Bsp: f(a)</em>)</li>
-</ul>
+<li>
+<h3 id="haveibeenpwned"><a href="https://haveibeenpwned.com/">HaveIBeenPwned</a></h3>
 </li>
-<li>Prolog verwendet Tiefensuche fürs Backtracking</li>
-<li>Reihenfolge der Klauseln ist entscheidend</li>
-</ul>
-<h4 id="code-beispiel-prolog-1">Code-Beispiel: (<em>Prolog</em>)</h4>
-<pre class=" language-prolog"><code class="prism  language-prolog"><span class="token function">vater</span><span class="token punctuation">(</span>hans<span class="token punctuation">,</span> paul<span class="token punctuation">)</span><span class="token operator">.</span>
-<span class="token function">vater</span><span class="token punctuation">(</span>hans<span class="token punctuation">,</span> anna<span class="token punctuation">)</span><span class="token operator">.</span>
-
-<span class="token comment">% Abfrage</span>
-<span class="token operator">?-</span>	<span class="token function">vater</span><span class="token punctuation">(</span><span class="token variable">X</span><span class="token punctuation">,</span><span class="token variable">Y</span><span class="token punctuation">)</span><span class="token operator">.</span>
-	<span class="token variable">X</span><span class="token operator">=</span>hans<span class="token operator">;</span>
-	<span class="token variable">Y</span><span class="token operator">=</span>paul<span class="token operator">;</span> <span class="token comment">% weitere Abfrage durch Simikolon</span>
-	<span class="token variable">X</span><span class="token operator">=</span>hans<span class="token operator">;</span>
-	<span class="token variable">Y</span><span class="token operator">=</span>anna<span class="token operator">.</span> <span class="token comment">% bei weiterer Abfrage würde "false." kommen</span>
-
-<span class="token comment">% Regel</span>
-<span class="token comment">% Hinweis: "," stehen für UND-Verknüpfungen</span>
-<span class="token function">father</span><span class="token punctuation">(</span><span class="token variable">Dad</span><span class="token punctuation">,</span> <span class="token variable">Child</span><span class="token punctuation">)</span> <span class="token operator">:-</span> <span class="token function">parent</span><span class="token punctuation">(</span><span class="token variable">Dad</span><span class="token punctuation">,</span> <span class="token variable">Child</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">male</span><span class="token punctuation">(</span><span class="token variable">Dad</span><span class="token punctuation">)</span><span class="token operator">.</span>
-
-<span class="token comment">% Listenoperationen</span>
-<span class="token function">member</span><span class="token punctuation">(</span><span class="token variable">X</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token variable">X</span><span class="token punctuation">,</span> <span class="token variable">Y</span><span class="token punctuation">,</span> <span class="token variable">Z</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">.</span>
-
-<span class="token function">append</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token variable">A</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token variable">X</span><span class="token punctuation">,</span> <span class="token variable">Y</span><span class="token punctuation">,</span> <span class="token variable">Z</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">.</span>
-
-<span class="token function">mapList</span><span class="token punctuation">(</span><span class="token function">praed</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token variable">X</span><span class="token punctuation">)</span><span class="token operator">.</span>
-
-<span class="token function">count</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token operator">.</span>
-<span class="token comment">% "|" entspricht cons</span>
-<span class="token comment">% "is" entspricht Zuweisung</span>
-<span class="token function">count</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token variable">_</span><span class="token operator">|</span><span class="token variable">Tail</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token variable">N</span><span class="token punctuation">)</span> <span class="token operator">:-</span> <span class="token function">count</span><span class="token punctuation">(</span><span class="token variable">Tail</span><span class="token punctuation">,</span> <span class="token variable">X</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token variable">N</span> <span class="token operator">is</span> <span class="token variable">X</span><span class="token operator">+</span><span class="token number">1.</span>
-
-<span class="token comment">% Abfragen</span>
-<span class="token operator">?-</span> <span class="token function">count</span><span class="token punctuation">(</span><span class="token punctuation">[</span>a<span class="token punctuation">,</span> b<span class="token punctuation">,</span> c<span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token variable">N</span><span class="token punctuation">)</span><span class="token operator">.</span>
-<span class="token variable">N</span> <span class="token operator">=</span> <span class="token number">3.</span>
-<span class="token operator">?-</span> <span class="token function">count</span><span class="token punctuation">(</span><span class="token punctuation">[</span>a<span class="token punctuation">,</span> b<span class="token punctuation">,</span> c<span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token operator">.</span>
-true<span class="token operator">.</span>
-</code></pre>
-<h3 id="prädikat-cut-und-fail">Prädikat <code>cut</code> und <code>fail</code></h3>
-<h4 id="cut"><code>cut</code></h4>
-<blockquote>
-<p>Darstellung durch <strong>, !.</strong></p>
-</blockquote>
-<ul>
-<li>Verhindert das Backtracking</li>
-<li>Wenn nur eine Regel erfüllt werden soll</li>
-<li>Einsatzfälle:
-<ul>
-<li>Effizienzsteigerung</li>
-<li>Speichereinsparung</li>
-<li>Verkürzung von Programmen</li>
-</ul>
+<li>
+<h3 id="owasp-1"><a href="https://owasp.org/">OWASP</a></h3>
 </li>
-<li>Cuts sind mit Vorsicht einzusetzen</li>
+<li>
+<h3 id="owasp-top-10-1"><a href="https://owasp.org/www-project-top-ten/">OWASP Top 10</a></h3>
+</li>
+<li>
+<h3 id="wireshark"><a href="https://www.wireshark.org">Wireshark</a></h3>
+</li>
+<li>
+<h3 id="wigle"><a href="https://www.wigle.net/">WiGLE</a></h3>
+</li>
+<li>
+<h3 id="awesome-list-pen-test"><a href="https://github.com/enaqx/awesome-pentest">Awesome List Pen-Test</a></h3>
+</li>
+<li>
+<h3 id="bug-bounty-programme-1"><a href="https://hackerone.com/bug-bounty-programs">Bug Bounty Programme</a></h3>
+</li>
+<li>
+<h3 id="google---project-zero"><a href="https://googleprojectzero.blogspot.com/">Google - Project Zero</a></h3>
+</li>
+<li>
+<h3 id="awesome-list-web-security"><a href="https://github.com/qazbnm456/awesome-web-security">Awesome List Web-Security</a></h3>
+</li>
+<li>
+<h3 id="owasp-2"><a href="https://www.owasp.org">OWASP</a></h3>
+</li>
+<li>
+<h3 id="twofactorauth.org"><a href="https://twofactorauth.org/">TwoFactorAuth.org</a></h3>
+</li>
+<li>
+<h3 id="shodan"><a href="https://www.shodan.io">Shodan</a></h3>
+</li>
+<li>
+<h3 id="mozilla-observatory"><a href="https://observatory.mozilla.org/">Mozilla Observatory</a></h3>
+</li>
+<li>
+<h3 id="owasp-cheat-sheet"><a href="https://cheatsheetseries.owasp.org/Glossary.html">OWASP Cheat Sheet</a></h3>
+</li>
 </ul>
-<h4 id="fail"><code>fail</code></h4>
-<blockquote>
-<p>Darstellung durch <strong>, fail.</strong></p>
-</blockquote>
-<ul>
-<li>Das Prädikat fail schlägt immer fehl</li>
-<li>Hierdurch wird immer Backtracking ausgeführt</li>
-<li>Erreicht die Ausgabe aller möglichen Belegungen ohne Benutzerinteraktion (<em>Anfrage durch “;”</em>)</li>
-</ul>
-<h4 id="negation-mit-cut-und-fail"><code>Negation mit cut und fail</code></h4>
-<blockquote>
-<p>Darstellung durch <strong>, !, fail.</strong></p>
-</blockquote>
-<ul>
-<li>Ausdrücken von Negationen durch die Verwendung von cut und fail</li>
-</ul>
-<pre class=" language-prolog"><code class="prism  language-prolog"><span class="token function">mag</span><span class="token punctuation">(</span>karl<span class="token punctuation">,</span> <span class="token variable">X</span><span class="token punctuation">)</span> <span class="token operator">:-</span> <span class="token function">salami_pizza</span><span class="token punctuation">(</span><span class="token variable">X</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token operator">!</span><span class="token punctuation">,</span>fail<span class="token operator">.</span>
-<span class="token function">mag</span><span class="token punctuation">(</span>karl<span class="token punctuation">,</span> <span class="token variable">X</span><span class="token punctuation">)</span> <span class="token operator">:-</span> <span class="token function">pizza</span><span class="token punctuation">(</span><span class="token variable">X</span><span class="token punctuation">)</span><span class="token operator">.</span>
+<h3 id="owasp-projects"><a href="https://www.owasp.org/index.php/Category:OWASP_Project">OWASP Projects</a></h3>
 
-<span class="token function">pizza</span><span class="token punctuation">(</span><span class="token variable">X</span><span class="token punctuation">)</span>  <span class="token operator">:-</span>  <span class="token function">vier_jahreszeiten_pizza</span><span class="token punctuation">(</span><span class="token variable">X</span><span class="token punctuation">)</span><span class="token operator">.</span>
-<span class="token function">pizza</span><span class="token punctuation">(</span><span class="token variable">X</span><span class="token punctuation">)</span>  <span class="token operator">:-</span>  <span class="token function">salami_pizza</span><span class="token punctuation">(</span><span class="token variable">X</span><span class="token punctuation">)</span><span class="token operator">.</span> 
-<span class="token function">pizza</span><span class="token punctuation">(</span><span class="token variable">X</span><span class="token punctuation">)</span>  <span class="token operator">:-</span>  <span class="token function">champignon_pizza</span><span class="token punctuation">(</span><span class="token variable">X</span><span class="token punctuation">)</span><span class="token operator">.</span>
-
-<span class="token function">vier_jahreszeiten_pizza</span><span class="token punctuation">(</span>vklein<span class="token punctuation">)</span><span class="token operator">.</span> 
-<span class="token function">vier_jahreszeiten_pizza</span><span class="token punctuation">(</span>vgross<span class="token punctuation">)</span><span class="token operator">.</span> 
-<span class="token function">salami_pizza</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token operator">.</span> 
-<span class="token function">champignon_pizza</span><span class="token punctuation">(</span>c<span class="token punctuation">)</span><span class="token operator">.</span>
-
-<span class="token operator">?-</span> <span class="token function">mag</span><span class="token punctuation">(</span>karl<span class="token punctuation">,</span>c<span class="token punctuation">)</span><span class="token operator">.</span>
-true<span class="token operator">.</span>
-
-<span class="token operator">?-</span> <span class="token function">mag</span><span class="token punctuation">(</span>karl<span class="token punctuation">,</span>s<span class="token punctuation">)</span><span class="token operator">.</span>
-false<span class="token operator">.</span>
-</code></pre>
-<h4 id="probleme">Probleme</h4>
-<ul>
-<li>Die Regeln dürfen nicht vertauscht werden</li>
-<li><code>mag(karl, X)</code> liefert false</li>
-</ul>
-<h3 id="besser-als-cut-and-fail">Besser als <code>cut and fail</code>:</h3>
-<blockquote>
-<p><strong>Negation</strong></p>
-</blockquote>
-<pre class=" language-prolog"><code class="prism  language-prolog"><span class="token function">neg</span><span class="token punctuation">(</span><span class="token variable">Ziel</span><span class="token punctuation">)</span>  <span class="token operator">:-</span>  <span class="token variable">Ziel</span><span class="token punctuation">,</span><span class="token operator">!</span><span class="token punctuation">,</span>fail<span class="token operator">.</span> 
-<span class="token function">neg</span><span class="token punctuation">(</span><span class="token variable">Ziel</span><span class="token punctuation">)</span><span class="token operator">.</span>
-
-<span class="token function">mag</span><span class="token punctuation">(</span>karl<span class="token punctuation">,</span> <span class="token variable">X</span><span class="token punctuation">)</span> <span class="token operator">:-</span> <span class="token function">pizza</span><span class="token punctuation">(</span><span class="token variable">X</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">neg</span><span class="token punctuation">(</span><span class="token function">salami_pizza</span><span class="token punctuation">(</span><span class="token variable">X</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">.</span>
-</code></pre>
-<h1 id="constraint-programmierung---grundlagen">9. Constraint Programmierung - Grundlagen</h1>
-<h1 id="constraint-solving">10. Constraint-solving</h1>
-<h1 id="constraint-logic-programmierung">10. Constraint-logic Programmierung</h1>
-<h1 id="parallelprogrammierung">11. Parallelprogrammierung</h1>
-<h2 id="einstieg">Einstieg</h2>
-<h2 id="multithreading-in-java">Multithreading (in Java)</h2>
-<h2 id="software-transactional-memory">Software Transactional Memory</h2>
-<h2 id="parallele-algorithmen">Parallele Algorithmen</h2>
-
+<table>
+<thead>
+<tr>
+<th align="left">Projekt</th>
+<th align="left">Beispiele</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Tool</td>
+<td align="left"><a href="https://www.owasp.org/index.php/OWASP_Zed_Attack_Proxy_Project">Zed Attack Proxy</a>, <a href="https://www.owasp.org/index.php/OWASP_Dependency_Check">Dependency Check</a>, <a href="https://www.owasp.org/index.php/OWASP_DefectDojo_Project">DefectDojo</a>, <a href="https://owasp-juice.shop">Juice Shop</a></td>
+</tr>
+<tr>
+<td align="left">Code</td>
+<td align="left"><a href="https://www.owasp.org/index.php/Category:OWASP_ModSecurity_Core_Rule_Set_Project">ModSecurity Core Rule Set</a>, <a href="https://www.owasp.org/index.php/OWASP_Java_HTML_Sanitizer">Java HTML Sanitizer</a>, <a href="https://www.owasp.org/index.php/OWASP_Security_Logging_Project">Security Logging Project</a>, <a href="https://www.owasp.org/index.php/OWASP_AppSensor_Project">AppSensor</a></td>
+</tr>
+<tr>
+<td align="left">Documentation</td>
+<td align="left"><a href="https://www.owasp.org/index.php/Category:OWASP_Top_Ten_Project">OWASP Top 10</a>, <a href="https://www.owasp.org/index.php/Category:OWASP_Application_Security_Verification_Standard_Project">Application Security Verification Standard (ASVS)</a>, <a href="https://www.owasp.org/index.php/OWASP_Podcast">OWASP 24/7 Podcast</a>, <a href="https://www.owasp.org/index.php/OWASP_Cornucopia">Cornucopia</a></td>
+</tr>
+</tbody>
+</table>
