@@ -664,7 +664,153 @@ number<span class="token punctuation">_</span>of<span class="token punctuation">
   <span class="token punctuation">}</span>
 </code></pre>
 <h1 id="relationale-programmierung">7. Relationale Programmierung</h1>
+<p><a href="https://johbra.github.io/PP2/Vorlesung/Abbildungen/FunktionenRelationenConstraint8.png"><img src="https://johbra.github.io/PP2/Vorlesung/Abbildungen/FunktionenRelationenConstraint8.png" alt="Abgrenzung der Paradigmen"></a></p>
+<h3 id="logische-programmierung">Logische Programmierung</h3>
+<blockquote>
+<p>Häufig als “Erweiterung” der relationalen Programmierung betrachtet</p>
+</blockquote>
+<ul>
+<li>Definition von <strong>Prädikaten</strong></li>
+<li>kürzer als Funktionale Programmierung</li>
+<li>vielseitiger verwendbarer als Funktionen</li>
+</ul>
+<h4 id="code-beispiel-prolog">Code-Beispiel: (<em>Prolog</em>)</h4>
+<pre class=" language-prolog"><code class="prism  language-prolog"><span class="token function">natural</span><span class="token punctuation">(</span>z<span class="token punctuation">)</span><span class="token operator">.</span>
+<span class="token function">natural</span><span class="token punctuation">(</span><span class="token function">s</span><span class="token punctuation">(</span><span class="token variable">N</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">:-</span> <span class="token function">natural</span><span class="token punctuation">(</span><span class="token variable">N</span><span class="token punctuation">)</span><span class="token operator">.</span>
+
+<span class="token comment">% Beispiel "plus"</span>
+<span class="token function">plus</span><span class="token punctuation">(</span>z<span class="token punctuation">,</span> <span class="token variable">N</span><span class="token punctuation">,</span> <span class="token variable">N</span><span class="token punctuation">)</span><span class="token operator">:-</span> <span class="token function">natural</span><span class="token punctuation">(</span><span class="token variable">N</span><span class="token punctuation">)</span><span class="token operator">.</span>
+<span class="token comment">% Definition von Variablen durch Großbuchstaben</span>
+<span class="token function">plus</span><span class="token punctuation">(</span><span class="token function">s</span><span class="token punctuation">(</span><span class="token variable">N</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token variable">M</span><span class="token punctuation">,</span> <span class="token function">s</span><span class="token punctuation">(</span><span class="token variable">X</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">:-</span> <span class="token function">plus</span><span class="token punctuation">(</span><span class="token variable">N</span><span class="token punctuation">,</span> <span class="token variable">M</span><span class="token punctuation">,</span> <span class="token variable">X</span><span class="token punctuation">)</span><span class="token operator">.</span>
+
+<span class="token comment">% Definition von beliebigen Variablen durch "_"</span>
+<span class="token function">print</span><span class="token punctuation">(</span><span class="token variable">_</span><span class="token punctuation">)</span><span class="token operator">.</span>
+</code></pre>
 <h1 id="relational-logische-programmierung">8. Relational-logische Programmierung</h1>
+<ul>
+<li><strong>Relational-logische Programmierung:</strong> Programme spezifizieren Relationen und Größen</li>
+<li><strong>Logische Programmierung:</strong> Programm mit Datenstrukturen (<em>Listen, Bäumen etc.</em>)</li>
+<li>Verwendung von Prädikaten</li>
+<li>Ziel ist die Beantwortung der Variablenbelegung durch
+<ul>
+<li><strong>Unifikation</strong>: Belegung der Variablen zweier Terme, so dass sie gleich sind</li>
+<li><strong>Backtracking</strong>: Suchstrategie zur Beweisfindung</li>
+</ul>
+</li>
+<li>Es gibt keine Typen</li>
+</ul>
+<h2 id="prolog">Prolog</h2>
+<ul>
+<li>Alle Daten werden durch Terme repräsentiert</li>
+<li>Term:
+<ul>
+<li>Atom (<em>Bsp: hans</em>)</li>
+<li>Variable (<em>Bsp: X</em>)</li>
+<li>Ganzzahl oder Gleitkommazahl</li>
+<li>zusammengesetzter Term (<em>Bsp: f(a)</em>)</li>
+</ul>
+</li>
+<li>Prolog verwendet Tiefensuche fürs Backtracking</li>
+<li>Reihenfolge der Klauseln ist entscheidend</li>
+</ul>
+<h4 id="code-beispiel-prolog-1">Code-Beispiel: (<em>Prolog</em>)</h4>
+<pre class=" language-prolog"><code class="prism  language-prolog"><span class="token function">vater</span><span class="token punctuation">(</span>hans<span class="token punctuation">,</span> paul<span class="token punctuation">)</span><span class="token operator">.</span>
+<span class="token function">vater</span><span class="token punctuation">(</span>hans<span class="token punctuation">,</span> anna<span class="token punctuation">)</span><span class="token operator">.</span>
+
+<span class="token comment">% Abfrage</span>
+<span class="token operator">?-</span>	<span class="token function">vater</span><span class="token punctuation">(</span><span class="token variable">X</span><span class="token punctuation">,</span><span class="token variable">Y</span><span class="token punctuation">)</span><span class="token operator">.</span>
+	<span class="token variable">X</span><span class="token operator">=</span>hans<span class="token operator">;</span>
+	<span class="token variable">Y</span><span class="token operator">=</span>paul<span class="token operator">;</span> <span class="token comment">% weitere Abfrage durch Simikolon</span>
+	<span class="token variable">X</span><span class="token operator">=</span>hans<span class="token operator">;</span>
+	<span class="token variable">Y</span><span class="token operator">=</span>anna<span class="token operator">.</span> <span class="token comment">% bei weiterer Abfrage würde "false." kommen</span>
+
+<span class="token comment">% Regel</span>
+<span class="token comment">% Hinweis: "," stehen für UND-Verknüpfungen</span>
+<span class="token function">father</span><span class="token punctuation">(</span><span class="token variable">Dad</span><span class="token punctuation">,</span> <span class="token variable">Child</span><span class="token punctuation">)</span> <span class="token operator">:-</span> <span class="token function">parent</span><span class="token punctuation">(</span><span class="token variable">Dad</span><span class="token punctuation">,</span> <span class="token variable">Child</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">male</span><span class="token punctuation">(</span><span class="token variable">Dad</span><span class="token punctuation">)</span><span class="token operator">.</span>
+
+<span class="token comment">% Listenoperationen</span>
+<span class="token function">member</span><span class="token punctuation">(</span><span class="token variable">X</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token variable">X</span><span class="token punctuation">,</span> <span class="token variable">Y</span><span class="token punctuation">,</span> <span class="token variable">Z</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">.</span>
+
+<span class="token function">append</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token variable">A</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token variable">X</span><span class="token punctuation">,</span> <span class="token variable">Y</span><span class="token punctuation">,</span> <span class="token variable">Z</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">.</span>
+
+<span class="token function">mapList</span><span class="token punctuation">(</span><span class="token function">praed</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token variable">X</span><span class="token punctuation">)</span><span class="token operator">.</span>
+
+<span class="token function">count</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token operator">.</span>
+<span class="token comment">% "|" entspricht cons</span>
+<span class="token comment">% "is" entspricht Zuweisung</span>
+<span class="token function">count</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token variable">_</span><span class="token operator">|</span><span class="token variable">Tail</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token variable">N</span><span class="token punctuation">)</span> <span class="token operator">:-</span> <span class="token function">count</span><span class="token punctuation">(</span><span class="token variable">Tail</span><span class="token punctuation">,</span> <span class="token variable">X</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token variable">N</span> <span class="token operator">is</span> <span class="token variable">X</span><span class="token operator">+</span><span class="token number">1.</span>
+
+<span class="token comment">% Abfragen</span>
+<span class="token operator">?-</span> <span class="token function">count</span><span class="token punctuation">(</span><span class="token punctuation">[</span>a<span class="token punctuation">,</span> b<span class="token punctuation">,</span> c<span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token variable">N</span><span class="token punctuation">)</span><span class="token operator">.</span>
+<span class="token variable">N</span> <span class="token operator">=</span> <span class="token number">3.</span>
+<span class="token operator">?-</span> <span class="token function">count</span><span class="token punctuation">(</span><span class="token punctuation">[</span>a<span class="token punctuation">,</span> b<span class="token punctuation">,</span> c<span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token operator">.</span>
+true<span class="token operator">.</span>
+</code></pre>
+<h3 id="prädikat-cut-und-fail">Prädikat <code>cut</code> und <code>fail</code></h3>
+<h4 id="cut"><code>cut</code></h4>
+<blockquote>
+<p>Darstellung durch <strong>, !.</strong></p>
+</blockquote>
+<ul>
+<li>Verhindert das Backtracking</li>
+<li>Wenn nur eine Regel erfüllt werden soll</li>
+<li>Einsatzfälle:
+<ul>
+<li>Effizienzsteigerung</li>
+<li>Speichereinsparung</li>
+<li>Verkürzung von Programmen</li>
+</ul>
+</li>
+<li>Cuts sind mit Vorsicht einzusetzen</li>
+</ul>
+<h4 id="fail"><code>fail</code></h4>
+<blockquote>
+<p>Darstellung durch <strong>, fail.</strong></p>
+</blockquote>
+<ul>
+<li>Das Prädikat fail schlägt immer fehl</li>
+<li>Hierdurch wird immer Backtracking ausgeführt</li>
+<li>Erreicht die Ausgabe aller möglichen Belegungen ohne Benutzerinteraktion (<em>Anfrage durch “;”</em>)</li>
+</ul>
+<h4 id="negation-mit-cut-und-fail"><code>Negation mit cut und fail</code></h4>
+<blockquote>
+<p>Darstellung durch <strong>, !, fail.</strong></p>
+</blockquote>
+<ul>
+<li>Ausdrücken von Negationen durch die Verwendung von cut und fail</li>
+</ul>
+<pre class=" language-prolog"><code class="prism  language-prolog"><span class="token function">mag</span><span class="token punctuation">(</span>karl<span class="token punctuation">,</span> <span class="token variable">X</span><span class="token punctuation">)</span> <span class="token operator">:-</span> <span class="token function">salami_pizza</span><span class="token punctuation">(</span><span class="token variable">X</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token operator">!</span><span class="token punctuation">,</span>fail<span class="token operator">.</span>
+<span class="token function">mag</span><span class="token punctuation">(</span>karl<span class="token punctuation">,</span> <span class="token variable">X</span><span class="token punctuation">)</span> <span class="token operator">:-</span> <span class="token function">pizza</span><span class="token punctuation">(</span><span class="token variable">X</span><span class="token punctuation">)</span><span class="token operator">.</span>
+
+<span class="token function">pizza</span><span class="token punctuation">(</span><span class="token variable">X</span><span class="token punctuation">)</span>  <span class="token operator">:-</span>  <span class="token function">vier_jahreszeiten_pizza</span><span class="token punctuation">(</span><span class="token variable">X</span><span class="token punctuation">)</span><span class="token operator">.</span>
+<span class="token function">pizza</span><span class="token punctuation">(</span><span class="token variable">X</span><span class="token punctuation">)</span>  <span class="token operator">:-</span>  <span class="token function">salami_pizza</span><span class="token punctuation">(</span><span class="token variable">X</span><span class="token punctuation">)</span><span class="token operator">.</span> 
+<span class="token function">pizza</span><span class="token punctuation">(</span><span class="token variable">X</span><span class="token punctuation">)</span>  <span class="token operator">:-</span>  <span class="token function">champignon_pizza</span><span class="token punctuation">(</span><span class="token variable">X</span><span class="token punctuation">)</span><span class="token operator">.</span>
+
+<span class="token function">vier_jahreszeiten_pizza</span><span class="token punctuation">(</span>vklein<span class="token punctuation">)</span><span class="token operator">.</span> 
+<span class="token function">vier_jahreszeiten_pizza</span><span class="token punctuation">(</span>vgross<span class="token punctuation">)</span><span class="token operator">.</span> 
+<span class="token function">salami_pizza</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token operator">.</span> 
+<span class="token function">champignon_pizza</span><span class="token punctuation">(</span>c<span class="token punctuation">)</span><span class="token operator">.</span>
+
+<span class="token operator">?-</span> <span class="token function">mag</span><span class="token punctuation">(</span>karl<span class="token punctuation">,</span>c<span class="token punctuation">)</span><span class="token operator">.</span>
+true<span class="token operator">.</span>
+
+<span class="token operator">?-</span> <span class="token function">mag</span><span class="token punctuation">(</span>karl<span class="token punctuation">,</span>s<span class="token punctuation">)</span><span class="token operator">.</span>
+false<span class="token operator">.</span>
+</code></pre>
+<h4 id="probleme">Probleme</h4>
+<ul>
+<li>Die Regeln dürfen nicht vertauscht werden</li>
+<li><code>mag(karl, X)</code> liefert false</li>
+</ul>
+<h3 id="besser-als-cut-and-fail">Besser als <code>cut and fail</code>:</h3>
+<blockquote>
+<p><strong>Negation</strong></p>
+</blockquote>
+<pre class=" language-prolog"><code class="prism  language-prolog"><span class="token function">neg</span><span class="token punctuation">(</span><span class="token variable">Ziel</span><span class="token punctuation">)</span>  <span class="token operator">:-</span>  <span class="token variable">Ziel</span><span class="token punctuation">,</span><span class="token operator">!</span><span class="token punctuation">,</span>fail<span class="token operator">.</span> 
+<span class="token function">neg</span><span class="token punctuation">(</span><span class="token variable">Ziel</span><span class="token punctuation">)</span><span class="token operator">.</span>
+
+<span class="token function">mag</span><span class="token punctuation">(</span>karl<span class="token punctuation">,</span> <span class="token variable">X</span><span class="token punctuation">)</span> <span class="token operator">:-</span> <span class="token function">pizza</span><span class="token punctuation">(</span><span class="token variable">X</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">neg</span><span class="token punctuation">(</span><span class="token function">salami_pizza</span><span class="token punctuation">(</span><span class="token variable">X</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">.</span>
+</code></pre>
 <h1 id="constraint-programmierung---grundlagen">9. Constraint Programmierung - Grundlagen</h1>
 <h1 id="constraint-solving">10. Constraint-solving</h1>
 <h1 id="constraint-logic-programmierung">10. Constraint-logic Programmierung</h1>
