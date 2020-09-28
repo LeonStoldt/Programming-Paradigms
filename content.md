@@ -806,7 +806,81 @@ false<span class="token operator">.</span>
 <span class="token function">mag</span><span class="token punctuation">(</span>karl<span class="token punctuation">,</span> <span class="token variable">X</span><span class="token punctuation">)</span> <span class="token operator">:-</span> <span class="token function">pizza</span><span class="token punctuation">(</span><span class="token variable">X</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">neg</span><span class="token punctuation">(</span><span class="token function">salami_pizza</span><span class="token punctuation">(</span><span class="token variable">X</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">.</span>
 </code></pre>
 <h1 id="constraint-programmierung---grundlagen">9. Constraint Programmierung - Grundlagen</h1>
-<h1 id="constraint-solving">10. Constraint-solving</h1>
+<ul>
+<li>“Regelbasierte” Programmierung</li>
+<li><strong>Keine</strong> definition eines Algorithmus</li>
+<li>Das Programm versucht den Zustand zu finden, in dem die Regeln erfüllt sind</li>
+<li>Anwendungsgebiete:
+<ul>
+<li>Erstellung von Stundenplänen</li>
+<li>Entscheidungsunterstützungssysteme für Planung und Konfiguration</li>
+<li>Konsistenzsicherung in Datenbanksystemen</li>
+</ul>
+</li>
+</ul>
+<h4 id="constraint">Constraint</h4>
+<ul>
+<li>Beziehung zwischen verschiedenen Variablen</li>
+<li>Constraints beschreiben Wissen über die Werte der Variablen</li>
+<li>Beispiel aus dem Alltag: Terminabsprachen</li>
+</ul>
+<h2 id="constraint-satisfaction">Constraint-satisfaction</h2>
+<ul>
+<li>verwendet kombinatorische Methoden
+<ul>
+<li>systematische Suche</li>
+<li>Generate &amp; Test (Belegung aller Variablen wird erzeugt und geprüft)</li>
+<li>Backtracking (Schrittweise Erweiterung korrekter Teillösungen zur Gesamtlösung)</li>
+</ul>
+</li>
+</ul>
+<h2 id="constraint-solving">Constraint-solving</h2>
+<ul>
+<li>verwendet mathematisch-analytische Verfahren</li>
+<li>Bsp:
+<ul>
+<li>Differentation</li>
+<li>Integration</li>
+<li>Taylor-Reihen</li>
+</ul>
+</li>
+</ul>
+<h4 id="primitive-constraints">primitive Constraints</h4>
+<ul>
+<li>beschreiben einen Zusammenhang zwischen Größen</li>
+<li>Bsp:
+<ul>
+<li>(adder x y z)</li>
+<li>(multiplier x y z)</li>
+</ul>
+</li>
+<li>Constraints können durch Konnektoren verbunden werden</li>
+<li>Konnektoren aktivieren alle verbundenen Constraint-Elemente nach Erhalt eines Werts</li>
+</ul>
+<h4 id="beispiel-von-konnektoren-und-constraints">Beispiel von Konnektoren und Constraints</h4>
+<blockquote>
+<p>Celsius zu Fahrenheit Converter</p>
+</blockquote>
+<p><a href="https://johbra.github.io/PP2/Vorlesung/Abbildungen/FahrenheitCelsiusKonverter.png"><img src="https://johbra.github.io/PP2/Vorlesung/Abbildungen/FahrenheitCelsiusKonverter.png" alt=""></a></p>
+<h4 id="lösung-in-clojure">Lösung in Clojure</h4>
+<pre class=" language-python"><code class="prism  language-python"><span class="token punctuation">(</span><span class="token keyword">def</span> celsius<span class="token operator">-</span>fahrenheit<span class="token operator">-</span>converter 
+  <span class="token punctuation">(</span>fn <span class="token punctuation">[</span>c f<span class="token punctuation">]</span>
+    <span class="token punctuation">(</span>let <span class="token punctuation">[</span>u <span class="token punctuation">(</span>make<span class="token operator">-</span>connector<span class="token punctuation">)</span>
+          v <span class="token punctuation">(</span>make<span class="token operator">-</span>connector<span class="token punctuation">)</span>
+          w <span class="token punctuation">(</span>make<span class="token operator">-</span>connector<span class="token punctuation">)</span>
+          x <span class="token punctuation">(</span>make<span class="token operator">-</span>connector<span class="token punctuation">)</span>
+          y <span class="token punctuation">(</span>make<span class="token operator">-</span>connector<span class="token punctuation">)</span><span class="token punctuation">]</span>
+      <span class="token punctuation">(</span>multiplier c w u<span class="token punctuation">)</span>
+      <span class="token punctuation">(</span>multiplier v x u<span class="token punctuation">)</span>
+      <span class="token punctuation">(</span>adder v y f<span class="token punctuation">)</span>
+      <span class="token punctuation">(</span>constant <span class="token number">9</span> w<span class="token punctuation">)</span>
+      <span class="token punctuation">(</span>constant <span class="token number">5</span> x<span class="token punctuation">)</span>
+      <span class="token punctuation">(</span>constant <span class="token number">32</span> y<span class="token punctuation">)</span>
+      'ok<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+</code></pre>
+<h4 id="lösung-in-prolog">Lösung in Prolog</h4>
+<pre class=" language-prolog"><code class="prism  language-prolog"><span class="token function">cf</span><span class="token punctuation">(</span><span class="token variable">C</span><span class="token punctuation">,</span> <span class="token variable">F</span><span class="token punctuation">)</span> <span class="token operator">:-</span> <span class="token punctuation">{</span><span class="token number">9</span><span class="token operator">*</span><span class="token variable">C</span><span class="token operator">=</span><span class="token number">5</span><span class="token operator">*</span><span class="token punctuation">(</span><span class="token variable">F</span><span class="token operator">-</span><span class="token number">32</span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token operator">.</span>
+</code></pre>
 <h1 id="constraint-logic-programmierung">10. Constraint-logic Programmierung</h1>
 <h1 id="parallelprogrammierung">11. Parallelprogrammierung</h1>
 <h2 id="einstieg">Einstieg</h2>
