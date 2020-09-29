@@ -812,13 +812,267 @@ false<span class="token operator">.</span>
 <span class="token function">mag</span><span class="token punctuation">(</span>karl<span class="token punctuation">,</span> <span class="token variable">X</span><span class="token punctuation">)</span> <span class="token operator">:-</span> <span class="token function">pizza</span><span class="token punctuation">(</span><span class="token variable">X</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">neg</span><span class="token punctuation">(</span><span class="token function">salami_pizza</span><span class="token punctuation">(</span><span class="token variable">X</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">.</span>
 </code></pre>
 <h1 id="constraint-programmierung---grundlagen">9. Constraint Programmierung - Grundlagen</h1>
-<h1 id="constraint-solving">10. Constraint-solving</h1>
+<ul>
+<li>“Regelbasierte” Programmierung</li>
+<li><strong>Keine</strong> definition eines Algorithmus</li>
+<li>Das Programm versucht den Zustand zu finden, in dem die Regeln erfüllt sind</li>
+<li>Anwendungsgebiete:
+<ul>
+<li>Erstellung von Stundenplänen</li>
+<li>Entscheidungsunterstützungssysteme für Planung und Konfiguration</li>
+<li>Konsistenzsicherung in Datenbanksystemen</li>
+</ul>
+</li>
+</ul>
+<h4 id="constraint">Constraint</h4>
+<ul>
+<li>Beziehung zwischen verschiedenen Variablen</li>
+<li>Constraints beschreiben Wissen über die Werte der Variablen</li>
+<li>Beispiel aus dem Alltag: Terminabsprachen</li>
+</ul>
+<h2 id="constraint-satisfaction">Constraint-satisfaction</h2>
+<ul>
+<li>verwendet kombinatorische Methoden
+<ul>
+<li>systematische Suche</li>
+<li>Generate &amp; Test (Belegung aller Variablen wird erzeugt und geprüft)</li>
+<li>Backtracking (Schrittweise Erweiterung korrekter Teillösungen zur Gesamtlösung)</li>
+</ul>
+</li>
+</ul>
+<h2 id="constraint-solving">Constraint-solving</h2>
+<ul>
+<li>verwendet mathematisch-analytische Verfahren</li>
+<li>Bsp:
+<ul>
+<li>Differentation</li>
+<li>Integration</li>
+<li>Taylor-Reihen</li>
+</ul>
+</li>
+</ul>
+<h4 id="primitive-constraints">primitive Constraints</h4>
+<ul>
+<li>beschreiben einen Zusammenhang zwischen Größen</li>
+<li>Bsp:
+<ul>
+<li>(adder x y z)</li>
+<li>(multiplier x y z)</li>
+</ul>
+</li>
+<li>Constraints können durch Konnektoren verbunden werden</li>
+<li>Konnektoren aktivieren alle verbundenen Constraint-Elemente nach Erhalt eines Werts</li>
+</ul>
+<h4 id="beispiel-von-konnektoren-und-constraints">Beispiel von Konnektoren und Constraints</h4>
+<blockquote>
+<p>Celsius zu Fahrenheit Converter</p>
+</blockquote>
+<p><a href="https://johbra.github.io/PP2/Vorlesung/Abbildungen/FahrenheitCelsiusKonverter.png"><img src="https://johbra.github.io/PP2/Vorlesung/Abbildungen/FahrenheitCelsiusKonverter.png" alt=""></a></p>
+<h4 id="lösung-in-clojure">Lösung in Clojure</h4>
+<pre class=" language-python"><code class="prism  language-python"><span class="token punctuation">(</span><span class="token keyword">def</span> celsius<span class="token operator">-</span>fahrenheit<span class="token operator">-</span>converter 
+  <span class="token punctuation">(</span>fn <span class="token punctuation">[</span>c f<span class="token punctuation">]</span>
+    <span class="token punctuation">(</span>let <span class="token punctuation">[</span>u <span class="token punctuation">(</span>make<span class="token operator">-</span>connector<span class="token punctuation">)</span>
+          v <span class="token punctuation">(</span>make<span class="token operator">-</span>connector<span class="token punctuation">)</span>
+          w <span class="token punctuation">(</span>make<span class="token operator">-</span>connector<span class="token punctuation">)</span>
+          x <span class="token punctuation">(</span>make<span class="token operator">-</span>connector<span class="token punctuation">)</span>
+          y <span class="token punctuation">(</span>make<span class="token operator">-</span>connector<span class="token punctuation">)</span><span class="token punctuation">]</span>
+      <span class="token punctuation">(</span>multiplier c w u<span class="token punctuation">)</span>
+      <span class="token punctuation">(</span>multiplier v x u<span class="token punctuation">)</span>
+      <span class="token punctuation">(</span>adder v y f<span class="token punctuation">)</span>
+      <span class="token punctuation">(</span>constant <span class="token number">9</span> w<span class="token punctuation">)</span>
+      <span class="token punctuation">(</span>constant <span class="token number">5</span> x<span class="token punctuation">)</span>
+      <span class="token punctuation">(</span>constant <span class="token number">32</span> y<span class="token punctuation">)</span>
+      'ok<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+</code></pre>
+<h4 id="lösung-in-prolog">Lösung in Prolog</h4>
+<pre class=" language-prolog"><code class="prism  language-prolog"><span class="token function">cf</span><span class="token punctuation">(</span><span class="token variable">C</span><span class="token punctuation">,</span> <span class="token variable">F</span><span class="token punctuation">)</span> <span class="token operator">:-</span> <span class="token punctuation">{</span><span class="token number">9</span><span class="token operator">*</span><span class="token variable">C</span><span class="token operator">=</span><span class="token number">5</span><span class="token operator">*</span><span class="token punctuation">(</span><span class="token variable">F</span><span class="token operator">-</span><span class="token number">32</span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token operator">.</span>
+</code></pre>
 <h1 id="constraint-logic-programmierung">10. Constraint-logic Programmierung</h1>
+<ul>
+<li>
+<p>Typisches Vorgehen</p>
+<ul>
+<li>
+<ol>
+<li>Analyse des Problems</li>
+</ol>
+</li>
+<li>
+<ol start="2">
+<li>Bestimmung der Bedingungen / Relationen</li>
+</ol>
+</li>
+<li>
+<ol start="3">
+<li>Formulierung der Bedingungen / Relationen</li>
+</ol>
+</li>
+<li>
+<ol start="4">
+<li>Lösung der Gleichungen</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>
+<p>Typische Anwendungsgebiete</p>
+<ul>
+<li>Anwendungen mit häufig ändernder Problemspezifikation</li>
+<li>Anwendung mit benötigter Entscheidungsunterstützung</li>
+<li>Planung</li>
+<li>Ressourcen-Zuweisung</li>
+<li>Logistik / Transport</li>
+<li>Finanzwesen</li>
+<li>Navigation</li>
+</ul>
+</li>
+</ul>
 <h1 id="parallelprogrammierung">11. Parallelprogrammierung</h1>
 <h2 id="einstieg">Einstieg</h2>
+
+<table>
+<thead>
+<tr>
+<th align="center">Nebenläufigkeit</th>
+<th align="center">Parallelität</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">mehrere unabhängige Aufgaben zur gleichen Zeit</td>
+<td align="center">Aufteilung einer Aufgabe in Teilaufgaben</td>
+</tr>
+<tr>
+<td align="center">Aufgaben konkurrieren um Ressourcen</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">Resultate einzelner Aufgaben beeinflussen evtl. das Verhalten anderer Aufgaben</td>
+<td align="center">Resultate einzelner Aufgaben beeinflussen nicht das Verhalten anderer Aufgaben</td>
+</tr>
+<tr>
+<td align="center"><strong>Nicht</strong>-Determinismus</td>
+<td align="center">Determinismus bleibt erhalten</td>
+</tr>
+<tr>
+<td align="center">Können Deadlocks verursachen</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">Können Raceconditions verursachen</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">Fehlverhalten schwer zu reproduzieren</td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table><h3 id="mehrkernprozessoren">Mehrkernprozessoren</h3>
+<ul>
+<li>gemeinsame Nutzung von Hauptspeicher und Takt</li>
+<li>Erhöhung des Durchsatzes</li>
+<li>höhere Zuverlässigkeit</li>
+</ul>
+<h3 id="prozesse-und-threads">Prozesse und Threads</h3>
+
+<table>
+<thead>
+<tr>
+<th align="center">Prozess</th>
+<th align="center">Thread</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">Programm in der Ausführung</td>
+<td align="center">Ausführungsstrang eines Prozesses</td>
+</tr>
+<tr>
+<td align="center">benötigt Ressourcen (Speicher, Prozessor, Dateien etc.)</td>
+<td align="center">benötigt Prozessor und eigenen Stack</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">verwendet Programmcode, Dateien etc.</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">mehrere Threads in einem Prozess möglich</td>
+</tr>
+</tbody>
+</table><p><a href="https://johbra.github.io/PP2/Vorlesung/Abbildungen/prozessthreads.png"><img src="https://johbra.github.io/PP2/Vorlesung/Abbildungen/prozessthreads.png" alt=""></a></p>
+<h3 id="multithreading">Multithreading</h3>
+<ul>
+<li>Beispiele
+<ul>
+<li>Anwendungen mit grafischer Oberfläche</li>
+<li>Serversoftware (Webserver, DB-Server)</li>
+</ul>
+</li>
+<li><strong>Vorteile:</strong>
+<ul>
+<li>gemeinsame Nutzung von Ressourcen</li>
+<li>kurze Antwortzeiten</li>
+<li>geringer Aufwand</li>
+</ul>
+</li>
+</ul>
 <h2 id="multithreading-in-java">Multithreading (in Java)</h2>
+<ul>
+<li>Threads verursachen geringere Kosten als Prozesse</li>
+<li>Umschalten zwischen Prozessen kostet viel Rechenzeit</li>
+<li>Programmierer müssen Race Conditions und Deadlocks verhindern</li>
+</ul>
+<h4 id="problem-des-überlappenden-aufrufs-von-operationen">Problem des überlappenden Aufrufs von Operationen</h4>
+<ul>
+<li>Thread muss seine Operation ohne Unterbrechung beenden können</li>
+<li>Threads müssen <em>synchronisiert</em> werden</li>
+<li><strong>Mutual Exclusion:</strong> Wechselseitiger Ausschluss</li>
+<li>Sperrmechanismen:
+<ul>
+<li>Semaphoren</li>
+<li>Mutex (Semaphore mit dem Wert 1 - stellt Mutual Exclusion sicher)</li>
+<li>Monitor (stellt wechselseitigen Ausschluss sicher und stellt Mechanismen für Thread-Kooperationen bereit) [<em>Bsp. Java <code>synchronized</code></em>]</li>
+</ul>
+</li>
+</ul>
+<pre class=" language-java"><code class="prism  language-java"><span class="token keyword">class</span> <span class="token class-name">Test</span> <span class="token punctuation">{</span>
+    <span class="token keyword">static</span> <span class="token keyword">int</span> n<span class="token punctuation">;</span>
+    <span class="token keyword">static</span> Object lock <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Object</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">void</span> <span class="token function">incrementN</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">synchronized</span><span class="token punctuation">(</span>lock<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            n <span class="token operator">=</span> n <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h3 id="threadsichere-typen-in-java">Threadsichere Typen in Java</h3>
+<p>In Java gibt es Threadsichere Datentypen. Bsp:</p>
+<ul>
+<li><code>java.util.concurrent.atomic</code>
+<ul>
+<li>AtomicInteger</li>
+<li>AtomicBoolean</li>
+<li>etc.</li>
+</ul>
+</li>
+<li><code>java.util.concurrent.ConcurrentHashMap</code></li>
+<li><code>java.util.concurrent.CopyOnWriteArrayList</code></li>
+<li><code>java.util.concurrent.BlockingQueue</code></li>
+<li>etc.</li>
+</ul>
 <h2 id="software-transactional-memory">Software Transactional Memory</h2>
+<ul>
+<li>Konzept paralleler Berechnungen, die auf gemeinsame Arbeitsspeicherbereiche zugreifen</li>
+<li>Ziel: Ausführungegeschwindigkeit steigern</li>
+</ul>
 <h2 id="parallele-algorithmen">Parallele Algorithmen</h2>
+<ul>
+<li>Parallelisierung von Algorithmen zur besseren Effizienz</li>
+<li>Benötigt eine geeignete Parallelisierungsstrategie</li>
+<li>Funktion höherer Ordnung <code>map</code> als ideales Beispiel zur Parallelisierung</li>
+<li>Beispiel in Java: <code>Parallelsort</code></li>
+</ul>
 </div>
 </body>
 
