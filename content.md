@@ -1012,6 +1012,59 @@ false<span class="token operator">.</span>
 </li>
 </ul>
 <h2 id="multithreading-in-java">Multithreading (in Java)</h2>
+<ul>
+<li>Threads verursachen geringere Kosten als Prozesse</li>
+<li>Umschalten zwischen Prozessen kostet viel Rechenzeit</li>
+<li>Programmierer müssen Race Conditions und Deadlocks verhindern</li>
+</ul>
+<h4 id="problem-des-überlappenden-aufrufs-von-operationen">Problem des überlappenden Aufrufs von Operationen</h4>
+<ul>
+<li>Thread muss seine Operation ohne Unterbrechung beenden können</li>
+<li>Threads müssen <em>synchronisiert</em> werden</li>
+<li><strong>Mutual Exclusion:</strong> Wechselseitiger Ausschluss</li>
+<li>Sperrmechanismen:
+<ul>
+<li>Semaphoren</li>
+<li>Mutex (Semaphore mit dem Wert 1 - stellt Mutual Exclusion sicher)</li>
+<li>Monitor (stellt wechselseitigen Ausschluss sicher und stellt Mechanismen für Thread-Kooperationen bereit) [<em>Bsp. Java <code>synchronized</code></em>]</li>
+</ul>
+</li>
+</ul>
+<pre class=" language-java"><code class="prism  language-java"><span class="token keyword">class</span> <span class="token class-name">Test</span> <span class="token punctuation">{</span>
+    <span class="token keyword">static</span> <span class="token keyword">int</span> n<span class="token punctuation">;</span>
+    <span class="token keyword">static</span> Object lock <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Object</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">void</span> <span class="token function">incrementN</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">synchronized</span><span class="token punctuation">(</span>lock<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            n <span class="token operator">=</span> n <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h3 id="threadsichere-typen-in-java">Threadsichere Typen in Java</h3>
+<p>In Java gibt es Threadsichere Datentypen. Bsp:</p>
+<ul>
+<li><code>java.util.concurrent.atomic</code>
+<ul>
+<li>AtomicInteger</li>
+<li>AtomicBoolean</li>
+<li>etc.</li>
+</ul>
+</li>
+<li><code>java.util.concurrent.ConcurrentHashMap</code></li>
+<li><code>java.util.concurrent.CopyOnWriteArrayList</code></li>
+<li><code>java.util.concurrent.BlockingQueue</code></li>
+<li>etc.</li>
+</ul>
 <h2 id="software-transactional-memory">Software Transactional Memory</h2>
+<ul>
+<li>Konzept paralleler Berechnungen, die auf gemeinsame Arbeitsspeicherbereiche zugreifen</li>
+<li>Ziel: Ausführungegeschwindigkeit steigern</li>
+</ul>
 <h2 id="parallele-algorithmen">Parallele Algorithmen</h2>
+<ul>
+<li>Parallelisierung von Algorithmen zur besseren Effizienz</li>
+<li>Benötigt eine geeignete Parallelisierungsstrategie</li>
+<li>Funktion höherer Ordnung <code>map</code> als ideales Beispiel zur Parallelisierung</li>
+<li>Beispiel in Java: <code>Parallelsort</code></li>
+</ul>
 
