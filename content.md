@@ -882,8 +882,135 @@ false<span class="token operator">.</span>
 <pre class=" language-prolog"><code class="prism  language-prolog"><span class="token function">cf</span><span class="token punctuation">(</span><span class="token variable">C</span><span class="token punctuation">,</span> <span class="token variable">F</span><span class="token punctuation">)</span> <span class="token operator">:-</span> <span class="token punctuation">{</span><span class="token number">9</span><span class="token operator">*</span><span class="token variable">C</span><span class="token operator">=</span><span class="token number">5</span><span class="token operator">*</span><span class="token punctuation">(</span><span class="token variable">F</span><span class="token operator">-</span><span class="token number">32</span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token operator">.</span>
 </code></pre>
 <h1 id="constraint-logic-programmierung">10. Constraint-logic Programmierung</h1>
+<ul>
+<li>
+<p>Typisches Vorgehen</p>
+<ul>
+<li>
+<ol>
+<li>Analyse des Problems</li>
+</ol>
+</li>
+<li>
+<ol start="2">
+<li>Bestimmung der Bedingungen / Relationen</li>
+</ol>
+</li>
+<li>
+<ol start="3">
+<li>Formulierung der Bedingungen / Relationen</li>
+</ol>
+</li>
+<li>
+<ol start="4">
+<li>Lösung der Gleichungen</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>
+<p>Typische Anwendungsgebiete</p>
+<ul>
+<li>Anwendungen mit häufig ändernder Problemspezifikation</li>
+<li>Anwendung mit benötigter Entscheidungsunterstützung</li>
+<li>Planung</li>
+<li>Ressourcen-Zuweisung</li>
+<li>Logistik / Transport</li>
+<li>Finanzwesen</li>
+<li>Navigation</li>
+</ul>
+</li>
+</ul>
 <h1 id="parallelprogrammierung">11. Parallelprogrammierung</h1>
 <h2 id="einstieg">Einstieg</h2>
+
+<table>
+<thead>
+<tr>
+<th align="center">Nebenläufigkeit</th>
+<th align="center">Parallelität</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">mehrere unabhängige Aufgaben zur gleichen Zeit</td>
+<td align="center">Aufteilung einer Aufgabe in Teilaufgaben</td>
+</tr>
+<tr>
+<td align="center">Aufgaben konkurrieren um Ressourcen</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">Resultate einzelner Aufgaben beeinflussen evtl. das Verhalten anderer Aufgaben</td>
+<td align="center">Resultate einzelner Aufgaben beeinflussen nicht das Verhalten anderer Aufgaben</td>
+</tr>
+<tr>
+<td align="center"><strong>Nicht</strong>-Determinismus</td>
+<td align="center">Determinismus bleibt erhalten</td>
+</tr>
+<tr>
+<td align="center">Können Deadlocks verursachen</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">Können Raceconditions verursachen</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">Fehlverhalten schwer zu reproduzieren</td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table><h3 id="mehrkernprozessoren">Mehrkernprozessoren</h3>
+<ul>
+<li>gemeinsame Nutzung von Hauptspeicher und Takt</li>
+<li>Erhöhung des Durchsatzes</li>
+<li>höhere Zuverlässigkeit</li>
+</ul>
+<h3 id="prozesse-und-threads">Prozesse und Threads</h3>
+
+<table>
+<thead>
+<tr>
+<th align="center">Prozess</th>
+<th align="center">Thread</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">Programm in der Ausführung</td>
+<td align="center">Ausführungsstrang eines Prozesses</td>
+</tr>
+<tr>
+<td align="center">benötigt Ressourcen (Speicher, Prozessor, Dateien etc.)</td>
+<td align="center">benötigt Prozessor und eigenen Stack</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">verwendet Programmcode, Dateien etc.</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">mehrere Threads in einem Prozess möglich</td>
+</tr>
+</tbody>
+</table><p><a href="https://johbra.github.io/PP2/Vorlesung/Abbildungen/prozessthreads.png"><img src="https://johbra.github.io/PP2/Vorlesung/Abbildungen/prozessthreads.png" alt=""></a></p>
+<h3 id="multithreading">Multithreading</h3>
+<ul>
+<li>Beispiele
+<ul>
+<li>Anwendungen mit grafischer Oberfläche</li>
+<li>Serversoftware (Webserver, DB-Server)</li>
+</ul>
+</li>
+<li><strong>Vorteile:</strong>
+<ul>
+<li>gemeinsame Nutzung von Ressourcen</li>
+<li>kurze Antwortzeiten</li>
+<li>geringer Aufwand</li>
+</ul>
+</li>
+</ul>
 <h2 id="multithreading-in-java">Multithreading (in Java)</h2>
 <h2 id="software-transactional-memory">Software Transactional Memory</h2>
 <h2 id="parallele-algorithmen">Parallele Algorithmen</h2>
